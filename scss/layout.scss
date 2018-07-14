@@ -1,0 +1,59 @@
+.body {
+  display: flex;
+  font-family: $basic;
+
+  min-height: 100vh;
+}
+
+.navigation {
+  flex: 1 1 20%;
+  background-color: gray;
+  display: block;
+  overflow-y: scroll;
+  height: 100vh;
+}
+
+.navigation__header {
+  padding: 20px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.header__title {
+  font-size: $large;
+  font-weight: 700;
+}
+
+.navigation__list {
+  padding: 10px;
+  font-size: 1.000em;
+}
+
+.nav-item {
+  height: 30px;
+
+  display: flex;
+  justify-content: flex-start;
+  align-items: center;
+}
+
+.nav-link {
+  flex: 1 1 100%;
+  padding-left: 5px;
+  border-left: solid 2px transparent;
+
+  &:hover{
+    font-weight: 700;
+  }
+
+  &:focus {
+    border-left: solid 2px blue;
+    font-weight: 700;
+  }
+}
+
+.documentation {
+  flex: 1 1 80%;
+  background-color: lightgray;
+}
