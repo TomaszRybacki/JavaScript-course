@@ -1,0 +1,23 @@
+.article {
+  max-width: 800px;
+  background-color: $white;
+  box-sizing: border-box;
+  margin: 20px auto;
+  padding: 20px;
+  box-shadow: 4px 4px 4px 2px darkgray, -4px 4px 4px 2px darkgray;
+}
+
+.article__header {
+  padding: 20px 0;
+}
+
+.article__title {
+  font-size: $xlarge;
+  font-weight: 700;
+}
+
+.article__paragraph {
+  font-size: $medium;
+  line-height: 1.2;
+  padding: 20px 0;
+}
