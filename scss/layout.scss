@@ -1,13 +1,17 @@
 .body {
   display: flex;
+  flex-wrap: wrap;
   font-family: $basic;
 
   min-height: 100vh;
 }
 
+// NAVIGATION
 .navigation {
-  flex: 1 1 20%;
-  background-color: gray;
+  flex: 0 0 20%;
+  color: $white;
+  background-color: $black;
+
   display: block;
   overflow-y: scroll;
   height: 100vh;
@@ -22,6 +26,7 @@
 
 .header__title {
   font-size: $large;
+  color: $orange;
   font-weight: 700;
 }
 
@@ -31,7 +36,7 @@
 }
 
 .nav-item {
-  height: 30px;
+  height: 40px;
 
   display: flex;
   justify-content: flex-start;
@@ -43,17 +48,86 @@
   padding-left: 5px;
   border-left: solid 2px transparent;
 
-  &:hover{
+  &:hover {
     font-weight: 700;
   }
 
   &:focus {
-    border-left: solid 2px blue;
+    border-left: solid 2px $orange;
     font-weight: 700;
   }
 }
 
+// Scrollbar
+.navigation::-webkit-scrollbar {
+  width: 10px;
+}
+
+.navigation::-webkit-scrollbar-track {
+  background: $black;
+}
+
+.navigation::-webkit-scrollbar-thumb {
+  background: $orange;
+}
+
+// DOCUMENTATION
 .documentation {
   flex: 1 1 80%;
   background-color: lightgray;
+  //  background-image: url(../img/warsaw%20by%20night.jpg);
+  //  background-size: 100% 100%;
+  //  background-repeat: no-repeat;
+}
+
+.documentation__header {
+  max-width: 800px;
+  background-color: $white;
+  box-sizing: border-box;
+  margin: 20px auto;
+  padding: 20px;
+
+
+  .header__banner {
+    width: 100%;
+
+    display: block;
+    margin: 0 auto;
+  }
+
+  .header__txt {
+    display: block;
+    padding: 20px 0;
+    font-size: $large;
+    text-align: justify;
+
+    .blog-link {
+      font-weight: 700;
+
+      &:hover,
+      &:focus {
+        color: $orange;
+      }
+    }
+  }
+}
+
+.documentation__footer {
+  flex: 1 1 100%;
+  text-align: center;
+  color: $white;
+  background-color: $black;
+  padding: 10px;
+
+  .footer__txt {
+    font-size: $small;
+  }
+
+  .footer__icon {
+    color: $red;
+  }
+
+  .footer__bold {
+    font-weight: 700;
+  }
 }
