@@ -14,10 +14,12 @@ $basic: 'Muli', sans-serif;
 
 /* Theme - colors */
 
-$black: rgb(0, 0, 0);
-$white: rgb(255, 255, 255);
-
+$black: rgb(56, 56, 56);
+$white: rgb(244, 244, 244);
 
 $orange: rgb(255, 87, 25);
-$red: rgb(249, 41, 13);
-$yellow: rgb(254, 167, 52);
+
+/* Code - colors */
+
+$code-background: rgb(221, 209, 193);
+$code-foreground: rgb(30, 31, 33);

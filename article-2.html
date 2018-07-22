@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="pl">
+
+<head>
+  <title>html markup</title>
+</head>
+
+<body>
+
+
+  <article class="article">
+
+      <header id="Debugowanie_cz.1" class="article__header">
+        <div class="decor">02</div><h2 class="article__title">Debugowanie cz.1</h2>
+      </header>
+
+
+      <p class="article__paragraph">Dzisiaj skonfigurujemy nasz projekt, w którym będziemy uczyć się kolejnych zagadnień związanych z JavaScript. Powiemy sobie również na temat błędów i sposobów radzenia sobie z nimi. Zakładam, że masz już zainstalowanego Bracketsa oraz przeglądarkę Chrome.</p>
+
+      <section class="article__section">
+        <h3 class="article__section__title">Projekt</h3>
+        <p class="article__paragraph">Tworzymy nowy folder do przechowywania naszych plików. Ja nazwałem swój <strong class="bold">Kurs.</strong> Wewnątrz tworzymy nowy folder scripts, w którym będą znajdować się wszystkie nasze skrypty. Tworzymy tam nowy plik o nazwie <strong class="bold">code.js.</strong> Teraz potrzebujemy utworzyć podstawowy plik html o nazwie <strong class="bold">index.html</strong> w folderze głównym.</p>
+
+        <pre class="article__code">
+        <code>
+        &lt;!DOCTYPE html&gt;
+        &lt;html lang="pl"&gt;
+
+          &lt;head&gt;
+            &lt;meta charset="utf-8"&gt;
+            &lt;meta http-equiv="x-ua-compatible" content="ie=edge"&gt;
+            &lt;meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no"&gt;
+
+            &lt;meta name="author" content="Tomasz Rybacki"&gt;
+            &lt;meta name="description" content="Kurs JavaScript dla początkujących."&gt;
+
+            &lt;title&gt;Kurs JavaScript&lt;/title&gt;
+          &lt;/head&gt;
+
+          &lt;body&gt;
+
+            &lt;script src="scripts/code.js"&gt;&lt;/script&gt;
+          &lt;/body&gt;
+
+        &lt;/html&gt;
+        </code>
+      </pre>
+
+        <p class="article__paragraph">Wewnątrz znacznika <strong class="bold">&lt;script&gt;</strong> umieszczamy ścieżkę dostępu do naszego pliku z kodem js. Znacznik ten umieszczamy zawsze na końcu naszego body tuż przed znacznikiem zamykającym <strong class="bold">&lt;/body&gt;</strong>. Robimy tak ponieważ nie chcemy żeby podczas wczytywania strony, ładujący się kod JavaScript blokował wyświetlanie pozostałej części strony. Sprawiając wrażenie wolnego działania strony i pozostawiając użytkownika z białym ekranem.</p>
+      </section>
+
+      <section class="article__section">
+        <h3 class="article__section__title">ESLint</h3>
+        <p class="article__paragraph">Pierwszym narzędziem jakie wykorzystamy do pisania kodu dobrej jakości będzie <a class="article__link" href="https://eslint.org">ESLint</a> ze zbiorem zasad airbnb-base. Narzędzie to pokazuje nam błędy jakie popełniliśmy oraz daje pomocne wskazówki, jeszcze przed uruchomieniem naszego kodu w przeglądarce.</p>
+
+        <p class="article__paragraph">Żeby je zainstalować, najpierw potrzebujemy zainstalować <a class="article__link" href="https://nodejs.org/en/">Node.js.</a> Pobieramy i instalujemy wersję rekomendowaną dla większości użytkowników, w chwili pisania tego postu jest to wersja 8.11.1 LTS.</p>
+
+        <p class="article__paragraph">Teraz uruchamiamy wiersz poleceń i za jego pomocą nawigujemy do folderu z naszym projektem. (Wszystkie moje polecenia są dla systemu operacyjnego Windows 10) W moim przypadku są to komendy:</p>
+
+        <span class="article__command">E:</span>
+        <span class="article__command">cd E:\11 Programowanie\Blog\Kurs</span>
+
+        <p class="article__paragraph">Teraz inicjalizujemy plik package.json, za pomocą komendy:</p>
+
+        <span class="article__command">npm init</span>
+
+        <p class="article__paragraph">Wszystkie opcje zatwierdzamy enterem. Nie musimy nic wpisywać i zmieniać. Następnie instalujemy ESLint wpisując polecenie:</p>
+
+        <span class="article__command">npm install –save-dev eslint eslint-config-airbnb eslint-plugin-import</span>
+      </section>
+
+    </article>
+
+
+</body>
+</html>
