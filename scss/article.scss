@@ -52,6 +52,27 @@
     padding: 10px;
     margin: 10px 0;
   }
+
+  &__img {
+    width: 100%;
+  }
+
+  &__ordered-list {
+    list-style: decimal;
+    padding: 20px 0 20px 20px;
+    font-size: $medium;
+    .ordered-list__item {
+      padding: 5px;
+    }
+  }
+
+  &__unordered-list {
+    list-style: disc;
+    padding: 20px 0 20px 20px;
+    .unordered-list__item {
+      padding: 5px;
+    }
+  }
 }
 
 .article__section {

@@ -57,7 +57,8 @@
     <article class="article">
 
       <header id="Czym_jest_javaScript_?" class="article__header">
-        <div class="decor">01</div><h2 class="article__title">Czym jest javaScript ?</h2>
+        <div class="decor">01</div>
+        <h2 class="article__title">Czym jest javaScript ?</h2>
       </header>
 
       <p class="article__paragraph">W wikipedii czytamy, że jest to skryptowy język programowania. Wyjaśnijmy sobie co to oznacza.</p>
@@ -81,7 +82,8 @@
     <article class="article">
 
       <header id="Debugowanie_cz.1" class="article__header">
-        <div class="decor">02</div><h2 class="article__title">Debugowanie cz.1</h2>
+        <div class="decor">02</div>
+        <h2 class="article__title">Debugowanie cz.1</h2>
       </header>
 
 
@@ -121,9 +123,9 @@
 
       <section class="article__section">
         <h3 class="article__section__title">ESLint</h3>
-        <p class="article__paragraph">Pierwszym narzędziem jakie wykorzystamy do pisania kodu dobrej jakości będzie <a class="article__link" href="https://eslint.org">ESLint</a> ze zbiorem zasad airbnb-base. Narzędzie to pokazuje nam błędy jakie popełniliśmy oraz daje pomocne wskazówki, jeszcze przed uruchomieniem naszego kodu w przeglądarce.</p>
+        <p class="article__paragraph">Pierwszym narzędziem jakie wykorzystamy do pisania kodu dobrej jakości będzie <a class="article__link" href="https://eslint.org" target="_blank">ESLint</a> ze zbiorem zasad airbnb-base. Narzędzie to pokazuje nam błędy jakie popełniliśmy oraz daje pomocne wskazówki, jeszcze przed uruchomieniem naszego kodu w przeglądarce.</p>
 
-        <p class="article__paragraph">Żeby je zainstalować, najpierw potrzebujemy zainstalować <a class="article__link" href="https://nodejs.org/en/">Node.js.</a> Pobieramy i instalujemy wersję rekomendowaną dla większości użytkowników, w chwili pisania tego postu jest to wersja 8.11.1 LTS.</p>
+        <p class="article__paragraph">Żeby je zainstalować, najpierw potrzebujemy zainstalować <a class="article__link" href="https://nodejs.org/en/" target="_blank">Node.js.</a> Pobieramy i instalujemy wersję rekomendowaną dla większości użytkowników, w chwili pisania tego postu jest to wersja 8.11.1 LTS.</p>
 
         <p class="article__paragraph">Teraz uruchamiamy wiersz poleceń i za jego pomocą nawigujemy do folderu z naszym projektem. (Wszystkie moje polecenia są dla systemu operacyjnego Windows 10) W moim przypadku są to komendy:</p>
 
@@ -137,6 +139,49 @@
         <p class="article__paragraph">Wszystkie opcje zatwierdzamy enterem. Nie musimy nic wpisywać i zmieniać. Następnie instalujemy ESLint wpisując polecenie:</p>
 
         <span class="article__command">npm install –save-dev eslint eslint-config-airbnb eslint-plugin-import</span>
+
+        <p class="article__paragraph">Teraz dodajemy plik o nazwie .eslintrc. Zawiera on ustawienia z jakich korzystamy w naszym projekcie.</p>
+
+        <pre class="article__code">
+        <code>
+      {
+          "extends": "airbnb-base",
+          "parserOptions": {
+          "ecmaVersion": 6
+          },
+          "env": {
+          "node": true,
+          "browser": true,
+          "es6": true
+          },
+          "rules": {
+          "comma-dangle": ["error", "never"],
+          "no-unused-vars": ["error", {"vars": "local", "args": "none"}]
+          }
+      }
+      </code>
+      </pre>
+
+        <p class="article__paragraph">Widzimy, że nasz zbiór zasad jest rozszerzeniem zasad opracowanych przez airbnb-base. Domyślnie ESLint wspiera tylko składnię ECMAScript 5, ponieważ zamierzamy korzystać również z wersji ECMAScript 6 dodajemy to możliwość w parserOptions. Nie przejmuj się jeśli nie wiesz co to oznacza. Wszystko wyjaśnimy w dalszej części kursu.</p>
+
+        <p class="article__paragraph">„env” przechowuje środowiska w jakich będzie działał nasz kod. Natomiast „rules” zawiera nasze własne ustawienia obecnie obowiązujących zasad. Dodając tu kolejne pozycje, możemy wyłączyć lub zmienić status zgłaszanego błędu na ostrzeżenie lub na odwrót. Wszystkie rodzaje błędów i ich możliwą konfiguracje znajdziemy w dokumentacji ESLint.</p>
+
+        <img class="article__img" src="img/Linter.jpg" alt="zrzut ekranu edytora Brackets">
+
+        <ol class="article__ordered-list">
+          <li class="ordered-list__item">Nasze drzewko plików w projekcie powinno wyglądać tak.</li>
+          <li class="ordered-list__item">Przykładowy kod, obok widzimy ikony wyświetlane przez ESLint zgłaszające ostrzeżenie i błąd w danej linijce kodu.</li>
+          <li class="ordered-list__item">Za pomocą tej ikony włączamy i wyłączamy podgląd zgłoszonych błędów (okno nr 4)</li>
+          <li class="ordered-list__item">Lista zgłoszonych błędów. Zaczynając od lewej mamy:
+            <ul class="article__unordered-list">
+              <li class="unordered-list__item">nr linii kodu z błędem</li>
+              <li class="unordered-list__item">typ błędu i informację na jego temat</li>
+              <li class="unordered-list__item">nazwę zasady podaną w nawiasie kwadratowym</li>
+            </ul>
+          </li>
+        </ol>
+
+        <p class="article__paragraph">Kod z tej lekcji można pobrać z <a class="article__link" href="https://github.com/TomaszRybacki/Kurs" target="_blank">GitHuba</a>.</p>
       </section>
 
     </article>
