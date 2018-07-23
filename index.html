@@ -18,6 +18,13 @@
 </head>
 
 <body class="body">
+
+  <button class="menu" id="menu-button">
+    <span class="menu-bar"></span>
+    <span class="menu-bar"></span>
+    <span class="menu-bar"></span>
+  </button>
+
   <nav id="navbar" class="navigation">
     <header class="navigation__header">
       <h1 class="header__title">Kurs JavaScript</h1>
@@ -95,26 +102,26 @@
 
         <pre class="article__code">
         <code>
-        &lt;!DOCTYPE html&gt;
-        &lt;html lang="pl"&gt;
+    &lt;!DOCTYPE html&gt;
+    &lt;html lang="pl"&gt;
 
-          &lt;head&gt;
-            &lt;meta charset="utf-8"&gt;
-            &lt;meta http-equiv="x-ua-compatible" content="ie=edge"&gt;
-            &lt;meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no"&gt;
+      &lt;head&gt;
+        &lt;meta charset="utf-8"&gt;
+        &lt;meta http-equiv="x-ua-compatible" content="ie=edge"&gt;
+        &lt;meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no"&gt;
 
-            &lt;meta name="author" content="Tomasz Rybacki"&gt;
-            &lt;meta name="description" content="Kurs JavaScript dla początkujących."&gt;
+        &lt;meta name="author" content="Tomasz Rybacki"&gt;
+        &lt;meta name="description" content="Kurs JavaScript dla początkujących."&gt;
 
-            &lt;title&gt;Kurs JavaScript&lt;/title&gt;
-          &lt;/head&gt;
+        &lt;title&gt;Kurs JavaScript&lt;/title&gt;
+      &lt;/head&gt;
 
-          &lt;body&gt;
+      &lt;body&gt;
 
-            &lt;script src="scripts/code.js"&gt;&lt;/script&gt;
-          &lt;/body&gt;
+        &lt;script src="scripts/code.js"&gt;&lt;/script&gt;
+      &lt;/body&gt;
 
-        &lt;/html&gt;
+    &lt;/html&gt;
         </code>
       </pre>
 
@@ -144,21 +151,21 @@
 
         <pre class="article__code">
         <code>
-      {
-          "extends": "airbnb-base",
-          "parserOptions": {
-          "ecmaVersion": 6
-          },
-          "env": {
-          "node": true,
-          "browser": true,
-          "es6": true
-          },
-          "rules": {
-          "comma-dangle": ["error", "never"],
-          "no-unused-vars": ["error", {"vars": "local", "args": "none"}]
-          }
-      }
+    {
+        "extends": "airbnb-base",
+        "parserOptions": {
+        "ecmaVersion": 6
+        },
+        "env": {
+        "node": true,
+        "browser": true,
+        "es6": true
+        },
+        "rules": {
+        "comma-dangle": ["error", "never"],
+        "no-unused-vars": ["error", {"vars": "local", "args": "none"}]
+        }
+    }
       </code>
       </pre>
 

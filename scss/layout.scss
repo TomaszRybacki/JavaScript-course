@@ -3,8 +3,7 @@
   justify-content: flex-start;
   flex-wrap: wrap;
   font-family: $basic;
-
-  min-height: 100vh;
+  background-color: lightgray;
 }
 
 // NAVIGATION
@@ -15,6 +14,9 @@
 
   display: block;
   position: fixed;
+  top: 0;
+  left: 250px;
+
   z-index: 100;
   overflow-y: scroll;
   height: 100vh;
@@ -80,12 +82,22 @@
 .push {
   width: 250px;
   background-color: $black;
+
+  @include mobile {
+    display: none;
+  }
 }
 
 // DOCUMENTATION
 .documentation {
-  flex: 1 1 80%;
-  background-color: lightgray;
+  flex: 0 1 80%;
+  max-width: 800px;
+  margin: 0 auto;
+
+  @include mobile {
+    flex: 0 1 90%;
+    margin: 0 auto;
+  }
 }
 
 .documentation__header {
@@ -95,6 +107,10 @@
   margin: 20px auto;
   padding: 20px;
   box-shadow: 4px 4px 4px 2px darkgray, -4px 4px 4px 2px darkgray;
+
+  @include mobile {
+    flex: 0 1 90%;
+  }
 
 
   .header__banner {
@@ -110,6 +126,10 @@
     font-size: $large;
     text-align: center;
     line-height: 1.2;
+
+    @include mobile {
+      font-size: $medium;
+    }
 
     .blog-link {
       font-weight: 700;
@@ -140,4 +160,58 @@
   .footer__bold {
     font-weight: 700;
   }
+}
+
+.menu {
+  width: 60px;
+  height: 60px;
+  border: none;
+  outline: none;
+  background-color: $black;
+  border-radius: 50%;
+  position: fixed;
+  top: 5%;
+  right: 5%;
+  z-index: 90;
+  cursor: pointer;
+  display: none;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+
+  @include mobile {
+    display: flex;
+  }
+
+  &:hover, &:focus {
+    .menu-bar {
+      background-color: $orange;
+    }
+  }
+
+  .menu-bar {
+    width: 30px;
+    margin: 2px 0;
+    height: 4px;
+    border-radius: 5px;
+    background-color: $white;
+  }
+}
+
+.navigation--active {
+  animation: 0.3s ease slide-in forwards;
+}
+
+@keyframes slide-in {
+  0% {left: -250px}
+  100% {left: 0px;}
+}
+
+.navigation--deactive {
+  animation: 0.3s ease slide-out forwards;
+}
+
+@keyframes slide-out {
+  0% {left: 0px}
+  100% {left: -250px;}
 }
