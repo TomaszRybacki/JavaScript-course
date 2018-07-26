@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html lang="pl">
+
+<head>
+  <title>html markup</title>
+</head>
+<body>
+
+<article class="article">
+
+      <header id="Debugowanie_cz.2" class="article__header">
+        <div class="decor">03</div>
+        <h2 class="article__title">Debugowanie cz.2</h2>
+      </header>
+
+      <p class="article__paragraph">Dzisiaj dokończymy temat radzenia sobie z błędami. Omówimy obiekt console, punkty kontrolne i typy pojawiających się błędów.</p>
+
+      <section class="article__section">
+        <h3 class="article__section__title">Obiekt console</h3>
+      </section>
+
+      <p class="article__paragraph">Przeglądarka internetowa Chrome ma wbudowaną konsolę JavaScript, możemy w niej pisać bezpośrednio kod js. Również w niej będą się nam wyświetlały wszystkie błędy jakie napotka interpreter. Będziemy mieli podaną nazwę błędu, jego opis i numer linii kodu, w którym wystąpił. Dzięki temu możemy szybko zlokalizować i poprawić występujące błędy.</p>
+
+      <p class="article__paragraph">Aby ją otworzyć klikamy prawym przyciskiem myszy na stronie internetowej i wybieramy przycisk Zbadaj. Następnie przechodzimy do zakładki Console.</p>
+
+      <img class="article__img" src="img/console.jpg" alt="zrzut ekranu konsoli w przeglądarce Chrome">
+
+      <ol class="article__ordered-list">
+        <li class="ordered-list__item">Pasek boczny konsoli. Klikając odpowiednio kategorię wyświetlamy tylko powiadomienia danego typu.</li>
+        <li class="ordered-list__item">Konsola. To tutaj będą pojawiać się informacje o błędach z ich opisem. Również tutaj możemy pisać nasz kod JS oraz wyświetlać informacje za pomocą obiektu console.</li>
+        <li class="ordered-list__item">Nazwa pliku oraz numer linii kodu z tego pliku, który generuje daną informację.</li>
+      </ol>
+
+      <p class="article__paragraph">Konsolę wykorzystujemy również do sprawdzania jakie wartości przyjmują nasze zmienne w danym fragmencie skryptu. Przyjrzyjmy się teraz metodom jakie zapewnia obiekt console. Najważniejsze z nich to:</p>
+
+      <ul class="article__unordered-list">
+        <li class="unordered-list__item"><strong class="bold">console.log()</strong> – służące do wyświetlania treści w konsoli</li>
+      </ul>
+
+      <p class="article__paragraph">Metoda ta ma trzy bliźniacze metody, które również wyświetlają nasz tekst w konsoli ale dodatkowo zapewniają stylowanie. Dzięki czemu możemy filtrować wyświetlane informacje i wyświetlać tylko te, które w danym momencie są dla nas istotne.</p>
+
+      <ul class="article__unordered-list">
+        <li class="unordered-list__item"><strong class="bold">console.info()</strong> – wyświetla tekst jako informację</li>
+        <li class="unordered-list__item"><strong class="bold">console.warn()</strong> – wyświetla tekst jako ostrzeżenie</li>
+        <li class="unordered-list__item"><strong class="bold">console.error()</strong> – wyświetla tekst jako błąd</li>
+      </ul>
+
+      <p class="article__paragraph">Kolejną przydatną metodą jest:</p>
+
+      <ul class="article__unordered-list">
+        <li class="unordered-list__item"><strong class="bold">console.group(), console.groupCollapsed()</strong> – służy do grupowania wyświetlanych informacji pod wspólną etykietą, coś w stylu rozpoczynającego znacznika HTML</li>
+        <li class="unordered-list__item"><strong class="bold">console.groupEnd()</strong> – zamyka naszą grupę, coś w stylu zamykającego znacznika HTML</li>
+      </ul>
+
+      <p class="article__paragraph">Oprócz tych podstawowych metod, mamy jeszcze kilka, które mogą być przydatne, oto one:</p>
+
+      <ul class="article__unordered-list">
+        <li class="unordered-list__item"><strong class="bold">console.assert()</strong> – sprawdza warunek, jeśli nie jest spełniony, dopiero wtedy wyświetla wiadomość do konsoli</li>
+        <li class="unordered-list__item"><strong class="bold">console.count()</strong> – wyświetla ile razy zostało użyte wywołanie tej metody z daną etykietą. Taki zwykły licznik.</li>
+        <li class="unordered-list__item"><strong class="bold">console.time() </strong> – rozpoczyna odliczanie czasu jaki minął od wywołania tej metody, dzięki temu możemy sprawdzić czas wykonania danego fragmentu naszego kodu</li>
+        <li class="unordered-list__item"><strong class="bold">console.timeEnd()</strong> – kończy odliczanie czasu i wyświetla ile czasu (milisekund) upłynęło od jego rozpoczęcia</li>
+      </ul>
+
+      <strong class="bold">Przykład</strong>
+
+      <pre class="article__code">
+        <code>
+    // Obiekt console
+
+    console.time('Timer');
+    console.count('Counter');
+
+    console.group('names');
+    console.info('Tomasz');
+    console.warn('Daniel');
+    console.error('Marcin');
+    console.log('Adam');
+    console.groupEnd();
+
+    console.count('Counter');
+
+    console.groupCollapsed('age');
+    console.log(28);
+    console.log(25);
+    console.log(32);
+    console.log(32);
+    console.groupEnd();
+
+    console.count('Counter');
+
+    const myName = 777;
+    console.assert(typeof myName === 'string', 'Niepoprawny typ zmiennej, oczekiwano wartości typu "string".');
+
+    console.timeEnd('Timer');
+        </code>
+      </pre>
+
+    <section class="article__section">
+      <h3 class="article__section__title">Punkty kontrolne</h3>
+
+      <p class="article__paragraph">Może się zdarzyć, że będziemy potrzebować przeanalizować jak działa nasz skrypt kawałek po wałku. W tym celu możemy wstawić słowo kluczowe debugger w każdym miejscu, w którym chcemy żeby nastąpiła pauza w wykonywaniu naszego skryptu. Następnie w zakładce Sources przeglądarki możemy przełączać się pomiędzy utworzonymi punktami kontrolnymi i obserwować w jaki sposób jest wykonywany nasz skrypt, jakie wartości przyjmują zmienne w danym miejscu i jaki jest stos wywołań.</p>
+    </section>
+
+    <section class="article__section">
+      <h3 class="article__section__title">Typy błędów</h3>
+      <ul class="article__unordered-list">
+        <li class="unordered-list__item">SyntaxError – nieprawidłowa składnia np.: niedopasowane lub brakujące znaki cytowania, brakujące nawiasy, nieprawidłowe nazwy właściwości lub zmiennych</li>
+        <li class="unordered-list__item">ReferenceError – zmienna nie istnieje np.: niezadeklarowana zmienna, niezdefiniowana nazwa funkcji</li>
+        <li class="unordered-list__item">TypeError – nieoczekiwany typ danych np.: metoda nie istnieje, nieprawidłowa wielkość znaku w nazwie metody</li>
+        <li class="unordered-list__item">RangeError – liczba spoza zakresu np.: nie można utworzyć tablicy zawierającej -x elementów</li>
+        <li class="unordered-list__item">EvalError – nieprawidłowe użycie funkcji eval()</li>
+        <li class="unordered-list__item">URIError – nieprawidłowe użycie funkcji URI</li>
+      </ul>
+
+      <p class="article__paragraph">Najbardziej interesują nas pierwsze cztery typy błędów bo to właśnie je będziemy spotykać najczęściej pisząc nasze programy.</p>
+    </section>
+
+    </article>
+
+</body>
+</html>

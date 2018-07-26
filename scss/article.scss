@@ -61,6 +61,11 @@
     list-style: decimal;
     padding: 20px 0 20px 20px;
     font-size: $medium;
+
+    .article__unordered-list {
+      font-size: inherit;
+    }
+
     .ordered-list__item {
       padding: 5px;
     }
@@ -69,6 +74,7 @@
   &__unordered-list {
     list-style: disc;
     padding: 20px 0 20px 20px;
+    font-size: $medium;
     .unordered-list__item {
       padding: 5px;
     }
