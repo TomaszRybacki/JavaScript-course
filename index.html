@@ -286,35 +286,158 @@
         </code>
       </pre>
 
-    <section class="article__section">
-      <h3 class="article__section__title">Punkty kontrolne</h3>
+      <section class="article__section">
+        <h3 class="article__section__title">Punkty kontrolne</h3>
 
-      <p class="article__paragraph">Może się zdarzyć, że będziemy potrzebować przeanalizować jak działa nasz skrypt kawałek po wałku. W tym celu możemy wstawić słowo kluczowe debugger w każdym miejscu, w którym chcemy żeby nastąpiła pauza w wykonywaniu naszego skryptu. Następnie w zakładce Sources przeglądarki możemy przełączać się pomiędzy utworzonymi punktami kontrolnymi i obserwować w jaki sposób jest wykonywany nasz skrypt, jakie wartości przyjmują zmienne w danym miejscu i jaki jest stos wywołań.</p>
-    </section>
+        <p class="article__paragraph">Może się zdarzyć, że będziemy potrzebować przeanalizować jak działa nasz skrypt kawałek po wałku. W tym celu możemy wstawić słowo kluczowe debugger w każdym miejscu, w którym chcemy żeby nastąpiła pauza w wykonywaniu naszego skryptu. Następnie w zakładce Sources przeglądarki możemy przełączać się pomiędzy utworzonymi punktami kontrolnymi i obserwować w jaki sposób jest wykonywany nasz skrypt, jakie wartości przyjmują zmienne w danym miejscu i jaki jest stos wywołań.</p>
+      </section>
 
-    <section class="article__section">
-      <h3 class="article__section__title">Typy błędów</h3>
-      <ul class="article__unordered-list">
-        <li class="unordered-list__item">SyntaxError – nieprawidłowa składnia np.: niedopasowane lub brakujące znaki cytowania, brakujące nawiasy, nieprawidłowe nazwy właściwości lub zmiennych</li>
-        <li class="unordered-list__item">ReferenceError – zmienna nie istnieje np.: niezadeklarowana zmienna, niezdefiniowana nazwa funkcji</li>
-        <li class="unordered-list__item">TypeError – nieoczekiwany typ danych np.: metoda nie istnieje, nieprawidłowa wielkość znaku w nazwie metody</li>
-        <li class="unordered-list__item">RangeError – liczba spoza zakresu np.: nie można utworzyć tablicy zawierającej -x elementów</li>
-        <li class="unordered-list__item">EvalError – nieprawidłowe użycie funkcji eval()</li>
-        <li class="unordered-list__item">URIError – nieprawidłowe użycie funkcji URI</li>
-      </ul>
+      <section class="article__section">
+        <h3 class="article__section__title">Typy błędów</h3>
+        <ul class="article__unordered-list">
+          <li class="unordered-list__item">SyntaxError – nieprawidłowa składnia np.: niedopasowane lub brakujące znaki cytowania, brakujące nawiasy, nieprawidłowe nazwy właściwości lub zmiennych</li>
+          <li class="unordered-list__item">ReferenceError – zmienna nie istnieje np.: niezadeklarowana zmienna, niezdefiniowana nazwa funkcji</li>
+          <li class="unordered-list__item">TypeError – nieoczekiwany typ danych np.: metoda nie istnieje, nieprawidłowa wielkość znaku w nazwie metody</li>
+          <li class="unordered-list__item">RangeError – liczba spoza zakresu np.: nie można utworzyć tablicy zawierającej -x elementów</li>
+          <li class="unordered-list__item">EvalError – nieprawidłowe użycie funkcji eval()</li>
+          <li class="unordered-list__item">URIError – nieprawidłowe użycie funkcji URI</li>
+        </ul>
 
-      <p class="article__paragraph">Najbardziej interesują nas pierwsze cztery typy błędów bo to właśnie je będziemy spotykać najczęściej pisząc nasze programy.</p>
-    </section>
+        <p class="article__paragraph">Najbardziej interesują nas pierwsze cztery typy błędów bo to właśnie je będziemy spotykać najczęściej pisząc nasze programy.</p>
+      </section>
 
     </article>
 
+
+    <!-- Article 04 -->
+
+
+    <article class="article">
+
+      <header id="Typy_wartości" class="article__header">
+        <div class="decor">04</div>
+        <h2 class="article__title">Typy wartości</h2>
+      </header>
+
+      <p class="article__paragraph">W JavaScript mamy siedem typów wartości, są to:</p>
+
+      <ol class="article__ordered-list">
+        <li class="ordered-list__item">string</li>
+        <li class="ordered-list__item">number</li>
+        <li class="ordered-list__item">boolean</li>
+        <li class="ordered-list__item">undefined</li>
+        <li class="ordered-list__item">null</li>
+        <li class="ordered-list__item">symbol</li>
+        <li class="ordered-list__item">object</li>
+      </ol>
+
+      <p class="article__paragraph">Typ przechowywanej wartości możemy sprawdzić za pomocą polecenia <strong class="bold">typeof()</strong>. JS jest językiem dynamicznym, zmienne nie są związane z konkretnym typem danych jaki mogą przechowywać. To wartości przechowywane w zmiennych mają swój typ i mogą się zmieniać w trakcje wykonywania naszego programu. Dzięki czemu zmienna o nazwie <strong class="bold">name</strong> może przechowywać na początku liczbę (typ number), potem ciąg znaków (typ string), żeby ostatecznie zostać obiektem (typ object) na końcu działania naszego programu.</p>
+
+
+      <section class="article__section">
+        <h3 class="article__section__title">String</h3>
+        <p class="article__paragraph">Jest to ciąg znaków tekstowych, który zapisujemy w cudzysłowie podwójnym lub pojedynczym lub za pomocą znaku apostrof (tego na klawiszu pod Esc). Ten typ służy do przechowywania informacji w postaci słów np.: „Życie to sztuka wyborów”, ‚Lubię się uczyć.’, `Kodowanie jest fajne.`. Wybór <strong class="bold">“ ”</strong> lub <strong class="bold">‘ ’</strong> należy do ciebie. Natomiast <strong class="bold">´ ´</strong> daje dodatkowe możliwości, o których powiemy w dalszych lekcjach kursu JS.</p>
+
+        <p class="article__paragraph">String w JS jest niezmienny co oznacza, że po jego utworzeniu nie możemy go modyfikować. Możemy jedynie tworzyć nowe wartości typu string na podstawie utworzonej wcześniej wartości np. poprzez wycięcie jego części. Mając słowo ‚domek’, możemy wyciąć pierwsze trzy litery tworząc słowo ‚dom’.</p>
+      </section>
+
+      <section class="article__section">
+        <h3 class="article__section__title">Number</h3>
+        <p class="article__paragraph">Przechowuje liczby, pozwala przeprowadzać operacje matematyczne. Typ ten zawiera zarówno liczby całkowite jak i ułamkowe liczby dziesiętne.</p>
+
+        <p class="article__paragraph">W JS wykorzystuje się 64-bitowy binarny format podwójnej precyzji oparty na standardzie IEEE 754. Oznacza to, że liczby są przechowywane w 64 bitach, gdzie 1 bit przechowuje znak liczby (+ lub -), 11 bitów przechowuje wykładnik potęgowy (dla 2³ = 2 * 2 * 2 wykładnikiem jest liczba 3), natomiast pozostałe 52 bity przechowują część ułamkową.</p>
+
+        <p class="article__paragraph">Z tego powodu nie możemy operować na dowolnych liczbach, jesteśmy zmuszeni do ograniczenia się do liczb całkowitych z przedziału od 9007199254740991 do -9007199254740991. Dodatkowo ułamki dziesiętne nie są reprezentowane w sposób dokładny i działanie 0.1 + 0.2 = 0.30000000000000004. Z matematycznego punktu widzenia nie jest to wynik, którego byśmy się spodziewali. Dlatego musimy zachować ostrożność przy operacjach na ułamkach i stosować zaokrąglenia przy porównywaniu wyników z sobą. Kolejną ciekawostką jest też fakt istnienia zera dodatniego i zera ujemnego. Gdy podzielimy 2 / 0 otrzymamy nieskończoność, natomiast dla działania 2 / -0 otrzymamy minus nieskończoność.</p>
+      </section>
+
+      <section class="article__section">
+        <h3 class="article__section__title">Boolean</h3>
+        <p class="article__paragraph">Typ ten pozwala na podejmowanie decyzji. Jest to typ logiczny, może przyjmować tylko dwie wartości: true (prawda) i false (fałsz).</p>
+      </section>
+
+      <section class="article__section">
+        <h3 class="article__section__title">Undefined</h3>
+        <p class="article__paragraph">Typ undefined zawiera tylko jedną wartość, wartość undefined. Wartość nie zdefiniowana zostaje automatycznie przypisana zmiennej, która została tylko zadeklarowana przy pomocy słowa kluczowego var lub let (powiemy na ten temat przy okazji omawiania zmiennych).</p>
+
+        <p class="article__paragraph">Dodatkowo sprawdzając typ zmiennej, która nie została zadeklarowana również otrzymamy wartość undefined np. console.log(typeof(c)); zwraca undefined gdy zmienna c nie występuje w naszym kodzie.</p>
+
+        <p class="article__paragraph">Wartość undefined zwraca również:</p>
+        <ul class="article__unordered-list">
+          <li class="unordered-list__item">funkcja, w której nie zastosowano polecenia return</li>
+          <li class="unordered-list__item">właściwość obiektu, która nie jest zadeklarowana</li>
+        </ul>
+      </section>
+
+      <section class="article__section">
+        <h3 class="article__section__title">Null</h3>
+        <p class="article__paragraph">Typ null zawiera tylko jedną wartość. Jest nią null. Wartość ta reprezentuje celowy brak danej wartości w obiekcie. Wynika z tego, że musimy ją przypisać do właściwości danego obiektu.</p>
+        <p class="article__paragraph">Ważną rzeczą, o której trzeba wiedzieć to błąd jaki istnieje w JS od czasu powstania tego języka.</p>
+
+        <pre class="article__code">
+        <code>
+    let a = null;
+    console.log(typeof(a)); // zwraca typ object
+        </code>
+      </pre>
+      </section>
+
+      <section class="article__section">
+        <h3 class="article__section__title">Symbol</h3>
+        <p class="article__paragraph">Jest to nie powtarzalna wartość służąca do identyfikacji właściwości w obiekcie. Tworzymy go za pomocą funkcji Symbol(‚opis’). Opis służy wyłącznie do celów debugowania abyśmy my potrafili rozróżnić symbole od siebie. Możemy nadać dwóm symbolom takie same opisy. Nie sprawi to jednak, że oba symbole będą takie same i równe sobie. Za każdym razem tworząc symbol tworzymy nowy unikatowy symbol.</p>
+      </section>
+
+      <section class="article__section">
+        <h3 class="article__section__title">Podsumowanie</h3>
+        <p class="article__paragraph">Omówione do tej pory typy to wartości typu prostego, co oznacza, że są niezmienne. Są to takie podstawowe klocki, z których budujemy bardziej złożone konstrukcje.</p>
+      </section>
+
+      <section class="article__section">
+        <h3 class="article__section__title">Object</h3>
+        <p class="article__paragraph">Object natomiast jest wartością złożoną składającą się z par klucz: wartość. Gdzie kluczem może być string lub symbol. Natomiast właściwością mogą być wszystkie wyżej wymienione typy. Object dodatkowo zawiera w sobie podtypy takie jak: function (funkcja – obiekt, który ma możliwość wywołania), array (tablica – obiekt, który wykorzystuje liczby jako klucze oraz ma automatycznie uaktualnianą właściwość length, która wskazuje wielkość tablicy).</p>
+
+        <p class="article__paragraph">Gdy myślimy o obiekcie możemy go sobie wyobrazić jako uproszczony model opisujący coś co znamy z rzeczywistości. Weźmy przykład człowieka. Każdy człowiek ma imię, wzrost, wagę, kolor oczu itp. Są to właściwości naszego obiektu. Dodatkowo każdy człowiek potrafi robić różne rzeczy, np. mówić, chodzić itp. Czynności wykonywane przez obiekt nazywamy metodami tego obiektu. Oto przykład obiektu o nazwie person.</p>
+
+        <pre class="article__code">
+        <code>
+    const person = {
+        name: 'Tomasz',
+        height: 174,
+        weight: 70,
+        eyeColor: 'gray',
+
+        sayHello() {
+          return 'Hello';
+        },
+        walk() {
+          return 'I go for a walk to a park';
+        }
+    }
+
+    console.log(person.name); // Tomasz
+    console.log(person.walk()); // 'I go for a walk to a park'
+
+    console.log(typeof(person.name)); // string
+    console.log(typeof(person.walk)); // function
+        </code>
+      </pre>
+      </section>
+
+      <section class="article__section">
+        <h3 class="article__section__title">Wartość specjalna NaN</h3>
+        <p class="article__paragraph">Typ number zawiera wartość NaN (not a number). Oznacza wartość, która nie jest poprawną liczbą. Powstaje w wyniku operacji matematycznej, która się nie powiodła np: 2 * 'ja'. Mamy typ number mnożony przez typ string. Ponieważ JS nie ma pojęcia w jaki sposób przeprowadzić taką operację otrzymamy NaN.</p>
+
+        <p class="article__paragraph">Dodatkowo wartość NaN nie jest równa innej wartości NaN. Dlatego żeby sprawdzić czy coś jest wartością NaN musimy użyć metody <strong class="bold">Number.isNaN()</strong>.</p>
+      </section>
+
+
+    </article>
 
 
 
     <footer class="documentation__footer">
       <span class="footer__txt">designed &amp; coded with <span class="footer__icon">&#10084;</span> by <span class="footer__bold">&copy; Tomasz Rybacki</span> in 2018</span>
     </footer>
-
+    <!-- blank -->
   </main>
 
 
