@@ -1,0 +1,153 @@
+<!DOCTYPE html>
+<html lang="pl">
+
+<head>
+  <title>html markup</title>
+</head>
+
+<body>
+
+ <article class="article">
+
+      <header id="placeholder" class="article__header">
+        <div class="decor">05</div>
+        <h2 class="article__title">Zmienne cz.1</h2>
+      </header>
+
+      <p class="article__paragraph">W kodzie JS istnieją trzy słowa kluczowe służące do deklarowania zmiennych. Są to słowa <strong class="bold">var, let, const</strong>. Dzisiaj przyjrzymy się różnicom jakie występują pomiędzy nimi oraz powiemy sobie czym jest zakres i wynoszenie.</p>
+
+      <p class="article__paragraph">Należy pamiętać, że w JS występuje typowanie dynamiczne co oznacza, że to wartości przechowywane w zmiennych mają swoje typy. Same zmienne nie wymuszają typu wartości jakie mogą przechowywać i można w nich przechowywać wartości różnego typu.</p>
+
+      <section class="article__section">
+        <h3 class="article__section__title">var</h3>
+
+        <p class="article__paragraph">Jest to najstarszy sposób deklarowania zmiennej. Poprzez zadeklarowanie zmiennej rozumiemy następującą linijkę kodu:</p>
+
+        <pre class="article__code">
+        <code>
+    var myName;
+        </code>
+      </pre>
+
+        <p class="article__paragraph">Właśnie utworzyliśmy zmienną o nazwie <strong class="bold">myName</strong>. W tym momencie przechowuje ona wartość undefined. Zmienne utworzone w ten sposób są dodawane do obiektu globalnego <strong class="bold">window</strong>. Przy pomocy polecenia:</p>
+
+        <pre class="article__code">
+        <code>
+    console.log(window);
+        </code>
+      </pre>
+
+        <p class="article__paragraph">Możemy wyświetlić jego wszystkie wstępnie zdefiniowane właściwości. Zobaczymy, że nasza zmienna została dodana i możemy ją odszukać na tej liście.</p>
+
+        <p class="article__paragraph">Tutaj jako ciekawostkę napiszę, że na początku zadeklarowałem zmienną o nazwie <strong class="bold">name</strong> a następnie byłem zdziwiony, że jej wartość początkowa wynosiła “”, czyli była pustym ciągiem tekstowym (string). Jak możemy zobaczyć obiekt <strong class="bold">window</strong> posiada wstępnie zdefiniowaną właściwość o nazwie <strong class="bold">name</strong>. Zagadka rozwiązana, wszystko działa jak należy.</p>
+
+        <strong class="bold">Zasady nadawania nazw zmiennym:</strong>
+        <ol class="article__ordered-list">
+          <li class="ordered-list__item">nazwa nie może zaczynać się od cyfry</li>
+          <li class="ordered-list__item">nie może zawierać myślnika ani krpoki</li>
+          <li class="ordered-list__item">nie wolno używać słów kluczowych jak np.: var, let, const</li>
+          <li class="ordered-list__item">wielkość liter ma znaczenie, zmienna <strong class="bold">name</strong> nie równa się zmiennej <strong class="bold">Name</strong></li>
+          <li class="ordered-list__item">gdy nazwa składa się z kilku słów zapisujemy je w notacji wielbłądziej (camelCase). Czyli kolejne wyrazy pisane są łącznie, rozpoczynając każdy następny wielką literą. np. <strong class="bold">myName</strong></li>
+          <li class="ordered-list__item">nazwa powinna wskazywać na rodzaj informacji jaki jest przechowywany w zmiennej</li>
+        </ol>
+
+        <p class="article__paragraph">Wracając do naszego przykładu, jeśli chcę zainicjować zmienną myName i przypisać jej wartość, mogę to zrobić za pomocą znaku równości.</p>
+
+        <pre class="article__code">
+        <code>
+    myName = 'Tomasz';
+        </code>
+      </pre>
+
+        <p class="article__paragraph">Mogę wykonać obie te czynności w tej samej linijce kodu. Należy jednak pamiętać, że interpreter JS, wykonuje te dwie czynności oddzielnie najpierw deklaruje zmienną a dopiero potem przypisuje jej wartość.</p>
+
+        <pre class="article__code">
+        <code>
+    var myName = 'Tomasz';
+
+    // ten kod zostanie wykonany jako:
+
+    var myName;
+    myName = 'Tomasz';
+        </code>
+      </pre>
+
+        <p class="article__paragraph">Możemy przypisać wartość do zmiennej bez jej deklaracji. Jest to jednak bardzo zły pomysł. W takim przypadku dochodzi bowiem do automatycznego utworzenia zmiennej globalnej w chwili wykonywania danej linii kodu przez interpreter.</p>
+      </section>
+
+
+      <section class="article__section">
+        <h3 class="article__section__title">Zakres</h3>
+
+        <p class="article__paragraph">Kolejnym pojęciem jakie musimy zrozumieć jest zakres zmiennej. Zakres oznacza zasięg w jakim jest widoczna nasza zmienna. W przypadku var jest to zakres lokalny funkcji, w której została zadeklarowana zmienna lub jest to zakres globalny dla zmiennych zadeklarowanych poza funkcją.</p>
+
+        <pre class="article__code">
+        <code>
+    var myName = 'Tomasz';
+
+    function getMyFullName() {
+      var mySurname = 'Rybacki';
+      console.log(myName);
+      console.log(mySurname);
+    }
+
+    console.log(myName); // Tomasz
+    console.log(mySurname); // ReferenceError
+    getMyFullName(); // Tomasz Rybacki
+        </code>
+      </pre>
+
+        <p class="article__paragraph">Zakres lokalny funkcji oznacza, że zmienna jest widoczna tylko wewnątrz funkcji, w której została zadeklarowana. Natomiast zmienne z zakresu globalnego są widoczne w całym naszym skrypcie. Dlatego w powyższym przykładzie funkcja getMyFullName wyświetli zarówno moje imię jak i nazwisko.</p>
+
+        <p class="article__paragraph">Jednak gdy spróbuję dostać się do zmiennej mySurname poza funkcją otrzymam błąd ReferenceError. Dzieje się tak ponieważ, reszta mojego skryptu nie widzi tej zmiennej i nie ma pojęcia o jej istnieniu.</p>
+      </section>
+
+      <section class="article__section">
+        <h3 class="article__section__title">Wynoszenie</h3>
+
+        <p class="article__paragraph">Przed wykonaniem naszego kodu interpreter przeszukuje cały nasz kod w poszukiwaniu deklaracji zmiennych i funkcji. Odnalezione deklaracje są następnie wynoszone na początek naszego skryptu, dzięki temu są widoczne w całym naszym skrypcie.</p>
+
+        <pre class="article__code">
+        <code>
+    console.log(myName); // undefined
+
+    // nie otrzymamy w tym momencie błędu ReferenceError
+    // ponieważ zmienna została wyniesiona na początek skryptu
+
+    var myName = 'Tomasz';
+
+    // zauważmy, że dopiero w tym momencie została przypisana wartość
+
+    console.log(myName); // Tomasz
+        </code>
+      </pre>
+
+        <p class="article__paragraph">Powyższy kod zostanie wykonany przez interpreter w następujący sposób:</p>
+
+        <pre class="article__code">
+        <code>
+    var myName;
+
+    console.log(myName); // undefined
+
+    myName = 'Tomasz';
+
+    console.log(myName); // Tomasz
+        </code>
+      </pre>
+
+        <p class="article__paragraph">Z tego też powodu powinniśmy deklarować wszystkie nasze zmienne na początku naszego skryptu (zakres globalny) lub funkcji (zakres lokalny). Dzięki temu nasz kod jest czytelniejszy, od razu widzimy, jakie zmienne mają jaki zakres.</p>
+
+      </section>
+
+      <section class="article__section">
+        <h3 class="article__section__title">Dlaczego nie chcemy deklarować wszystkich naszych zmiennych globalnie ?</h3>
+
+        <p class="article__paragraph">Nasza aplikacja lub strona internetowa może współpracować z wieloma bibliotekami napisanymi w JS przez kogoś innego. Wynika z tego, że ktoś inny mógł by nadać takie same nazwy swoim zmiennym jak zrobiliśmy to my w naszym skrypcie. Powstało by wtedy wiele zamieszania, a wyniki działania naszej aplikacji były by nieprzewidywalne. Dlatego staramy się unikać współdzielenia przestrzeni nazw i gdy tylko to możliwe ukrywamy nasze zmienne.</p>
+      </section>
+    </article>
+
+
+</body>
+
+</html>
