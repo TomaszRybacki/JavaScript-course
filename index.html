@@ -577,6 +577,156 @@
     </article>
 
 
+    <!-- Article 06 -->
+
+    <article class="article">
+
+      <header id="Zmienne_cz.2" class="article__header">
+        <div class="decor">06</div>
+        <h2 class="article__title">Zmienne cz.2</h2>
+      </header>
+
+      <p class="article__paragraph">Kontynuujemy temat zmiennych. Dzisiaj przyjrzymy się zmiennym wprowadzonym przez ECMAScript 6. Są to słowa kluczowe <strong class="bold">let</strong> i <strong class="bold">const</strong>. Dodatkowo zobaczymy w jaki sposób wartości są przechowywane w zmiennych.</p>
+
+      <section class="article__section">
+        <h3 class="article__section__title">let</h3>
+
+        <p class="article__paragraph">Za pomocą słowa <strong class="bold">let</strong> deklarujemy zmienną, której zakres jest ograniczony do bloku kodu. Blokiem kodu nazywamy wszystko co zawiera się w nawiasach klamrowych { }, możemy w ten sposób zgrupować ze sobą kilka wyrażeń.</p>
+
+        <pre class="article__code">
+        <code>
+    let myName = 'Tomasz';
+    var mySurname = 'Rybacki';
+
+    {
+      let myName = 'Marcin';
+      var mySurname = 'Kazanowski'
+
+      console.log(myName); // Marcin
+      console.log(mySurname); // Kazanowski
+    }
+
+    console.log(myName); // Tomasz
+    console.log(mySurname); // Kazanowski
+        </code>
+      </pre>
+
+        <p class="article__paragraph">let nie tworzy właściwości na obiekcie globalnym</p>
+
+        <pre class="article__code">
+        <code>
+    var myName = 'Tomasz';
+    let mySurname = 'Rybacki';
+
+    console.log(window.myName); // Tomasz
+    console.log(window.mySurname); // undefined
+        </code>
+      </pre>
+
+        <p class="article__paragraph">nie można ponownie zadeklarować zmiennej o tej samej nazwie w danym zakresie</p>
+
+        <pre class="article__code">
+        <code>
+    let myName = 'Tomasz';
+    let myName = 'Marcin'; // SyntaxError
+        </code>
+      </pre>
+
+        <p class="article__paragraph">nie ulega wynoszeniu – tak zwana tymczasowa martwa strefa (Temporal Dead Zone)</p>
+
+        <pre class="article__code">
+        <code>
+    myName = 'Tomasz'; // ReferenceError
+    console.log(typeof(myName)); // ReferenceError
+    let myName;
+        </code>
+      </pre>
+      </section>
+
+      <section class="article__section">
+        <h3 class="article__section__title">const</h3>
+
+        <p class="article__paragraph">Przy użyciu słowa kluczowego <strong class="bold">const</strong> deklarujemy zmienną, która jest stałą. Co oznacza, że nie można jej przypisać nowej wartości. Dodatkowo musimy przypisać jej wartość w chwili deklaracji.</p>
+
+        <pre class="article__code">
+        <code>
+    const myName = 'Tomasz';
+        </code>
+      </pre>
+
+        <p class="article__paragraph"> Poniższe próby zakończą się błędem</p>
+
+        <pre class="article__code">
+        <code>
+    const myName = 'Tomasz';
+    const myName = 'Marcin'; // SyntaxError
+
+    const myName; // SyntaxError
+    myName = 'Tomasz';
+        </code>
+      </pre>
+
+        <p class="article__paragraph"><strong class="bold">const</strong> tak samo jak <strong class="bold">let</strong> ma zakres bloku, nie tworzy właściwości na obiekcie globalnym, nie można ponownie zadeklarować zmiennej o tej samej nazwie w danym zakresie i nie ulega wynoszeniu.</p>
+      </section>
+
+      <section class="article__section">
+        <h3 class="article__section__title">Przechowywanie wartości w zmiennych</h3>
+
+        <p class="article__paragraph">W tym momencie musimy sobie powiedzieć w jaki sposób wartości są przechowywane w zmiennych. Otóż wartości typu prostego są przechowywane bezpośrednio w danej zmiennej. Możemy więc kopiować wartości jakie przechowują do innych zmiennych.</p>
+
+        <pre class="article__code">
+        <code>
+    let a = 2;
+    console.log(a); // 2
+
+    let b = a;
+    console.log(b); // 2
+
+    b = b + 2;
+    console.log(b); // 4
+    console.log(a); // 2
+        </code>
+      </pre>
+
+        <p class="article__paragraph"> Wyobraźmy sobie, że zmienna <strong class="bold">a</strong> jest pudełkiem, w którym znajduje się cyfra <strong class="bold">2</strong>. W momencie zadeklarowania zmiennej <strong class="bold">b</strong> i przypisania jej wartości <strong class="bold">a</strong> powstaje nowe pudełko z nową cyfrą <strong class="bold">2</strong>. W efekcie mamy dwa pudełka i dwie oddzielne cyfry <strong class="bold">2</strong>, które możemy niezależnie od siebie modyfikować.</p>
+
+        <p class="article__paragraph">Natomiast wartości typu złożonego są zapisywane w zmiennych jako referencja do miejsca w pamięci, w której są przechowywane dane informacje. Możemy to sobie wyobrazić jako jedno pudełko, w którym znajduje się obiekt <strong class="bold">me</strong>. W chwili utworzenia obiektu <strong class="bold">myBrother</strong> nie następuje skopiowanie obiektu <strong class="bold">me</strong> i przypisanie go do nowej zmiennej. Powstaje natomiast nowa referencja (czyli taka strzałka wskazująca gdzie znajduje się obiekt <strong class="bold">me</strong>). Mamy więc dwie oddzielne strzałki, które wskazują te same pudełko. Modyfikując więc dowolną ze strzałek, tak naprawdę modyfikujemy ten sam pojemnik. Dlatego w poniższym przykładzie zmieniliśmy zarówno moje imię jak i imię mojego brata.</p>
+
+        <pre class="article__code">
+        <code>
+    let me = {
+      name: 'Tomasz',
+      age: 28
+    }
+
+    let myBrother = me;
+
+    myBrother.name = 'Daniel';
+
+    console.log(myBrother.name); // Daniel
+    console.log(me.name); // Daniel
+        </code>
+      </pre>
+
+        <p class="article__paragraph">Gdy zadeklarujemy stałą, która przechowuje wartość typu złożonego jak np. obiekt. Możemy zmienić właściwości tego obiektu. Nie możemy jednak przypisać jej nowej wartości.</p>
+
+        <pre class="article__code">
+        <code>
+    const person = {
+      name: 'Tomasz',
+      age: 28
+    }
+
+    person.name = 'Daniel';
+    person.age = 25;
+
+    console.log(person); // {name: Daniel, age: 25}
+
+    person = 'Daniel'; // TypeError
+        </code>
+      </pre>
+      </section>
+    </article>
 
 
     <footer class="documentation__footer">
