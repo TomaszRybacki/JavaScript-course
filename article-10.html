@@ -1,0 +1,155 @@
+<!DOCTYPE html>
+<html lang="pl">
+
+<head>
+  <title>html markup</title>
+</head>
+
+<body>
+
+
+  <article class="article">
+
+    <header id="Tablice" class="article__header">
+      <div class="decor">10</div>
+      <h2 class="article__title">Tablice</h2>
+    </header>
+
+    <p class="article__paragraph">Tablice są specjalnym typem obiektu w JS. Mają więc dostęp do wielu metod pozwalających na manipulowanie nimi. W tym wpisie nie będę omawiał wszystkich dostępnych dla nich metod. Skupię się na podstawie ich działania. Tablice służą do wygodnego przechowywania większych ilości danych typu prostego.</p>
+
+    <section class="article__section">
+      <h3 class="article__section__title">Tworzenie tablic</h3>
+
+      <p class="article__paragraph">Tablicę możemy utworzyć za pomocą literału tablicy.</p>
+
+      <pre class="article__code">
+        <code>
+    // tworzymy pustą tablicę
+    const emptyArray = [];
+    // tworzymy tablicę przechowującą imiona
+    const namesArray = ['Tomasz', 'Daniel', 'Mateusz'];
+        </code>
+      </pre>
+
+      <p class="article__paragraph">Drugim sposobem na stworzenie tablicy jest użycie konstruktora <strong class="bold">new</strong>.</p>
+
+      <pre class="article__code">
+        <code>
+    // tworzymy pustą tablicę
+    const emptyArray = new Array();
+    // tworzymy tablicę przechowującą imiona
+    const namesArray = new Array('Tomasz', 'Daniel', 'Mateusz');
+    // tworzymy pustą tablicę o długości 10 elementów
+    const undefinedElementsArray = new Array(10);
+        </code>
+      </pre>
+    </section>
+
+    <section class="article__section">
+      <h3 class="article__section__title">Właściwość length</h3>
+
+      <p class="article__paragraph">Opisuje ona długość tablicy, czyli liczbę elementów jakie się w niej znajdują. Należy pamiętać, że w tablicy mogą znajdować się puste miejsca.</p>
+
+      <pre class="article__code">
+        <code>
+    // w tablicy znajdują się 3 imiona i jedno puste miejsce zawierające wartość undefined
+    const namesArray = ['Tomasz', 'Daniel', , 'Mateusz'];
+    console.log(namesArray.length); // 4
+        </code>
+      </pre>
+    </section>
+
+    <section class="article__section">
+      <h3 class="article__section__title">Dostęp do przechowywanych wartości</h3>
+
+      <p class="article__paragraph">Wszystkie wartości w tablicy posiadają swój indeks, czyli liczbę, która określa położenie danej wartości w tablicy. Indeksy zaczynamy liczyć od zera. Dla tablicy o długości 3 liczymy (0, 1, 2). Aby pobrać wartość z tablicy wpisujemy jej nazwę oraz indeks w nawiasie kwadratowym. <strong class="bold">nazwa[indeks]</strong></p>
+
+      <ul class="article__unordered-list">
+        <li class="unordered-list__item">pierwszy element w tablicy ma zawsze indeks zero: <strong class="bold">nazwa[0]</strong></li>
+        <li class="unordered-list__item">ostatni element w tablicy ma indeks: <strong class="bold">nazwa[nazwa.length – 1]</strong></li>
+      </ul>
+
+      <pre class="article__code">
+        <code>
+    // pobieranie wartości z tablicy
+    const namesArray = ['Tomasz', 'Daniel', , 'Mateusz'];
+    console.log(namesArray[0]); // 'Tomasz'
+    console.log(namesArray[1]); // 'Daniel'
+    console.log(namesArray[2]); // undefined
+    console.log(namesArray[namesArray.length - 1]); // 'Mateusz'
+    // nadpisywanie wartości w tablicy
+    namesArray[2] = 'Przemek';
+    console.log(namesArray); // ["Tomasz", "Daniel", "Przemek", "Mateusz"]
+    // usuwanie wartości z tablicy
+    delete namesArray[0];
+    console.log(namesArray); // [empty, "Daniel", "Przemek", "Mateusz"]
+        </code>
+      </pre>
+
+      <p class="article__paragraph">Możemy najpierw utworzyć pustą tablicę a następnie dodawać do niej wartości za pomocą indeksów. W takim przypadku musimy być ostrożni, ponieważ możemy utworzyć wiele pustych miejsc w naszej tablicy.</p>
+
+      <pre class="article__code">
+        <code>
+    const animalsArray = [];
+    animalsArray[2] = 'cat';
+    animalsArray[22] = 'dog';
+    console.log(animalsArray); // [empty × 2, "cat", empty × 19, "dog"]
+    console.log(animalsArray.length); // 23
+        </code>
+      </pre>
+
+    </section>
+
+    <section class="article__section">
+      <h3 class="article__section__title">Tablice wielowymiarowe</h3>
+
+      <p class="article__paragraph">W tablicy możemy przechowywać dowolne wartości, nie muszą to być jedynie wartości typu prostego. Możemy w nich umieszczać też obiekty i inne tablice. Gdy tablica zawiera inne tablice jest nazywana tablicą wielowymiarową. Aby dostać się do jej wartości tworzymy ciąg nawiasów, które określają kolejno indeksy danej tablicy. <strong class="bold">nazwa[indeks tablicy nr 1][indeks tablicy nr 2][indeks tablicy nr 3] itd.</strong></p>
+
+      <pre class="article__code">
+        <code>
+    const multidimensionalArray = [['rekin', 'sum'], ['delfin', 'wieloryb'], ['zółw', 'homar']];
+    console.log(multidimensionalArray[0][1]); // 'sum'
+    console.log(multidimensionalArray[1][0]); // 'delfin'
+    console.log(multidimensionalArray[2][0]); // 'żółw'
+        </code>
+      </pre>
+    </section>
+
+    <section class="article__section">
+      <h3 class="article__section__title">Pętla forEach</h3>
+    </section>
+
+    <p class="article__paragraph">Jedyną metodą o jakiej chcę wspomnieć w tym wpisie jest pętla forEach, ponieważ jest to temat powiązany z tym co będzie w kolejnym wpisie, czyli dokładnym omówieniem pętli w JavaScrpit.</p>
+
+    <p class="article__paragraph">Pisząc w skrócie, pętle pozwalają nam na wykonanie danego fragmentu kodu wielokrotnie, dopóki jest spełniony określony przez nas warunek. Pętle są często wykorzystywane do przeglądania i manipulowania wartościami w tablicach.</p>
+
+    <p class="article__paragraph">Cechą wyróżniającą tą metodę jest fakt, że pętla ta zostanie wykonana tylko dla tych elementów, które mają przypisaną wartość. Wszystkie puste miejsca w tablicy są pomijane, mimo że ich wartość również wynosi <strong class="bold">undefined</strong>.</p>
+
+    <pre class="article__code">
+        <code>
+    const numbersArray = [0, 1, undefined, null, 4, , 6, 7, , 9];
+    numbersArray.forEach((num) =&gt; {
+      console.log(num * 2);
+    });
+    /*
+    otrzymamy:
+    0
+    2
+    NaN
+    0
+    8
+    12
+    14
+    18
+    */
+    console.log(numbersArray[2]); // undefined
+    console.log(numbersArray[5]); // undefined
+        </code>
+      </pre>
+
+  </article>
+
+
+</body>
+
+</html>
