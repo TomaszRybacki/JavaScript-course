@@ -1,0 +1,173 @@
+<!DOCTYPE html>
+<html lang="pl">
+
+<head>
+  <title>html markup</title>
+</head>
+
+<body>
+
+   <article class="article">
+
+      <header id="Instrukcje_warunkowe" class="article__header">
+        <div class="decor">09</div>
+        <h2 class="article__title">Instrukcje warunkowe</h2>
+      </header>
+
+      <p class="article__paragraph">Do podejmowania decyzji w kodzie JS służą instrukcje warunkowe <strong class="bold">if … else, switch</strong> oraz operator warunkowy.</p>
+
+      <section class="article__section">
+        <h3 class="article__section__title">if … else</h3>
+
+        <p class="article__paragraph">Nasz warunek jest zamieniany na typ boolean. W zależności od otrzymanego wyniku, wykonamy dany fragment kodu.</p>
+
+        <pre class="article__code">
+        <code>
+    if (warunek) {
+      // jeśli prawda wykonaj ten blok kodu
+    } else {
+      // jeśli fałsz wykonaj ten blok kodu
+    }
+        </code>
+      </pre>
+
+        <p class="article__paragraph">Możemy w ten sposób sprawdzać czy dana wartość istnieje lub czy spełnia dany warunek np.</p>
+
+        <pre class="article__code">
+        <code>
+    // sprawdzamy czy obiekt user posiada właściwość myName
+    const user = {
+      name: 'Tomasz',
+      age: 29,
+      country: 'Poland'
+    };
+    if (user.myName) {
+      console.log(`Właściwość myName została odnaleziona, jej wartość wynosi ${user.myName}`);
+    } else {
+      console.log('Właściwość myName nie została odnaleziona w obiekcie user.');
+    }
+    /*
+    Nasz wynik:
+    Właściwość myName nie została odnaleziona w obiekcie user.
+    */
+    // sprawdzamy czy użytkownik może kupić legalnie piwo w Polsce
+    if (user.age &gt;= 18 &amp;&amp; user.country === 'Poland') {
+      console.log('Możesz legalnie kupić piwo będąc w Polsce.');
+    } else {
+      console.log('W Polsce, nie sprzedajemy alkoholu nieletnim!');
+    }
+    /*
+    Nasz wynik:
+    Możesz legalnie kupić piwo będąc w Polsce
+    */
+        </code>
+      </pre>
+
+        <p class="article__paragraph">Jeśli chcemy wykonać tylko jedną linijkę kodu możemy pominąć nawiasy klamrowe. Nie jest to zalecana praktyka, ale czasami bywa przydatna i warto o niej wiedzieć.</p>
+
+        <pre class="article__code">
+        <code>
+    if (user.name === 'Tomasz') console.log('Cześć Tomasz!'); // Cześć Tomasz!
+    if (user.age &gt;= 18) console.log('Jesteś pełnoletni.'); // Jesteś pełnoletni.
+        </code>
+      </pre>
+
+        <p class="article__paragraph">Dodatkowo możemy zagnieżdżać warunki jeden w drugim i sprawdzać kilka warunków po sobie</p>
+
+        <pre class="article__code">
+        <code>
+    if (user.country === 'Poland') {
+      if (user.name === 'Janek') {
+        if (user.age &gt;= 18) {
+          console.log('Użytkownik przeszedł test prawdziwego Polaka.');
+        }
+      }
+    } else if (user.country === 'Germany') {
+      if (user.name === 'Hans') {
+        if (user.age &gt;= 18) {
+          console.log('Użytkownik przeszedł test prawdziwego Niemca.');
+        }
+      }
+    } else {
+      console.log('Użytkownik nie jest ani prawdziwym Polakiem ani prawdziwym Niemcem.');
+    }
+        </code>
+      </pre>
+
+        <p class="article__paragraph">Jak możemy zobaczyć w powyższym przykładzie jest to mało czytelny sposób prezentowania logiki naszego kodu. Dodatkowo łatwo w nim popełnić błąd. Dlatego korzystajmy z operatorów logicznych, żeby nie stosować zbyt wielu poziomów zagnieżdżenia kodu.</p>
+      </section>
+
+      <section class="article__section">
+        <h3 class="article__section__title">switch</h3>
+
+        <p class="article__paragraph">Gdy chcemy wybrać co ma się stać na podstawie kilku możliwych odpowiedzi, korzystamy ze switcha. Jego działanie polega na sprawdzeniu każdej zdefiniowanej odpowiedzi do naszego warunku. Następnie wykonywany jest kod, który przeszedł nasz warunek aż do słowa kluczowego <strong class="bold">break</strong>. Służy ono do przerwania działania wykonywanego kodu i wyjście z bloku kodu <strong class="bold">switch</strong>. Musimy je dodać po każdej możliwej odpowiedzi, w przeciwnym razie zostanie wykonany cały pozostały kod. Na końcu instrukcji <strong class="bold">switch</strong> zawsze podajemy przypadek domyślny (<strong class="bold">default</strong>), który ma zostać wykonany w przypadku braku dopasowania żadnej z powyższych odpowiedzi.</p>
+
+        <pre class="article__code">
+        <code>
+    switch (warunek) {
+      case odpowiedź1:
+        // wykonaj ten kod gdy odpowiedż1 jest poprawna
+        break;
+      case odpowiedź2:
+        // wykonaj ten kod gdy odpowiedż2 jest poprawna
+        break;
+      case odpowiedź3:
+        // wykonaj ten kod gdy odpowiedż3 jest poprawna
+        break;
+      default:
+        // gdy żadna z powyższych odpowiedzi nie jest właściwa, wykonaj ten kod
+    }
+        </code>
+      </pre>
+
+        <strong class="bold">Przykład</strong>
+
+        <pre class="article__code">
+        <code>
+    // Jaka jest stolica państwa, w którym mieszka nasz użytkownik ?
+    switch (user.country) {
+      case 'Poland':
+        console.log('Stolicą państwa użytkownika jest Warszawa.');
+        break;
+      case 'Germany':
+        console.log('Stolicą państwa użytkownika jest Berlin.');
+        break;
+      case 'Italy':
+        console.log('Stolicą państwa użytkownika jest Rzym.');
+        break;
+      default:
+        console.log('Użytkownik mieszka poza Europą.');
+    }
+        </code>
+      </pre>
+      </section>
+
+      <section class="article__section">
+        <h3 class="article__section__title">Operator warunkowy</h3>
+
+        <p class="article__paragraph">Gdy mamy tylko dwie możliwości do wyboru, możemy skrócić nasz kod, przez zastosowanie operatora warunkowego (nazywanego też operatorem trójkowym).</p>
+
+        <pre class="article__code">
+        <code>
+    (warunek) ? (wykonaj gdy prawda) : (wykonaj gdy fałsz)
+        </code>
+      </pre>
+      </section>
+
+      <strong class="bold">Przykład</strong>
+
+      <pre class="article__code">
+        <code>
+    let a = 8;
+    let b = 5;
+    const biggerNumber = (a &gt;= b) ? a : b;
+    console.log(biggerNumber); // 8
+        </code>
+      </pre>
+
+    </article>
+
+
+</body>
+
+</html>
