@@ -1,0 +1,276 @@
+<!DOCTYPE html>
+<html lang="pl">
+
+<head>
+  <title>html markup</title>
+</head>
+
+<body>
+
+
+    <article class="article">
+
+      <header id="Konwersja_typów" class="article__header">
+        <div class="decor">08</div>
+        <h2 class="article__title">Konwersja typów</h2>
+      </header>
+
+      <section class="article__section">
+        <h3 class="article__section__title">Czym jest konwersja typów ?</h3>
+
+        <p class="article__paragraph">Jest to zamiana typu jednej wartości na inny typ. Kyle Simpson używa określenia <strong class="bold">jawnej konwersji typów</strong>, gdy w naszym kodzie widać, że konwersja przeprowadzana jest celowo. Oraz określenia <strong class="bold">niejawnej konwersji typów</strong>, gdy następuje ona jako efekt dodatkowy innej przeprowadzanej operacji.</p>
+
+        <p class="article__paragraph">Nie będę dokładnie opisywał mechanizmu jej działania, żeby nie komplikować. W końcu z założenia kurs ten jest przeznaczony dla osób początkujących.</p>
+      </section>
+
+      <section class="article__section">
+        <h3 class="article__section__title">Jawna konwersja typów.</h3>
+
+        <p class="article__paragraph"><strong class="bold">- zamiana liczby (number) na ciąg znaków (string) lub na odwrót.</strong></p>
+
+        <p class="article__paragraph">Najbardziej przejrzystym sposobem dokonania tej konwersji jest użycie wbudowanych funkcji <strong class="bold">String()</strong> i <strong class="bold">Number()</strong>:</p>
+
+        <pre class="article__code">
+        <code>
+    let age = '28';
+    let birthday = 1989;
+
+    console.log(Number(age)); // 28
+    console.log(typeof(Number(age))); // number
+
+    console.log(String(birthday)); // '1989'
+    console.log(typeof(String(birthday))); // string
+        </code>
+      </pre>
+
+        <p class="article__paragraph">Kolejnym jawnym sposobem na zamianę ciągu znaków na liczbę jest użycie operatora +</p>
+
+        <pre class="article__code">
+        <code>
+    let age = '28';
+
+    console.log(+age); // 28
+    console.log(typeof(+age)); // number
+        </code>
+      </pre>
+
+        <p class="article__paragraph"> <strong class="bold">- zamiana na typ boolean</strong></p>
+
+        <p class="article__paragraph">W tym momencie musimy sobie powiedzieć na temat wartości prawdziwych (truthy) i fałszywych (falsy).</p>
+
+        <p class="article__paragraph">Wartością fałszywą jest wszystko to co zostaje zamienione na wartość <strong class="bold">false</strong> podczas konwersji na typ boolean. Jest to krótka, ściśle określona lista wartości, którą łatwo zapamiętać.</p>
+
+        <ol class="article__ordered-list">
+          <li class="ordered-list__item">undefined</li>
+          <li class="ordered-list__item">null</li>
+          <li class="ordered-list__item">0</li>
+          <li class="ordered-list__item">NaN</li>
+          <li class="ordered-list__item">'' pusty ciąg znaków</li>
+        </ol>
+
+        <p class="article__paragraph">Wartości prawdziwe możemy zapamiętać jeszcze prościej, są to wszystkie wartości, które nie znajdują się na powyższej liście.</p>
+
+        <p class="article__paragraph">Tak samo jak wcześniej najbardziej czytelnym sposobem na konwersję jest użycie wbudowanej funkcji <strong class="bold">Boolean()</strong></p>
+
+        <pre class="article__code">
+        <code>
+    let object = {};
+    console.log(Boolean(object)); // true
+
+    let array = [];
+    console.log(Boolean(array)); // true
+
+    let string = '0';
+    console.log(Boolean(string)); // true
+
+    let number = 6;
+    console.log(Boolean(number)); // true
+
+
+    let zero = 0;
+    console.log(Boolean(zero)); // false
+
+    let something;
+    console.log(Boolean(something)); // false
+
+    let empty = null;
+    console.log(Boolean(empty)); // false
+
+    let emptyString = '';
+    console.log(Boolean(emptyString)); // false
+
+    let invalidNumber = NaN;
+    console.log(Boolean(invalidNumber)); // false
+        </code>
+      </pre>
+
+        <p class="article__paragraph"> Kolejnym sposobem na konwersję jest użycie operatora podwójnej negacji !!</p>
+
+        <pre class="article__code">
+        <code>
+    let age = '28';
+    let birthday = 1989;
+
+    console.log(!!age); // true
+    console.log(typeof(!!age)); // boolean
+
+    console.log(!!birthday); // true
+    console.log(typeof(!!birthday)); // boolean
+        </code>
+      </pre>
+
+        <p class="article__paragraph"><strong class="bold">- zamiana wartości złożonych (obiektów) na wartości proste</strong></p>
+
+        <p class="article__paragraph">W tym przypadku sprawa się nieco komplikuje, ponieważ sami musimy określić w jaki sposób chcemy zamienić obiekt na liczbę lub ciąg znaków. Każdy obiekt dziedziczy metodę <strong class="bold">toString()</strong> i <strong class="bold">valueOf()</strong>, właśnie te dwie metody określają w jaki sposób zostanie dokonana konwersja na <strong class="bold">string</strong> i <strong class="bold">number</strong>.</p>
+
+        <pre class="article__code">
+        <code>
+    // zostaną wykorzystane domyślne metody odziedziczone po prototypie
+
+    const person = {
+      name: 'Tomasz',
+      age: 28
+    };
+
+    // funkcje wbudowane Number() i String() wywołują metody valueOf() i toString()
+
+    console.log(Number(person)); // NaN
+
+    console.log(String(person)); // [object Object]
+    console.log(typeof(String(person))); // string
+
+    // możemy sami wywołać metodę toString() bezpośrednio
+
+    console.log(person.toString()); // [object Object]
+        </code>
+      </pre>
+
+        <p class="article__paragraph">Przesłaniamy domyślne metody i sami decydujemy w jaki sposób ma nastąpić konwersja:</p>
+
+        <pre class="article__code">
+        <code>
+    const person = {
+      name: 'Tomasz',
+      age: 28,
+
+      valueOf() {
+        return this.age;
+      },
+
+      toString() {
+        return `{name: ${this.name}, age: ${this.age}}`;
+      }
+    };
+
+    console.log(Number(person)); // 28
+
+    console.log(String(person)); // {name: Tomasz, age: 28}
+    console.log(person.toString()); // {name: Tomasz, age: 28}
+        </code>
+      </pre>
+      </section>
+
+      <section class="article__section">
+        <h3 class="article__section__title">Niejawna konwersja typów</h3>
+
+        <p class="article__paragraph"><strong class="bold">- zamiana liczb na ciągi znaków</strong></p>
+
+        <p class="article__paragraph">Jeśli dowolny argument operatora + to wartość typu string, otrzymamy konkatenację łańcuchów znaków.</p>
+
+        <pre class="article__code">
+        <code>
+    let birthday = 1989;
+
+    console.log(birthday + ''); // 1989
+    console.log(typeof(birthday + '')); // string
+        </code>
+      </pre>
+
+        <p class="article__paragraph"><strong class="bold">- zamiana ciągów znaków na liczby</strong></p>
+
+        <pre class="article__code">
+        <code>
+    let a = '1';
+    let b = 3;
+
+    console.log(a - b); // -2
+    console.log(a * b); // 3
+    console.log(a / b); // 0.3333333333333333
+        </code>
+      </pre>
+
+        <p class="article__paragraph"><strong class="bold">- konwersja dowolnej wartości na typ boolean</strong></p>
+
+        <p class="article__paragraph">Każda wartość użyta w kontekście poniższych wyrażeń zostanie zamieniona na typ boolean:</p>
+
+        <ol class="article__ordered-list">
+          <li class="ordered-list__item">wyrażenie testowe w instrukcji <strong class="bold">if</strong></li>
+          <li class="ordered-list__item">wyrażenie testowe w nagłówku pętli <strong class="bold">for</strong></li>
+          <li class="ordered-list__item">wyrażenie testowe w pętlach <strong class="bold">while</strong> i <strong class="bold">do while</strong></li>
+          <li class="ordered-list__item">wyrażenie testowe w operatorze warunkowym</li>
+          <li class="ordered-list__item">argument z lewej strony operatorów <strong class="bold">&amp;&amp;</strong> i <strong class="bold">||</strong></li>
+        </ol>
+
+
+        <p class="article__paragraph">Omówimy wszystkie te wyrażenia w kolejnych lekcjach, więc nie przejmuj się, że nie wiesz jeszcze co oznaczają.</p>
+      </section>
+
+      <section class="article__section">
+        <h3 class="article__section__title">Korzystanie z równości luźnej ==</h3>
+
+        <p class="article__paragraph">Wartość NaN nigdy nie jest równa NaN. Możemy to sobie wytłumaczyć w następujący sposób.</p>
+
+        <pre class="article__code">
+        <code>
+    console.log('a' * 2); // NaN
+    console.log('b' * 2); // NaN
+        </code>
+      </pre>
+
+        <p class="article__paragraph">Obie wartości nie są prawidłowymi liczbami, ale każda z nich powstała w inny sposób, dlatego nie są sobie równe. Żeby sprawdzić czy dana wartość jest NaN, korzystamy z wbudowanej funkcji <strong class="bold">Number.isNaN()</strong>. Ważne jest żeby nie pomylić z globalną funkcją <strong class="bold">isNaN()</strong>. Jest to starsza wersja tej funkcji, która wymusza konwersję na typ number przed dokonaniem sprawdzenia.</p>
+
+        <pre class="article__code">
+        <code>
+    console.log(NaN == NaN); // false
+    console.log(('a' * 2) == NaN); // false
+
+    console.log(Number.isNaN(NaN)); // true
+    console.log(Number.isNaN('a' * 2)); // true
+
+    let a = 'NaN';
+
+    console.log(Number.isNaN(a)); // false
+    console.log(isNaN(a)); // true
+        </code>
+      </pre>
+
+        <p class="article__paragraph">Równość luźna ma kilka przypadków, które bez znajomości mechanizmu przeprowadzanej konwersji dają nam zaskakujące rezultaty. Dlatego też gdy korzystamy z operatora ==, należy przestrzegać poniższych zasad:</p>
+
+        <ol class="article__ordered-list">
+          <li class="ordered-list__item">Jeśli po którejś ze stron występuje wartość <strong class="bold">true</strong> lub <strong class="bold">false</strong>, nigdy nie używaj operatora ==</li>
+          <li class="ordered-list__item">Jeśli po którejś ze stron może wystąpić wartość <strong class="bold">[], ′′ lub 0</strong>, nie używaj operatora ==</li>
+        </ol>
+
+        <p class="article__paragraph">Oto lista szalonych wyników, których chcemy uniknąć w naszym kodzie:</p>
+
+        <pre class="article__code">
+        <code>
+    console.log('0' == false); // true
+    console.log(false == 0); // true
+    console.log(false == ''); // true
+    console.log(false == []); // true
+
+    console.log('' == 0); // true
+    console.log('' == []); // true
+    console.log(0 == []); // true
+        </code>
+      </pre>
+
+      </section>
+
+    </article>
+
+
+</body>
+
+</html>
