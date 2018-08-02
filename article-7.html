@@ -1,0 +1,209 @@
+<!DOCTYPE html>
+<html lang="pl">
+
+<head>
+  <title>html markup</title>
+</head>
+
+<body>
+
+<article class="article">
+
+      <header id="Operatory" class="article__header">
+        <div class="decor">07</div>
+        <h2 class="article__title">Operatory</h2>
+      </header>
+
+      <section class="article__section">
+        <h3 class="article__section__title">Operatory matematyczne</h3>
+
+        <p class="article__paragraph">Są nam dobrze znane z lekcji matematyki. Są to:</p>
+
+        <pre class="article__code">
+        <code>
+    // dodawanie (+)
+
+    console.log(2 + 3); // 5
+
+    // odejmowanie (-)
+
+    console.log(5 - 4); // 1
+
+    // mnożenie (*)
+
+    console.log(2 * 3); // 6
+
+    // dzielenie (/)
+
+    console.log(8 / 2); // 4
+
+    // reszta z dzielenia (%)
+
+    console.log(6 % 5); // 1
+        </code>
+      </pre>
+
+        <p class="article__paragraph">Nowością dla nas mogą być operatory inkrementacji (++) i dekrementacji (–). Czyli odpowiednio zwiększenia i zmniejszenia danej wartości o 1. Możemy je stosować za równo z lewej strony jak i prawej strony naszej zmiennej. Gdy występują z lewej to zmiana wartości nastąpi już w danej linijce kodu, gdy występują z prawej to zmiana wartości nastąpi w następnej linijce kodu.</p>
+
+        <pre class="article__code">
+        <code>
+    // inkrementacja (++) - czyli zwiększenie wartości o 1
+
+    let someNumber = 2;
+
+    console.log(someNumber++); // 2
+    console.log(someNumber); // 3
+
+    someNumber = 2;
+
+    console.log(++someNumber); // 3
+    console.log(someNumber); // 3
+
+    // dekrementacja (--) - czyli zmniejszenie wartości o 1
+
+    let otherNumber = 6;
+
+    console.log(otherNumber--); // 6
+    console.log(otherNumber); // 5
+
+    otherNumber = 6;
+
+    console.log(--otherNumber); // 5
+    console.log(otherNumber); // 5
+        </code>
+      </pre>
+
+        <p class="article__paragraph">Osobiście wolę ich nie stosować i używać operatorów przypisania <strong class="bold">someNumber += 1</strong> lub <strong class="bold">someNumber -=1</strong>, co według mnie jest o wiele bardziej czytelne.</p>
+      </section>
+
+      <section class="article__section">
+        <h3 class="article__section__title">Operatory przypisania</h3>
+
+        <p class="article__paragraph">Znamy już operator równa się (=) z poprzednich wpisów. Nie wiemy jednak, że ma on kilka wariantów, które pozwalają najpierw wykonać działanie a następnie przypisać wynik tego działania np. <strong class="bold">someNumber += 1</strong> jest równoznaczne z <strong class="bold">someNumber = someNumber + 1</strong></p>
+
+        <pre class="article__code">
+        <code>
+    let number = 6;
+
+    // przypisanie dodawania (+=)
+
+    console.log(number += 2); // 8
+
+    // przypisanie odejmowania (-=)
+
+    console.log(number -= 2); // 6
+
+    // przypisanie mnożenia
+
+    console.log(number *= 2); // 12
+
+    // przypisanie dzielenia (/=)
+
+    console.log(number /= 2); // 6
+
+    // przypisanie reszty z dzielenia
+
+    console.log(number %= 2); // 0
+        </code>
+      </pre>
+      </section>
+      <section class="article__section">
+        <h3 class="article__section__title">Operatory porównania</h3>
+
+        <p class="article__paragraph">Służą do sprawdzenia czy obie strony równania są sobie równe czy różne.</p>
+
+        <p class="article__paragraph"><strong class="bold">1 Porównanie luźne (==)</strong></p>
+
+        <p class="article__paragraph">Zezwala na konwersję typów porównywanych wartości. Czyli gdy porównujemy ze sobą dwie wartości różnych typów jak np. '2' == 2 otrzymamy wartość <strong class="bold">true</strong>. Czyli obie wartości są sobie równe, ponieważ typ string został zamieniony na typ number i dopiero wówczas dokonano porównania 2 == 2, co jak wiemy jest prawdą.</p>
+
+        <p class="article__paragraph"><strong class="bold">2 Porównanie ścisłe (===)</strong></p>
+
+        <p class="article__paragraph">Nie zezwala na konwersję typów porównywanych wartości. Czyli '2' === 2 da nam w wyniku <strong class="bold">false</strong>. Dokładnie na temat konwersji typów powiemy w kolejnym wpisie. Pozostałe operatory porównania to:</p>
+
+        <pre class="article__code">
+        <code>
+    // większy od (&gt;)
+
+    console.log(4 &gt; 2); // true
+
+    // mniejszy od (&lt;)
+
+    console.log(1 &lt; 3); // true
+
+    // większy równy od (&gt;=)
+
+    console.log(2 &gt;= 2); // true
+
+    // mniejszy równy od (&lt;=)
+
+    console.log(6 &lt;= 9); // true
+
+    // nie równy - porównanie luźne (!=)
+
+    console.log(2 != 3); // true
+
+    // nie równy - porównanie ścisłe (!==)
+
+    console.log('3' !== 3); // true
+        </code>
+      </pre>
+      </section>
+
+      <section class="article__section">
+        <h3 class="article__section__title">Operatory logiczne</h3>
+
+        <p class="article__paragraph">Gdy chcemy podjąć bardziej skomplikowaną decyzję stosujemy operatory logiczne, które pozwalają nam sprawdzić kilka warunków jednocześnie.</p>
+
+        <p class="article__paragraph">Warto wiedzieć, że operator <strong class="bold">&amp;&amp;</strong> i <strong class="bold">||</strong> zwraca jedną ze sprawdzanych wartości, a ponieważ najczęściej jest stosowany w kontekście sprawdzania wartości boolowskich jest następnie konwertowany do wartości <strong class="bold">true</strong> lub <strong class="bold">false</strong>.</p>
+
+        <pre class="article__code">
+        <code>
+    let myName = 'Tomasz';
+    let myAge = 28;
+    let isSleeping = true;
+
+    // logiczne i (&amp;&amp;) - zwraca prawdę gdy oba warunki są spełnione
+
+    console.log(myAge &gt;= 18 &amp;&amp; myName === 'Tomasz'); // true
+    console.log(myAge &amp;&amp; myName); // Tomasz
+    // logiczne lub (||) - zwraca prawdę gdy jeden z warunków jest spełniony
+
+    console.log(myName === 'Tomasz' || myName === 'Marcin'); // true
+
+    // negacja (!) - odwraca wartość z prawdy na fałsz lub na odwrót
+
+    console.log(!isSleeping); // false
+        </code>
+      </pre>
+
+        <p class="article__paragraph">Wyrażenia logiczne są sprawdzane od lewej do prawej strony. Staramy się pisać je w taki sposób żeby warunek, który ma większe prawdopodobieństwo oblać nasz test był umieszczony z lewej strony. Ponieważ dalsza część naszego wyrażenia nie jest wtedy sprawdzana, tylko od razu otrzymujemy nasz wynik np. dla <strong class="bold">warunek1 &amp;&amp; warunek2</strong> gdy <strong class="bold">warunek1</strong> zwróci <strong class="bold">false</strong>, całe nasze wyrażenie zwróci wartość <strong class="bold">false</strong> bez sprawdzania  <strong class="bold">warunek2</strong>. Analogicznie dla <strong class="bold">warunek1 || warunek2</strong>, gdy <strong class="bold">warunek1</strong> zwraca <strong class="bold">true</strong>, całe wyrażenie zwraca wartość <strong class="bold">true</strong>.</p>
+      </section>
+
+      <section class="article__section">
+        <h3 class="article__section__title">Konkatenacja</h3>
+
+        <p class="article__paragraph">Operator (+) ma dodatkowe działanie w postaci łączenia ze sobą łańcuchów znaków.</p>
+
+        <pre class="article__code">
+        <code>
+    let myName = 'Tomasz'
+    console.log('Mam na' + ' imię ' + myName + '.'); // Mam na imię Tomasz.
+        </code>
+      </pre>
+
+        <p class="article__paragraph">Wraz z wprowadzeniem przez ES6 szablonów ciągów znaków, zamiast używać plusa do łączenia ze sobą łańcuchów znaków korzystamy ze znaku apostrofu (pod klawiszem Esc). Jest to o wiele bardziej czytelniejszy sposób na umieszczanie tekstu ze zmiennych w generowanych przez nas zdaniach. Zmienne umieszczamy w nawiasach klamrowych poprzedzonych znakiem dolara  <strong class="bold">${}</strong>.</p>
+
+        <pre class="article__code">
+        <code>
+    let myName = 'Tomasz'
+    console.log(`Mam na imię ${myName}.`); // Mam na imię Tomasz.
+        </code>
+      </pre>
+      </section>
+
+    </article>
+
+
+</body>
+
+</html>
