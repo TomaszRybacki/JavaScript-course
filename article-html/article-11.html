@@ -1,0 +1,263 @@
+<!DOCTYPE html>
+<html lang="pl">
+
+<head>
+  <title>html markup</title>
+</head>
+
+<body>
+
+
+    <article class="article">
+
+      <header id="Podstawowe_pętle" class="article__header">
+        <div class="decor">11</div>
+        <h2 class="article__title">Podstawowe pętle</h2>
+      </header>
+
+      <p class="article__paragraph">Gdy chcemy wykonać dany kawałek kodu wielokrotnie, stosujemy w tym celu pętle. Pozwala nam to na pisanie krótszego i bardziej czytelnego kodu, który jest łatwiejszy w utrzymaniu i debugowaniu. W tym wpisie przyjrzymy się trzem podstawowym pętlom dostępnym w JS. Są to pętle: <strong class="bold">for, while, do…while</strong>.</p>
+
+      <section class="article__section">
+        <h3 class="article__section__title">Pętla for</h3>
+
+        <pre class="article__code">
+        <code>
+    for ([wyrażenieInicjalizacji]; [warunek]; [wyrażenieInkrementacji]) {
+        Instrukcja
+     }
+        </code>
+      </pre>
+
+        <p class="article__paragraph">Załóżmy, że nie możemy spać i śpiewamy sobie w myślach piosenkę <a class="article__link" href="https://www.youtube.com/watch?v=aI3k7X78-KY" target="_blank">Manifest Dziecięcy</a> – Witka Muzyka Ulicy. Za pomocą kodu odliczanie z tej piosenki możemy napisać tak:</p>
+
+        <pre class="article__code">
+        <code>
+    for (let i = 1; i  &lt; 11; i += 1) {
+      console.log('i', i);
+    }
+
+    /*
+     Co da nam w wyniku:
+
+      i 1
+      i 2
+      i 3
+      i 4
+      i 5
+      i 6
+      i 7
+      i 8
+      i 9
+      i 10
+    */
+        </code>
+      </pre>
+
+        <p class="article__paragraph">Jest ogólnie przyjętym zwyczajem, że w pętlach wykorzystujemy zmienne o nazwie <strong class="bold">i</strong> lub <strong class="bold">j</strong> do iteracji. Jak możemy zauważyć najpierw inicjalizujemy naszą zmienną <strong class="bold">i</strong> i przypisujemy jej wartość początkową, w naszym przypadku jest to liczba 1.</p>
+
+        <pre class="article__code">
+        <code>
+    for (let i = 1; --; --) {
+      --
+    }
+        </code>
+      </pre>
+
+        <p class="article__paragraph">Następnie jest sprawdzany warunek, jeśli jego wynik da nam wartość <strong class="bold">true</strong> wykonywany jest kod wewnątrz nawiasów klamrowych (blok kodu pętli).</p>
+
+        <pre class="article__code">
+        <code>
+    for (--; i &lt; 11; --) {
+      console.log('i', i);
+    }
+        </code>
+      </pre>
+
+        <p class="article__paragraph">Ostatnim krokiem jest zwiększenie lub zmniejszenie wartości zmiennej <strong class="bold">i</strong>.</p>
+
+        <pre class="article__code">
+        <code>
+    for (--; --; i += 1) {
+      --
+    }
+        </code>
+      </pre>
+
+        <p class="article__paragraph">Cała procedura powtarza się ponownie aż do momentu gdy warunek zwróci nam wartość <strong class="bold">false</strong>. Należy uważać żeby nie utworzyć pętli działającej w nieskończoność. Ponieważ nasza przeglądarka się zawiesi, użycie procesora skoczy do 100% i pozostanie nam jedynie <strong class="bold">ctrl + alt + del</strong>, żeby wyjść z tej patowej sytuacji 🙂</p>
+
+      </section>
+
+      <section class="article__section">
+        <h3 class="article__section__title">Pętla while</h3>
+
+        <pre class="article__code">
+        <code>
+    while (warunek) {
+         instrukcja
+     }
+        </code>
+      </pre>
+
+        <p class="article__paragraph">Działa podobnie do pętli for. Też jest wykonywana dopóki jest spełniony jej warunek. Tym razem jednak bardziej musimy pamiętać o zmianie jej licznika, ponieważ zmieniamy go w jej wnętrzu.</p>
+
+        <pre class="article__code">
+        <code>
+    let i = 1;
+    while (i &lt; 11) {
+        console.log('i', i);
+        i += 1;
+    }
+        </code>
+      </pre>
+      </section>
+
+      <section class="article__section">
+        <h3 class="article__section__title">Pętla do…while</h3>
+
+        <pre class="article__code">
+        <code>
+    do {
+        instrukcja
+     }
+    while (warunek);
+        </code>
+      </pre>
+
+        <p class="article__paragraph">Jej cechą charakterystyczną jest to, że zawsze zostanie wykonana przynajmniej raz, ponieważ jej warunek jest sprawdzany na końcu za jej blokiem kodu.</p>
+
+        <pre class="article__code">
+        <code>
+    let i = 1;
+    do {
+      console.log('i', i);
+      i += 1;
+    } while (i &lt; 11);
+        </code>
+      </pre>
+      </section>
+
+      <section class="article__section">
+        <h3 class="article__section__title">Pętle a tablice</h3>
+
+        <p class="article__paragraph">Bardzo często pętle są wykorzystywane do działania na tablicach. Wracając do naszej piosenki, tym razem chcemy wypisywać słowa zamiast cyfr w jej refrenie. Możemy to zrobić w następujący sposób:</p>
+
+        <pre class="article__code">
+        <code>
+    const words = ['raz', 'dwa', 'trzy', 'cztery', 'pięć', 'sześć', 'siedem', 'osiem', 'dziewięć', 'dziesięć']
+    for (let i = 0; i &lt; words.length; i += 1) {
+      console.log('i', words[i]);
+    }
+        </code>
+      </pre>
+
+        <p class="article__paragraph">Widzimy, że zaczynamy od 0, ponieważ jak wiemy z poprzedniej lekcji elementy w tablicach są indeksowane od 0. Następnie chcemy iterować przez wszystkie elementy jakie się w niej znajdują, w tym celu wykorzystujemy właściwość <strong class="bold">length</strong> aby pobrać długość tablicy. Oto nasz wynik:</p>
+
+        <pre class="article__code">
+        <code>
+    /*
+        i raz
+        i dwa
+        i trzy
+        i cztery
+        i pięć
+        i sześć
+        i siedem
+        i osiem
+        i dziewięć
+        i dziesięć
+    */
+        </code>
+      </pre>
+
+      </section>
+
+      <section class="article__section">
+        <h3 class="article__section__title">break</h3>
+
+        <p class="article__paragraph">Do przerwania wykonywania pętli w trakcie jej działania służy słowo kluczowe <strong class="bold">break</strong>. Załóżmy, że szukamy w tablicy danej wartości i gdy tylko ją znajdziemy chcemy przerwać wykonywanie naszej pętli, żeby nie marnować czasu na czekanie aż sprawdzi wszystkie jej elementy. Żeby było jeszcze ciekawiej tym razem zaczniemy pętle od końca tablicy i będziemy szli w kierunku jej pierwszego elementu.</p>
+
+        <pre class="article__code">
+        <code>
+    const words = ['raz', 'dwa', 'trzy', 'cztery', 'pięć', 'sześć', 'siedem', 'osiem', 'dziewięć', 'dziesięć'];
+    for (let i = words.length - 1; i &gt;= 0; i -= 1) {
+      if (words[i] === 'osiem') {
+        break;
+      }
+      console.log('i', words[i]);
+    }
+    /*
+    Nasz wynik:
+    i dziesięć
+    i dziewięć
+    */
+        </code>
+      </pre>
+
+      </section>
+
+      <section class="article__section">
+        <h3 class="article__section__title">continue</h3>
+
+        <p class="article__paragraph">Do pomijania wybranych iteracji służy słowo kluczowe continue. Tym razem jesteśmy pijani podczas śpiewania naszej piosenki i mamy problemy z liczeniem wstecz. Przez co umknęło nam kilka liczb 🙂</p>
+
+        <pre class="article__code">
+        <code>
+    const words = ['raz', 'dwa', 'trzy', 'cztery', 'pięć', 'sześć', 'siedem', 'osiem', 'dziewięć', 'dziesięć'];
+    for (let i = words.length - 1; i &gt;= 0; i -= 1) {
+      if (words[i] === 'osiem' || words[i] === 'trzy' || words[i] === 'pięć') {
+        continue;
+      }
+      console.log('i', words[i]);
+    }
+    /*
+    i dziesięć
+    i dziewięć
+    i siedem
+    i sześć
+    i cztery
+    i dwa
+    i raz
+    */
+        </code>
+      </pre>
+      </section>
+
+      <section class="article__section">
+        <h3 class="article__section__title">Pętla w pętli</h3>
+
+        <p class="article__paragraph">Może się zdarzyć, że jedna pętla nam nie wystarczy i będziemy potrzebowali zagnieżdżać jedną pętle w drugiej. W takiej sytuacji koniecznie trzeba pamiętać o zastosowaniu różnych zmiennych dla każdej z pętli. W pierwszej pętli korzystamy z iteratora o nazwie <strong class="bold">i</strong>, a w drugiej z iteratora o nazwie <strong class="bold">j</strong>.</p>
+
+        <pre class="article__code">
+        <code>
+    const arrayOfArrays = [['raz', 'dwa', 'trzy'], ['cztery', 'pięć', 'sześć'], ['siedem', 'osiem', 'dziewięć']];
+    for (let i = 0; i &lt; arrayOfArrays.length; i += 1) {
+      console.log('---------')
+      for (let j = 0; j &lt; arrayOfArrays[0].length; j += 1) {
+        console.log(arrayOfArrays[i][j]);
+      }
+    }
+    /*
+    Nasz wynik:
+    ---------
+    raz
+    dwa
+    trzy
+    ---------
+    cztery
+    pięć
+    sześć
+    ---------
+    siedem
+    osiem
+    dziewięć
+    */
+        </code>
+      </pre>
+      </section>
+
+    </article>
+
+
+</body>
+
+</html>
