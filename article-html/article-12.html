@@ -1,0 +1,174 @@
+<!DOCTYPE html>
+<html lang="pl">
+
+<head>
+  <title>html markup</title>
+</head>
+
+<body>
+
+    <article class="article">
+
+      <header id="Funkcje_cz.1" class="article__header">
+        <div class="decor">12</div>
+        <h2 class="article__title">Funkcje cz.1</h2>
+      </header>
+
+      <section class="article__section">
+        <h3 class="article__section__title">Czym są funkcje ?</h3>
+
+        <p class="article__paragraph">Funkcje możemy sobie wyobrazić jako maszyny do przetwarzania, jako przykład weźmy drukarkę. Żeby coś wydrukować musimy włożyć do drukarki papier, toner i przesłać informacje, które chcemy przenieść na papier. W rezultacie otrzymujemy zadrukowane strony naszego dokumentu. Tak samo jest z funkcjami, wkładamy do nich argumenty. One przetwarzają je w swoim wnętrzu i zwracają nam jakiś wynik.</p>
+      </section>
+
+      <section class="article__section">
+        <h3 class="article__section__title">Po co są funkcje ?</h3>
+
+        <p class="article__paragraph">Dzięki nim mamy możliwość wielokrotnego używania tego samego fragmentu kodu bez konieczności powtarzania go. Pozwala to nam na łatwiejsze dokonywanie zmian w naszym programie, znajdowanie błędów i znacznie skraca długość kodu. W programowaniu istnieje zasada DRY ( Don’t Repeat Yourself ) czyli nie powtarzaj się i warto ją stosować.</p>
+      </section>
+
+      <section class="article__section">
+        <h3 class="article__section__title">Deklaracja funkcji</h3>
+
+        <pre class="article__code">
+        <code>
+    function nazwa(parametry) {
+        ciało funkcji – dzieje się tu cała logika i przetwarzanie parametrów
+        return  zwracany przez funkcję wynik
+    }
+        </code>
+      </pre>
+
+        <p class="article__paragraph">Jest to pierwszy ze sposobów na utworzenie funkcji. Powstała w ten sposób funkcja ulega mechanizmowi wynoszenia, czyli jest przenoszona na początek skryptu, przez co jest dostępna w całym naszym programie. Sztampowym przykładem jest funkcja, która sumuje dwie liczby.</p>
+
+        <pre class="article__code">
+        <code>
+    function sum(a, b) {
+      return a + b;
+    }
+
+    console.log(sum(2, 3)); // 5
+        </code>
+      </pre>
+      </section>
+
+      <section class="article__section">
+        <h3 class="article__section__title">Wyrażenie funkcyjne</h3>
+
+        <p class="article__paragraph">Drugim sposobem stworzenia funkcji jest wyrażenie funkcyjne, czyli utworzenie zmiennej, która będzie przechowywała referencję do funkcji (strzałka wskazująca, gdzie znajduje się nasza funkcja). W odróżnieniu od deklaracji funkcji, funkcje stworzone w ten sposób nie są wynoszone, więc możemy ich używać tylko w tej części naszego skryptu, która występuje za miejscem ich utworzenia.</p>
+
+        <pre class="article__code">
+        <code>
+    const sum = function (a, b) {
+      return a + b;
+    };
+
+    console.log(sum(2, 3)); // 5
+        </code>
+      </pre>
+
+        <p class="article__paragraph">Poniższy kod generuje błąd.</p>
+
+        <pre class="article__code">
+        <code>
+    console.log(sum(2, 3)); // 5
+
+    const sum = function (a, b) {
+      return a + b;
+    };
+    // Uncaught ReferenceError: sum is not defined
+        </code>
+      </pre>
+
+        <p class="article__paragraph">Jak możemy zauważyć funkcja ta nie ma swojej nazwy, dlatego nazywana jest funkcją anonimową. Odwołujemy się do niej za pośrednictwem nazwy naszej zmiennej. Możemy jednak nadać jej nazwę jeśli chcemy.</p>
+      </section>
+
+      <section class="article__section">
+        <h3 class="article__section__title">Wywoływanie funkcji</h3>
+
+        <p class="article__paragraph">Aby wywołać funkcję wpisujemy jej nazwę oraz parę nawiasów <strong class="bold">nazwa()</strong>, w tym momencie nasza funkcja zostaje uruchomiona. Kontynuując nasz przykład z funkcją sum. Możemy ją wywołać bez przekazania argumentów do jej wnętrza.</p>
+
+        <pre class="article__code">
+        <code>
+    console.log(sum()); // NaN
+        </code>
+      </pre>
+
+        <p class="article__paragraph">Jak widzimy w rezultacie otrzymamy Not a Number. Ponieważ nie przekazaliśmy do niej żadnych argumentów, wartość a i b wynosi <strong class="bold">undefined</strong>. Dodając obie te wartości do siebie otrzymamy <strong class="bold">NaN</strong>, czyli nie prawidłową wartość liczbową.</p>
+
+        <p class="article__paragraph">Możemy się przed tym zabezpieczyć przypisując domyślne wartości parametrów. Wtedy za każdym razem gdy, któryś z nich zostanie pominięty w wywołaniu, zostanie użyta jego wartość domyślna.</p>
+
+        <p class="article__paragraph">Pierwszy ze sposobów takiego zabezpieczenia wykorzystuje ES6.</p>
+
+        <pre class="article__code">
+        <code>
+    function sum(a = 0, b = 0) {
+      return a + b;
+    }
+    console.log(sum()); // 0
+        </code>
+      </pre>
+
+        <p class="article__paragraph"> Nim wprowadzono ES6 stosowano poniższą metodę:</p>
+
+        <pre class="article__code">
+        <code>
+    function sum(a, b) {
+      a = a || 0;
+      b = b || 0;
+      return a + b;
+    }
+    console.log(sum()); // 0
+        </code>
+      </pre>
+
+        <p class="article__paragraph">Gdy nie przekażemy żadnego argumentu wartość a wynosi <strong class="bold">undefined</strong>, następnie operator logiczny (lub) sprawdza wartość po jego lewej stronie, ponieważ jest to wartość fałszywa wybiera wartość po swojej prawej stronie i przypisuje ją do zmiennej <strong class="bold">a</strong>. W tym momencie <strong class="bold">a = 0</strong>.</p>
+
+        <p class="article__paragraph">Możemy też przekazać do funkcji więcej argumentów niż wymaga przez nią ilość parametrów. Argumentem jest to co wkładamy do funkcji w momencie jej wywołania np. <strong class="bold">sum(2, 3)</strong>, argumenty to liczby <strong class="bold">2</strong> i <strong class="bold">3</strong>. Parametrem natomiast jest nazwa zmiennej wykorzystywana do operacji wewnątrz funkcji, czyli <strong class="bold">a</strong> i <strong class="bold">b</strong> w naszym przykładzie. Gdy przekażemy większą ilość argumentów do funkcji niż wymagana, wszystkie dodatkowe są ignorowane.</p>
+
+        <pre class="article__code">
+        <code>
+    console.log(sum(2, 3, 5, 66)); // 5
+        </code>
+      </pre>
+
+      </section>
+
+      <section class="article__section">
+        <h3 class="article__section__title">return</h3>
+
+        <p class="article__paragraph">Aby zwrócić wartość z funkcji wykorzystujemy słowo kluczowe return. Kończy ono działanie funkcji i zwraca wartość. W funkcji może występować kilka słów return, zawsze jednak działanie funkcji jest kończone w chwili dotarcia do pierwszego z nich.</p>
+
+        <pre class="article__code">
+        <code>
+    function checkAge(age) {
+      if (age &gt;= 18) {
+        return 'Możesz wejść do klubu.';
+      }
+      return 'Młodocianym wstęp wzbroniony!';
+    }
+    console.log(checkAge(29)); // Możesz wejść do klubu.
+        </code>
+      </pre>
+
+        <p class="article__paragraph">Jeśli pominiemy słowo <strong class="bold">return</strong>, funkcja zwróci wartość <strong class="bold">undefined</strong>. Przeważnie chcemy przechować wynik działa naszej funkcji w jakiejś zmiennej aby móc go później wykorzystać.</p>
+
+        <pre class="article__code">
+        <code>
+    let guest = checkAge(16);
+    console.log(guest); // Młodocianym wstęp wzbroniony!
+
+    function printUserName(name) {
+      console.log(`Mam na imię ${name}`);
+    }
+
+    let printMyName = printUserName('Tomasz') // Mam na imię Tomasz
+    console.log(printMyName); // undefined
+        </code>
+      </pre>
+      </section>
+    </article>
+
+
+</body>
+
+</html>
