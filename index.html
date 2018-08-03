@@ -1924,6 +1924,166 @@
       </section>
     </article>
 
+
+    <!-- Article 13 -->
+
+
+    <article class="article">
+
+      <header id="Funkcje_cz.2" class="article__header">
+        <div class="decor">13</div>
+        <h2 class="article__title">Funkcje cz.2</h2>
+      </header>
+
+      <section class="article__section">
+        <h3 class="article__section__title">Zakres lokalny funkcji</h3>
+
+        <p class="article__paragraph">Z wcześniejszego wpisu na temat zmiennej var, wiemy, że jej zakresem może być zakres lokalny funkcji. Oznacza to, że możemy tworzyć zmienne, które są zamknięte w ciele naszej funkcji i nie da się do nich odwołać spoza niej. Za każdym razem gdy dana funkcja jest wywoływana, zostaje utworzona zmienna w niej zadeklarowana, która jest usuwana po zakończeniu jej działania przez mechanizm usuwania nieużytków aby zwolnić miejsce w pamięci.</p>
+
+        <pre class="article__code">
+        <code>
+    function defineMyName() {
+      let myName = 'Tomasz';
+    }
+
+    defineMyName();
+    console.log(myMame); // Uncaught ReferenceError: myMame is not defined
+        </code>
+      </pre>
+
+      </section>
+
+      <section class="article__section">
+        <h3 class="article__section__title">Zakres zagnieżdżony</h3>
+
+        <p class="article__paragraph">Gdy mamy kilka funkcji zagnieżdżonych jedna w drugiej. Najpierw silnik JS sprawdza bieżący zakres leksykalny funkcji, wykonywanego kodu. Jeśli zmienna nie zostanie w nim odnaleziona, sprawdza kolejny zakres zewnętrzny i kontynuuje sprawdzanie tak długo aż znajdzie szukaną zmienną lub dotrze do zakresu globalnego. W tym momencie jeśli zmienna nie została odnaleziona zgłaszany jest błąd.</p>
+
+        <pre class="article__code">
+        <code>
+    let someString = null;
+    let anotherString = null;
+
+    function globalFunction() {
+      let someString = 'Hello';
+
+      function internalFunction1() {
+        let anotherString = 'Word';
+        console.group('internalFunction1');
+        console.log(someString);
+        console.log(anotherString);
+        console.groupEnd();
+      }
+
+      function internalFunction2() {
+        console.group('internalFunction2');
+        console.log(someString);
+        console.log(anotherString);
+        console.groupEnd();
+      }
+
+      console.group('globalFunction');
+      console.log(someString);
+      console.log(anotherString);
+      console.groupEnd();
+      internalFunction1();
+      internalFunction2();
+    }
+
+    globalFunction();
+
+    /*
+    globalFunction
+      Hello
+      null
+    internalFunction1
+      Hello
+      Word
+    internalFunction2
+      Hello
+      null
+    */
+        </code>
+      </pre>
+
+      </section>
+
+      <section class="article__section">
+        <h3 class="article__section__title">Domknięcia</h3>
+
+        <p class="article__paragraph">Funkcje w JavaScript są wartościami pierwszej klasy co oznacza, że mogą być przekazywane i zwracane przez inne funkcje.</p>
+
+        <p class="article__paragraph">Domknięcia pozwalają nam na dostęp do zmiennych zadeklarowanych w zakresie leksykalnym funkcji nawet gdy wywołamy daną funkcję poza jej zakresem leksykalnym.</p>
+
+        <pre class="article__code">
+        <code>
+    function globalFunction() {
+      let myName = 'Tomasz';
+
+      function internalFunction() {
+        return `Cześć, ${myName}!`;
+      }
+      return internalFunction;
+    }
+
+    let sayHello = globalFunction();
+    console.log(sayHello()); // Cześć, Tomasz!
+        </code>
+      </pre>
+
+        <p class="article__paragraph">Jak widzimy w powyższym przykładzie funkcji <strong class="bold">sayHello</strong> przypisujemy wynik wykonania funkcji <strong class="bold">globalFunction</strong>. Ponieważ <strong class="bold">globalFunction</strong> zwraca nam funkcję wewnętrzną <strong class="bold">internalFunction</strong>. Zatem funkcja <strong class="bold">sayHello</strong> jest referencją do funkcji <strong class="bold">internalFunction</strong>.</p>
+
+          <p class="article__paragraph">W tym momencie możemy wywołać funkcję wewnętrzną za pomocą <strong class="bold">sayHello()</strong>, poza jej zakresem leksykalnym, mimo, że funkcja <strong class="bold">globalFunction</strong> została już wykonana nadal mamy dostęp do jej zmiennej <strong class="bold">myName</strong>. Właśnie na tym polega mechanizm domknięcia.</p>
+
+      </section>
+
+      <section class="article__section">
+        <h3 class="article__section__title">IIFE</h3>
+
+        <p class="article__paragraph">To skrót od Immediately Invoked Function Expression, są to funkcje anonimowe, które są wywoływane zaraz po ich deklaracji.</p>
+
+        <pre class="article__code">
+        <code>
+    let getMyName = (function() {
+        let myName = 'Tomasz';
+        return myName;
+    })();
+
+    console.log(getMyName); // Tomasz
+        </code>
+      </pre>
+
+        <p class="article__paragraph">Jak widzimy w powyższym przykładzie aby wykonać funkcję natychmiast po jej deklaracji bierzemy ją w dodatkowy nawias, a następnie dodajemy parę pustych nawiasów na jej końcu. Tak samo jak wywołujemy zwykła funkcję.</p>
+
+        <p class="article__paragraph">IIFE są wykorzystywane we wzorcu modułu, który pozwala nam na zgrupowanie podobnej funkcjonalności w jednym obiekcie oraz na stworzenie prywatnych zmiennych, które mogą być modyfikowane jedynie za pośrednictwem udostępnionych przez nas metod.</p>
+
+        <pre class="article__code">
+        <code>
+    const myModule = (function () {
+      let myName = 'Tomasz';
+      let myAge = 29;
+
+      return {
+        increaseMyAge: function() {
+          return myAge += 1;
+        },
+        getMyAge: function() {
+          return myAge;
+        }
+      };
+    })();
+    console.log(myModule.myName); // undefined
+    console.log(myModule.myAge); // undefined
+    myModule.increaseMyAge();
+    console.log(myModule.getMyAge()); // 30
+        </code>
+      </pre>
+      </section>
+
+    </article>
+
+
+
+
     <footer class="documentation__footer">
       <span class="footer__txt">designed &amp; coded with <span class="footer__icon">&#10084;</span> by <span class="footer__bold">&copy; Tomasz Rybacki</span> in 2018</span>
     </footer>
