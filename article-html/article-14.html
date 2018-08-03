@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html lang="pl">
+
+<head>
+  <title>html markup</title>
+</head>
+
+<body>
+
+    <article class="article">
+
+      <header id="Funkcje_cz.3" class="article__header">
+        <div class="decor">14</div>
+        <h2 class="article__title">Funkcje cz.3</h2>
+      </header>
+
+      <section class="article__section">
+        <h3 class="article__section__title">Funkcje strzałkowe</h3>
+
+        <p class="article__paragraph">W ES6 zostały wprowadzone funkcje strzałkowe. Mają krótszą składnie, dzięki czemu idealnie nadają się do stosowania jako wyrażenia zwrotne (o nich w dalszej części tego wpisu) . Są bardziej czytelne niż standardowe funkcje przy prostych operacjach. Dodatkowo nie mają wiązania <strong class="bold">this</strong>. Możemy je tylko tworzyć jako wyrażenia funkcyjne, nie podlegają więc wynoszeniu.</p>
+
+        <pre class="article__code">
+        <code>
+    (parametr1, parametr2, itd.) =&gt; { return wynik; }
+        </code>
+      </pre>
+
+        <p class="article__paragraph">Jak widzimy pomijamy słowo kluczowe <strong class="bold">function</strong>, dodajemy natomiast strzałkę za nawiasami z parametrami funkcji. Następnie tworzymy ciało funkcji w nawiasach klamrowych.</p>
+
+        <pre class="article__code">
+        <code>
+    const mathOperation = (a, b, c) =&gt; {
+      if (c &gt; 0) {
+        return a + b;
+      }
+      return a - b;
+    };
+        </code>
+      </pre>
+
+        <p class="article__paragraph">W przypadku gdy nasza funkcja przyjmuje tylko jeden parametr i jej jedynym zadaniem jest zwrócić nam wynik. Możemy uprościć nasz zapis jeszcze bardziej i pominąć nawiasy na około parametrów oraz nawiasy klamrowe ciała funkcji i słowo kluczowe <strong class="bold">return</strong>.</p>
+
+        <pre class="article__code">
+        <code>
+    const greetings = name =&gt; `Cześć ${name}!`;
+    console.log(greetings('Tomasz')); // Cześć Tomasz!
+
+    const difference = (a, b) =&gt; a - b;
+    console.log(difference(10, 4)); // 6
+        </code>
+      </pre>
+
+        <p class="article__paragraph">Brak wiązania <strong class="bold">this</strong>. Na temat słowa kluczowego <strong class="bold">this</strong> napisałem już wpis, który można przeczytać <a class="article__link" target="_blank" href="http://blog.tomasz-rybacki.pl/javascript/this/">tutaj</a>. W odniesieniu do funkcji strzałkowych słowo <strong class="bold">this</strong> odnosi się do zakresu nadrzędnego funkcji lub zakresu globalnego.</p>
+      </section>
+
+      <section class="article__section">
+        <h3 class="article__section__title">Wyrażenia zwrotne</h3>
+
+        <p class="article__paragraph">W poprzednim wpisie wspomniałem, że do funkcji możemy przekazywać również inne funkcje jako parametry. Właśnie takie funkcje nazywamy wyrażeniami zwrotnymi (ang. callback). Mamy dostępnych wiele wbudowanych metod, które przyjmują inne funkcje jako parametry. Jako przykład weźmy funkcję <strong class="bold">setTimeout</strong>.</p>
+
+        <pre class="article__code">
+        <code>
+    window.setTimeout(callback, opóźnienie)
+        </code>
+      </pre>
+
+        <p class="article__paragraph">Funkcja ta wykonuje dostarczoną przez nas funkcję po upływie określonej liczby milisekund.</p>
+
+        <pre class="article__code">
+        <code>
+    function printMessage() {
+      console.log('Zostałam wykonana po upływie 1 sekundy.');
+    }
+    window.setTimeout(printMessage, 1000);
+
+    // Zostałam wykonana po upływie 1 sekundy.
+        </code>
+      </pre>
+
+        <p class="article__paragraph">Możemy również wykorzystać właśnie poznane przez nas funkcje strzałkowe, zamiast deklarowania oddzielnej funkcji <strong class="bold">printMessage</strong>, możemy przekazać anonimową funkcję strzałkową zapisaną wprost w metodzie <strong class="bold">setTimeout</strong>.</p>
+
+
+        <pre class="article__code">
+        <code>
+    window.setTimeout(() =&gt; {
+      console.log('Zostałam wykonana po upływie 1 sekundy.')
+    }, 1000);
+
+    // Zostałam wykonana po upływie 1 sekundy.
+        </code>
+      </pre>
+
+        <p class="article__paragraph">Możemy też pisać własne funkcje, które przyjmują inne funkcje jako parametry.</p>
+
+        <pre class="article__code">
+        <code>
+    function randomBetween(callback, min, max) {
+      const randomNumber = Math.floor(Math.random() * (max - min + 1) + min);
+      callback(randomNumber);
+    }
+
+    randomBetween((number) =&gt; {
+      console.log(`Wylosowaną liczbą jest ${number}!`);
+    }, 10, 20);
+    // Wylosowaną liczbą jest 12!
+        </code>
+      </pre>
+
+        <p class="article__paragraph"> W powyższym przykładzie funkcja randomBetween losuję liczbę z podanego przedziału. Jako pierwszy argument przyjmuje funkcję, która wyświetla wiadomość. Kolejne dwa argumenty określają do jakiego przedziału ma należeć wylosowana liczba. Widzimy, że funkcja zwrotna zostaje wywołana w ciele funkcji randomBetween z wylosowaną wcześniej liczbą. Liczba ta jest przekazywana do anonimowej funkcji strzałkowej, która następnie wyświetla ją w konsoli naszej przeglądarki.</p>
+      </section>
+
+    </article>
+
+
+</body>
+
+</html>
