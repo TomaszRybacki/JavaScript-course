@@ -1,0 +1,173 @@
+<!DOCTYPE html>
+<html lang="pl">
+
+<head>
+  <title>html markup</title>
+</head>
+
+<body>
+
+<article class="article">
+
+      <header id="Klasy" class="article__header">
+        <div class="decor">17</div>
+        <h2 class="article__title">Klasy</h2>
+      </header>
+
+      <p class="article__paragraph">W ES6 wprowadzono nową składnie <strong class="bold">class</strong>, jest to ukłon w stronę osób, które na co dzień programują w językach opartych o klasy jak np. Java. Dzięki temu nie muszą uczyć się bardziej ogólnej koncepcji prototypów i dziedziczenia. Mogą od razu zacząć pisać programy, w oparciu o to co dobrze znają i czego używali na co dzień do tej pory.</p>
+
+      <p class="article__paragraph">Nie zmienia to mechanizmu w jaki działa JavaScript. Wszystko to co poznaliśmy w poprzednim wpisie nadal funkcjonuje i dzieje się pod płaszczykiem nowej składni, którą poznamy dzisiaj.</p>
+
+      <section class="article__section">
+        <h3 class="article__section__title">class</h3>
+
+        <p class="article__paragraph">Klasy są specjalnymi funkcjami, które zawierają w swoim ciele konstruktor i metody dodawane do prototypu. Dzięki temu mamy wszystko ładnie pogrupowane. Stwórzmy podobny przykład do tego z poprzedniego wpisu.</p>
+
+        <pre class="article__code">
+        <code>
+    class Human {
+      constructor(name) {
+        this.name = name;
+      }
+
+      greetings() {
+        console.log(`Witaj ${this.login || this.name}, dobrze cię widzieć!`);
+      }
+
+      farewell() {
+        console.log(`Dziękujemy, że nas odwiedziłeś. Do zobaczenia ${this.login || this.name}.`);
+      }
+    }
+
+    class User extends Human {
+      constructor(name, login, email) {
+        super(name);
+        this.login = login;
+        this.email = email;
+      }
+    }
+
+    const user1 = new User('Tomasz', 'Tom89', 'TomaszRybacki1989@gmail.com');
+
+    console.log(user1);
+    // {name: "Tomasz", login: "Tom89", email: "TomaszRybacki1989@gmail.com"}
+
+    user1.greetings(); // Witaj Tom89, dobrze cię widzieć!
+    user1.farewell(); // Dziękujemy, że nas odwiedziłeś. Do zobaczenia Tom89.
+        </code>
+      </pre>
+
+        <p class="article__paragraph">Widzimy, że nasz kod jest teraz o wiele bardziej czytelny. Nasza funkcja konstruktora jest zawarta wewnątrz klasy. Dodatkowo słowo kluczowe <strong class="bold">extends</strong> wyraźnie pokazuje zależność pomiędzy obiektami. Żeby odwołać się do kodu konstruktora z klasy wyższej i go rozszerzyć, używamy słowa kluczowego <strong class="bold">super()</strong>, w nawiasach podając argumenty z jakimi chcemy go wywołać.</p>
+
+        <p class="article__paragraph">Oczywiście cały mechanizm działania pozostaje taki sam, możemy nadal nadpisać odziedziczone metody i dodać nowe dostępne tylko w instancjach stworzonych przy użyciu naszej klasy <strong class="bold">User</strong>.</p>
+
+        <pre class="article__code">
+        <code>
+    class User extends Human {
+      constructor(name, login, email) {
+        super(name);
+        this.login = login;
+        this.email = email;
+      }
+
+      farewell() {
+        console.log('Miłego dnia.');
+      }
+
+      changeLogin() {
+        console.log('Twój login został zmieniony.');
+      }
+    }
+
+    const user1 = new User('Tomasz', 'Tom89', 'TomaszRybacki1989@gmail.com');
+    const human1 = new Human('Daniel');
+
+    user1.greetings(); // Witaj Tom89, dobrze cię widzieć!
+    user1.farewell(); // Miłego dnia.
+    user1.changeLogin(); // Twój login został zmieniony.
+
+    human1.greetings(); // Witaj Daniel, dobrze cię widzieć!
+    human1.farewell(); // Dziękujemy, że nas odwiedziłeś. Do zobaczenia Daniel.
+    human1.changeLogin(); // TypeError
+        </code>
+      </pre>
+
+      </section>
+
+      <section class="article__section">
+        <h3 class="article__section__title">Wynoszenie</h3>
+
+        <p class="article__paragraph">Istotną różnicą pomiędzy zwykłą funkcją a klasą jest to, że klasy nie są wynoszone na początek naszego skryptu. Musimy je więc najpierw zadeklarować a dopiero potem ich używać.</p>
+      </section>
+
+      <section class="article__section">
+        <h3 class="article__section__title">Deklaracja klasy i wyrażenie klasy</h3>
+
+        <p class="article__paragraph">Powyższy przykład zawiera deklarację klasy czyli:</p>
+
+        <pre class="article__code">
+        <code>
+    class Human {}
+        </code>
+      </pre>
+
+        <p class="article__paragraph">Tak samo jak w przypadku funkcji możemy przypisać ją do zmiennej, tak samo możemy postąpić z klasą. Wyrażenia klas mogą być anonimowe lub nazwane.</p>
+
+        <pre class="article__code">
+        <code>
+     const Human = class {};
+
+    const Human = class Human {};
+        </code>
+      </pre>
+      </section>
+
+      <section class="article__section">
+        <h3 class="article__section__title">Metody statyczne</h3>
+
+        <p class="article__paragraph">Są to metody dostępne tylko z poziomu klasy. Nie można się do nich odwołać za pomocą instancji utworzonych przy pomocy tej klasy. Służą przeważnie do tworzenia metod pomocniczych.</p>
+
+        <pre class="article__code">
+        <code>
+    class Human {
+      constructor(name, age) {
+        this.name = name;
+        this.age = age;
+      }
+
+      static youngerHuman(a, b) {
+        if (a.age &gt; b.age) {
+          return b.name;
+        }
+        return a.name;
+      }
+    }
+
+    class User extends Human {
+      constructor(name, age, login, email) {
+        super(name, age);
+        this.login = login;
+        this.email = email;
+      }
+    }
+
+    const user1 = new User('Tomasz', 29, 'Tom89', 'TomaszRybacki1989@gmail.com');
+    const user2 = new User('Marcin', 32, 'Martin86', 'example@gmail.com');
+
+    const human1 = new Human('Daniel', 26);
+
+    user1.youngerHuman(); // TypeError
+    human1.youngerHuman(); // TypeError
+
+    console.log(Human.youngerHuman(user1, user2)); // Tomasz
+        </code>
+      </pre>
+      </section>
+
+
+    </article>
+
+
+</body>
+
+</html>
