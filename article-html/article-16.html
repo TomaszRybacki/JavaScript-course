@@ -1,0 +1,223 @@
+<!DOCTYPE html>
+<html lang="pl">
+
+<head>
+  <title>html markup</title>
+</head>
+
+<body>
+
+    <article class="article">
+
+      <header id="Obiekty_cz.2" class="article__header">
+        <div class="decor">16</div>
+        <h2 class="article__title">Obiekty cz.2</h2>
+      </header>
+
+      <p class="article__paragraph">Dzisiejszy wpis nie należy do najłatwiejszych dlatego warto przeczytać go kilkukrotnie i samemu przećwiczyć w edytorze. Będzie za to ciekawie, ponieważ poznamy podstawowy mechanizm działania języka JavaScript.</p>
+
+      <section class="article__section">
+        <h3 class="article__section__title">Konstruktory</h3>
+
+        <p class="article__paragraph">Są to zwyczajne funkcje, których nazwę piszemy z wielkiej litery (jest to ogólnie przyjęta konwencja). Pozwalają nam tworzyć wiele podobnych do siebie obiektów (o tych samych właściwościach i metodach). Konstruktor możemy sobie wyobrazić jako formę do ciastek, przy pomocy której wyciskamy wiele podobnych ciasteczek. Każde z powstałych ciasteczek jest nową instancją obiektu. Czyli samodzielnym obiektem, który powstał na bazie danego konstruktora.</p>
+
+        <pre class="article__code">
+        <code>
+    function User(name, age, location) {
+      this.name = name;
+      this.age = age;
+      this.location = location;
+
+      this.greetings = function () {
+        console.log(`Witaj ${this.name}, dobrze cię widzieć!`);
+      };
+    }
+
+    const user1 = new User('Tomasz', 29, 'Poland');
+    const user2 = new User('Daniel', 26, 'Poland');
+
+    user1.greetings(); // Witaj Tomasz, dobrze cię widzieć!
+    console.log(user1);
+    // {name: "Tomasz", age: 29, location: "Poland", greetings: ƒ}
+        </code>
+      </pre>
+
+        <p class="article__paragraph">W powyższym przykładzie utworzyliśmy funkcję konstruktora o nazwie <strong class="bold">User</strong>, następnie przy jej pomocy stworzyliśmy dwóch użytkowników. Aby to zrobić korzystamy z operatora <strong class="bold">new</strong>. Działa on w następujący sposób:</p>
+
+        <ol class="article__ordered-list">
+          <li class="ordered-list__item">Tworzy nowy pusty obiekt, który dziedziczy po <strong class="bold">User.prototype</strong></li>
+          <li class="ordered-list__item">Sprawia, że <strong class="bold">this</strong> odnosi się do nowo utworzonego obiektu.</li>
+          <li class="ordered-list__item">Ustawia jaki konstruktor został użyty do utworzenia obiektu.</li>
+          <li class="ordered-list__item">Na koniec zwraca nam referencję do nowo utworzonego obiektu, który jest zapisywany w naszej zmiennej np. <strong class="bold">user1</strong>.</li>
+        </ol>
+
+        <p class="article__paragraph">Adnotacja do punktu nr 3. Dzięki temu możemy sprawdzić czy dany obiekt został stworzony za pomocą danego konstruktora.</p>
+
+        <pre class="article__code">
+        <code>
+    const user3 = {
+      name: 'Marcin',
+      age: 29,
+      location: 'Cuba'
+    };
+
+    console.log(user1 instanceof User); // true
+    console.log(user3 instanceof User); // false
+        </code>
+      </pre>
+
+      </section>
+
+      <section class="article__section">
+        <h3 class="article__section__title">Prototypy i dziedziczenie</h3>
+
+        <p class="article__paragraph">Model obiektowy języka JavaScript bazuje na prototypach. Wszystkie obiekty, które tworzymy powstają na bazie innych obiektów. Umożliwia to dziedziczenie właściwości i metod po innych obiektach. Prototypem nazywamy obiekt po którym są dziedziczone właściwości i metody.</p>
+
+        <p class="article__paragraph">Możemy to sobie wyobrazić jako drzewo, gdzie pniem jest prototyp obiektu <strong class="bold">Object</strong>, to na jego podstawie powstają wszystkie inne obiekty, które tworzą strukturę rozgałęzień niczym w prawdziwym drzewie. Prototyp <strong class="bold">Object</strong> zawiera podstawowe metody, które dziedziczą wszystkie inne obiekty, dzięki którym funkcjonuje nasz system obiektów.</p>
+
+        <pre class="article__code">
+        <code>
+    console.log(user3)
+
+    //  {name: "Marcin", age: 29, location: "Cuba"}
+    //  age: 29
+    //  location: "Cuba"
+    //  name: "Marcin"
+    //  __proto__:
+    //      constructor: ƒ Object()
+    //      hasOwnProperty: ƒ hasOwnProperty()
+    //      isPrototypeOf: ƒ isPrototypeOf()
+    //      propertyIsEnumerable: ƒ propertyIsEnumerable()
+    //      toLocaleString: ƒ toLocaleString()
+    //      toString: ƒ toString()
+    //      valueOf: ƒ valueOf()
+    //      __defineGetter__: ƒ __defineGetter__()
+    //      __defineSetter__: ƒ __defineSetter__()
+    //      __lookupGetter__: ƒ __lookupGetter__()
+    //      __lookupSetter__: ƒ __lookupSetter__()
+    //      get __proto__: ƒ __proto__()
+    //      set __proto__: ƒ __proto__()
+        </code>
+      </pre>
+
+        <p class="article__paragraph">W powyższym przykładzie widzimy, że nasz obiekt user3 ma dostępne metody takie jak np: hasOwnProperty, toString, valueOf itd. Wszystkie te metody zostały odziedziczone po jego prototypie i mamy do nich dostęp z poziomu obiektu user3.</p>
+      </section>
+
+      <section class="article__section">
+        <h3 class="article__section__title">Jak działa dziedziczenie ?</h3>
+
+        <p class="article__paragraph">Chcemy ulepszyć nasz wcześniejszy kod i przenieść metodę greetings wyżej w naszym łańcuchu prototypów. Nie ma potrzeby, żeby każdy z naszych obiektów użytkowników miał swoją własną metodę powitania. Dużo lepszym rozwiązaniem jest utworzenie jednej metody greetings, z której będzie mógł korzystać każdy z użytkowników.</p>
+
+        <pre class="article__code">
+        <code>
+    function User(name, age, location) {
+      this.name = name;
+      this.age = age;
+      this.location = location;
+    }
+
+    User.prototype.greetings = function () {
+        console.log(`Witaj ${this.name}, dobrze cię widzieć!`);
+      };
+
+    const user1 = new User('Tomasz', 29, 'Poland');
+    const user2 = new User('Daniel', 26, 'Poland');
+
+    user1.greetings(); // Witaj Tomasz, dobrze cię widzieć!
+    user2.greetings(); // Witaj Daniel, dobrze cię widzieć!
+
+    console.log(user1); // {name: "Tomasz", age: 29, location: "Poland"}
+    console.log(Object.getPrototypeOf(user1)); // {greetings: ƒ, constructor: ƒ}
+        </code>
+      </pre>
+
+        <p class="article__paragraph">Jak widzimy powyżej, obiekt <strong class="bold">user1</strong> nie ma własnej metody <strong class="bold">greetings</strong>. Mimo to może ją wywołać. Dzieje się tak ponieważ odziedziczył ją po swoim prototypie. W chwili wywołania tej metody JavaScript sprawdza czy istnieje ona w danym obiekcie. Jeśli nie została znaleziona, następuje przesunięcie się w dół naszej gałęzi do prototypu danego obiektu. Jeśli i tu nie została odnaleziona cały proces się powtarza, aż do momentu znalezienia metody lub dotarcia do pnia naszego drzewa jakim jest obiekt <strong class="bold">Object</strong>. Jeśli i tu nie zostaje znaleziona nasza metoda, zgłaszany jest błąd.</p>
+      </section>
+
+      <section class="article__section">
+        <h3 class="article__section__title">Przesłanianie prototypu</h3>
+
+        <p class="article__paragraph">Ponieważ JS zaczyna sprawdzanie od obiektu, który wywołał daną metodę, możemy utworzyć w nim jego własną metodę o tej samej nazwie i tym samym przesłonić metodę, która już istnieje w łańcuchu prototypów.</p>
+
+        <pre class="article__code">
+        <code>
+    user1.greetings = function () {
+      console.log(`Witaj ponownie ${this.name}, jak się dzisiaj masz ?`);
+    };
+
+    user1.greetings(); // Witaj ponownie Tomasz, jak się dzisiaj masz ?
+    user2.greetings(); // Witaj Daniel, dobrze cię widzieć!
+        </code>
+      </pre>
+
+        <p class="article__paragraph">Widzimy, że <strong class="bold">user1</strong> ma swoje własne powitanie, które nie wpłynęło na użytkownika <strong class="bold">user2</strong>.</p>
+
+        <p class="article__paragraph">Jeśli chcemy dodać kilka rzeczy naraz do prototypu, możemy to zrobić. Przypisując obiekt do prototypu. Musimy tylko pamiętać, że w takim przypadku musimy ręcznie dodać właściwości <strong class="bold">constructor</strong> do naszego prototypu.</p>
+
+        <pre class="article__code">
+        <code>
+    User.prototype = {
+      constructor: User, // UWAGA! - zawsze samemu ustawiamy tą właściwość
+      greetings: function () {
+        console.log(`Witaj ${this.name}, dobrze cię widzieć!`);
+      },
+      farewell: function () {
+        console.log(`Dziękujemy, że nas odwiedziłeś. Do zobaczenia ${this.name}`);
+      }
+    };
+        </code>
+      </pre>
+      </section>
+
+      <section class="article__section">
+        <h3 class="article__section__title">Prototypy są dynamiczne</h3>
+
+        <p class="article__paragraph">Oznacza to, że wszystkie obiekty utworzone na podstawie danego prototypu, te utworzone przed jak i po modyfikacji prototypu (np. dodanie nowej metody) mają dostęp do wszystkich jego właściwości i metod.</p>
+      </section>
+
+      <section class="article__section">
+        <h3 class="article__section__title">Tworzenie łańcucha prototypów</h3>
+
+        <p class="article__paragraph">Załóżmy, że chcemy utworzyć następujący łańcuch <strong class="bold">Object -&gt; Human -&gt; User</strong>. Każdy łańcuch budujemy od bardziej ogólnej koncepcji do bardziej szczegółowej. Na początku mamy więc ogólne pojęcie obiektu zdefiniowane przez sam język JS. Później tworzymy obiekt Człowieka, jest to dosyć ogólna kategoria. Następnie podkategorią Człowieka może być Użytkownik.</p>
+
+        <pre class="article__code">
+        <code>
+    function Human() {}
+
+    Human.prototype = {
+      constructor: Human,
+      greetings: function () {
+        console.log(`Witaj ${this.login}, dobrze cię widzieć!`);
+      },
+      farewell: function () {
+        console.log(`Dziękujemy, że nas odwiedziłeś. Do zobaczenia ${this.login}`);
+      }
+    };
+
+    function User(login, email) {
+      this.login = login;
+      this.email = email;
+    }
+
+    User.prototype = Object.create(Human.prototype); // Tutaj następuje połączenie prototypów
+    User.prototype.constructor = User; // UWAGA! - ustawiamy ręcznie
+
+    const user1 = new User('Tomasz', 'example@gmail.com');
+    const human1 = new Human();
+
+    user1.greetings(); // Witaj Tomasz, dobrze cię widzieć!
+
+    console.log(human1 instanceof User); // false
+    console.log(user1 instanceof Human); // true
+    console.log(user1 instanceof User); // true
+        </code>
+      </pre>
+
+        <p class="article__paragraph">Przy pomocy <strong class="bold">Object.create()</strong>, tworzymy nowy obiekt, powstaje on na podstawie istniejącego i wybranego przez nas obiektu prototypu.</p>
+      </section>
+    </article>
+
+
+</body>
+
+</html>
