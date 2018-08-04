@@ -2684,11 +2684,99 @@
     </article>
 
 
+    <!-- Article 18 -->
+
+
+    <article class="article">
+
+      <header id="Obiekty_opakowujące" class="article__header">
+        <div class="decor">18</div>
+        <h2 class="article__title">Obiekty opakowujące</h2>
+      </header>
+
+      <p class="article__paragraph">Teraz gdy poznałeś obiekty i typy proste w JavaScript. Będziesz mógł z łatwością zrozumieć co się dzieje w poniższej sytuacji:</p>
+
+      <pre class="article__code">
+        <code>
+    let myName = 'Tomasz';
+
+    console.log(myName.indexOf('s')); // 4
+    console.log(typeof myName); // string
+        </code>
+      </pre>
+
+      <p class="article__paragraph">Patrząc na powyższy kod, możesz podrapać się w głowę i pomyśleć. Co jest grane ? Przecież przy pomocy notacji z kropką odwołujemy się do metody obiektu. Ale w następnej linijce kodu widzimy wyraźnie, że zmienna <strong class="bold">myName</strong> przechowuje wartość typu prostego.</p>
+
+      <section class="article__section">
+        <h3 class="article__section__title">Opakowanie przez silnik JS</h3>
+
+        <p class="article__paragraph">Rozwiązanie tej zagadki jest proste. Oto co się wydarzyło za kurtyną:</p>
+
+        <ol class="article__ordered-list">
+          <li class="ordered-list__item">Za każdym razem gdy chcemy wywołać metodę na wartości typu prostego zostaje ona „po cichu” opakowana przy pomocy obiektu.</li>
+          <li class="ordered-list__item">Następnie zostaje wywołana nasza metoda.</li>
+          <li class="ordered-list__item">Gdy tylko otrzymamy wynik jej działania nasz obiekt opakowujący jest niszczony.</li>
+        </ol>
+
+        <p class="article__paragraph">Teraz powyższy przykład jest dla nas zrozumiały i logiczny. Otrzymane wartości są dokładnie tym czego się spodziewaliśmy. Opakowaniu ulegają wartości proste typu: string, number i boolean.</p>
+      </section>
+
+      <section class="article__section">
+        <h3 class="article__section__title">Własnoręczne opakowanie</h3>
+
+        <p class="article__paragraph">To co zostało zrobione „po cichu” przez silnik JS. Możemy również zrobić samemu przy użyciu konstruktora.</p>
+
+        <pre class="article__code">
+        <code>
+    let myName = new String('Tomasz');
+
+    console.log(myName.indexOf('s')); // 4
+
+    console.log(myName); // {"Tomasz"}
+    console.log(typeof myName); // object
+
+    let myAge = new Number(29);
+
+    console.log(myAge); // {29}
+    console.log(typeof myAge); // object
+
+    let codingIsCool = new Boolean(true);
+
+    console.log(codingIsCool); // {true}
+    console.log(typeof codingIsCool); // object
+        </code>
+      </pre>
+
+        <p class="article__paragraph">Jak widzimy nasza wartość pozostaje cały czas zapakowana i sprawdzenie jej typu zwraca object. Możemy też ręcznie rozpakować naszą wartość wykorzystując mechanizm konwersji typów.</p>
+
+        <pre class="article__code">
+        <code>
+    myName = myName + '';
+
+    console.log(myName); // Tomasz
+    console.log(typeof myName); // string
+
+    myAge = myAge + 0;
+
+    console.log(myAge); // 29
+    console.log(typeof myAge); // number
+
+    codingIsCool = !!codingIsCool;
+
+    console.log(codingIsCool); // true
+    console.log(typeof codingIsCool); // boolean
+        </code>
+      </pre>
+
+        <p class="article__paragraph">Teraz gdy wiemy na czym polega opakowywanie typów prostych. Zapamiętajmy żeby nigdy nie robić tego samemu. Zawsze twórz wartości typu prostego w postaci literału !</p>
+      </section>
+
+    </article>
+
 
     <footer class="documentation__footer">
       <span class="footer__txt">designed &amp; coded with <span class="footer__icon">&#10084;</span> by <span class="footer__bold">&copy; Tomasz Rybacki</span> in 2018</span>
     </footer>
-    <!-- blank -->
   </main>
 
 
