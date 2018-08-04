@@ -2190,6 +2190,125 @@
     </article>
 
 
+    <!-- Article 15 -->
+
+
+    <article class="article">
+
+      <header id="Obiekty_cz.1" class="article__header">
+        <div class="decor">15</div>
+        <h2 class="article__title">Obiekty cz.1</h2>
+      </header>
+
+      <p class="article__paragraph">W JavaScript prawie wszystko jest obiektem (funkcje, tablice, obiekty wbudowane). W kilku kolejnych wpisach opiszę w jaki sposób działają obiekty i na czym polega programowanie obiektowe w JS.</p>
+
+      <p class="article__paragraph">Obiekty są kolekcją wartości składających się z par <strong class="bold">nazwa: wartość</strong>, służących do opisywania dowolnej rzeczy np. ludzi, samochodów, zwierząt itd.</p>
+
+      <section class="article__section">
+        <h3 class="article__section__title">Tworzenie obiektu</h3>
+
+        <p class="article__paragraph">Najprostszym sposobem utworzenia pojedynczego obiektu jest opakowanie naszych par <strong class="bold">nazwa: wartość</strong> w nawiasy klamrowe <strong class="bold">{}</strong>, jest to tak zwany literał obiektu. Wartości przechowywane w obiekcie nazywamy <strong class="bold">właściwościami</strong> natomiast funkcje przechowywane w obiekcie to <strong class="bold">metody</strong> tego obiektu.</p>
+
+        <pre class="article__code">
+        <code>
+    const myFamilyHouse = {
+      city: 'Ostrołęka',
+      inhabitants: 2,
+      floors: 2,
+
+      neighborhood: function () {
+        return 'Cicha i spokojna okolica. Idealna do odpoczynku od miejskiego zgiełku.';
+      }
+    };
+        </code>
+      </pre>
+
+        <p class="article__paragraph">Powyższy obiekt opisujący mój rodzinny dom ma 3 właściwości: <strong class="bold">city, inhabitants, floors</strong>. Posiada też jedną metodę: <strong class="bold">neighborhood</strong>.</p>
+
+      </section>
+
+      <section class="article__section">
+        <h3 class="article__section__title">Dostęp do wartości</h3>
+
+        <p class="article__paragraph">Aby odczytać wartość właściwości lub wywołać metodę używamy notacji z kropką lub notacji z nawiasami.</p>
+
+        <pre class="article__code">
+        <code>
+    console.log(myFamilyHouse.city); // Ostrołęka
+    console.log(myFamilyHouse.floors); // 2
+
+    console.log(myFamilyHouse.neighborhood());
+    // Cicha i spokojna okolica. Idealna do odpoczynku od miejskiego zgiełku.
+
+    console.log(myFamilyHouse['inhabitants']); // 2
+    console.log(myFamilyHouse['neighborhood']())
+    // Cicha i spokojna okolica. Idealna do odpoczynku od miejskiego zgiełku.
+        </code>
+      </pre>
+
+        <p class="article__paragraph">Jak widzimy w powyższym przykładzie notacja z kropką jest o wiele bardziej czytelna dlatego jest najczęściej stosowana. Ma jednak swoje ograniczenia w postaci:</p>
+
+        <ul class="article__unordered-list">
+          <li class="unordered-list__item">nazwy właściwości muszą być znakami alfanumerycznymi (z uwzględnieniem znaków _ i $)</li>
+          <li class="unordered-list__item">nie mogą zaczynać się od cyfry</li>
+          <li class="unordered-list__item">nie mogą zawierać nazw zmiennych</li>
+        </ul>
+
+        <p class="article__paragraph">Natomiast w przypadku notacji z nawiasami możemy używać:</p>
+
+        <ul class="article__unordered-list">
+          <li class="unordered-list__item">znaku spacji w nazwach</li>
+          <li class="unordered-list__item">nazw zmiennych</li>
+          <li class="unordered-list__item">cyfr na początku łańcucha znaków</li>
+        </ul>
+
+        <p class="article__paragraph">Musimy pamiętać, że identyfikatory w notacji z nawiasami muszą być wartością typu 'string' lub zmienną, która zawiera wartości typu 'string'.</p>
+      </section>
+
+
+      <section class="article__section">
+        <h3 class="article__section__title">Nadpisanie wartości</h3>
+
+        <p class="article__paragraph">Aby zmienić istniejącą wartość lub dodać nową, stosujemy zwykłe przypisanie. Obiekty są modyfikowalne (mutable data), w każdej chwili możemy modyfikować ich zawartość. Jeśli obiekt zawiera już podany klucz jego wartość zostanie nadpisana, w przeciwnym razie zostanie on dodany do naszego obiektu.</p>
+
+        <pre class="article__code">
+        <code>
+    myFamilyHouse.garden = true;
+    myFamilyHouse.inhabitants = 3;
+
+    myFamilyHouse.income = function () {
+      return myFamilyHouse.inhabitants * 1000;
+    };
+
+    console.log(myFamilyHouse.income()); // 3000
+    console.log(myFamilyHouse);
+    // { city: "Ostrołęka", inhabitants: 3, floors: 2, neighborhood: ƒ, garden: true, income: ƒ }
+        </code>
+      </pre>
+      </section>
+
+      <section class="article__section">
+        <h3 class="article__section__title">Usuwanie właściwości i metod</h3>
+
+        <p class="article__paragraph">Aby pozbyć się właściwości lub metody korzystamy z operatora <strong class="bold">delete</strong>.</p>
+
+        <pre class="article__code">
+        <code>
+    delete myFamilyHouse.garden;
+    delete myFamilyHouse.income;
+
+    console.log(myFamilyHouse);
+    // { city: "Ostrołęka", inhabitants: 3, floors: 2, neighborhood: ƒ }
+        </code>
+      </pre>
+
+        <p class="article__paragraph">W tym momencie omówiliśmy podstawy funkcjonowania obiektów. Wystarczy na dzisiaj, wiedza przyswajana w małych dawkach lepiej się wchłania 🙂</p>
+      </section>
+    </article>
+
+
+
+
     <footer class="documentation__footer">
       <span class="footer__txt">designed &amp; coded with <span class="footer__icon">&#10084;</span> by <span class="footer__bold">&copy; Tomasz Rybacki</span> in 2018</span>
     </footer>
