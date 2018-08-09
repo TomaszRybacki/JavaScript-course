@@ -1,0 +1,10 @@
+{
+  "name": "JavaScriptCourse",
+  "version": "",
+  "description": "JavaScript course taken from my blog posts.",
+  "devDependencies": {
+    "eslint": "^4.19.1",
+    "eslint-config-airbnb": "^17.0.0",
+    "eslint-plugin-import": "^2.13.0"
+  }
+}
