@@ -48,6 +48,7 @@
       <li class="nav-item"><a class="nav-link" href="#Objekty_cz2">16. Objekty cz.2</a></li>
       <li class="nav-item"><a class="nav-link" href="#Klasy">17. Klasy</a></li>
       <li class="nav-item"><a class="nav-link" href="#Obiekty_opakowujace">18. Obiekty opakowujące</a></li>
+      <li class="nav-item"><a class="nav-link" href="#Obiekty_wbudowane">19. Obiekty wbudowane</a></li>
     </ol>
   </nav>
 
@@ -2772,6 +2773,177 @@
       </section>
 
     </article>
+
+
+    <!-- Article 19 -->
+
+
+    <article class="article">
+
+      <header id="Obiekty_wbudowane" class="article__header">
+        <div class="decor">19</div>
+        <h2 class="article__title">Obiekty wbudowane</h2>
+      </header>
+
+      <p class="article__paragraph">W JavaScript mamy dostęp do wielu już utworzonych obiektów, które pozwalają nam na wykonywanie różnych operacji. Możemy je podzielić na trzy grupy:</p>
+
+      <ol class="article__ordered-list">
+        <li class="ordered-list__item">Obiekty opakowujące. Pozwalają nam na zarządzanie różnymi typami danych. Są to: <strong class="bold">Array, Number, Boolean, Symbol, Object, Array, Function, Map, Set, JSON.</strong></li>
+        <li class="ordered-list__item">Obiekty użytkowe. Pozwalają nam wykonywać różne operacje. Są to: <strong class="bold">Math, Date, RegExp.</strong></li>
+        <li class="ordered-list__item">Obiekty błędów. Służą do zarządzania powstałymi błędami. Są to: <strong class="bold">Error, EvalError, InternalError, RangeError, ReferenceError, SyntaxError, TypeError, URIError.</strong></li>
+      </ol>
+
+      <p class="article__paragraph">Jak widzisz jest tego całkiem sporo, część z tych obiektów już poznałeś. Dzisiaj chcę się skupić na obiektach z drugiej grupy.</p>
+
+      <section class="article__section">
+        <h3 class="article__section__title">Math</h3>
+
+        <p class="article__paragraph">Obiekt Math służy do przeprowadzania różnych działań matematycznych. Jest dosyć niezwykły, w przeciwieństwie do pozostałych nie jest funkcją konstruktora. Wszystkie jego właściwości i metody są statyczne. Odwołujemy się do nich przez obiekt Math. Przyjrzyjmy się jego najczęściej używanym właściwościom i metodom.</p>
+
+        <pre class="article__code">
+        <code>
+    Właściwości:
+
+    console.log(Math.PI); // 3.141592
+    // zwraca wartość liczby pi
+
+    console.log(Math.SQRT2); // 1.414213
+    // zwraca pierwiastek kwadratowy z 2
+
+    Metody:
+
+    console.log(Math.abs(-6)) // 6
+    // zwraca wartość absolutną liczby
+
+    console.log(Math.cbrt(27)) // 3
+    // zwraca pierwiastek sześcienny z liczby
+
+    console.log(Math.sqrt(16)) // 4
+    // zwraca pierwiastek kwadratowy z liczby
+
+    console.log(Math.pow(5, 2)) // 25
+    // zwraca liczbę podniesioną do potęgi
+
+    console.log(Math.ceil(5.2)) // 6
+    // zaokrągla liczbę w górę
+
+    console.log(Math.floor(5.6)) // 5
+    // zaokrągla liczbę w dół
+
+    console.log(Math.round(5.5)) // 6
+    // zaokrągla liczbę do najbliższej wartości całkowitej
+
+    console.log(Math.random()) // 0.634532
+    // generuje losową liczbę z przedziału od 0 do 1 (nie zawiera jedynki)
+
+    console.log(Math.min(45, 23)); // 23
+    // zwraca najmniejszą z podanych liczb
+
+    console.log(Math.max(45, 23)); // 45
+    // zwraca największą z podanych liczb
+        </code>
+      </pre>
+
+      </section>
+
+      <section class="article__section">
+        <h3 class="article__section__title">Date</h3>
+
+        <p class="article__paragraph">Obiekt date pozwala nam na pracę z czasem. Oparty jest na czasie uniksowym, czyli wartości dodatnie oznaczają liczbę milisekund jakie upłynęły od początku roku 1970. Nie uwzględnia jednak milisekund przestępnych. Sposoby tworzenia obiektu date:</p>
+
+        <pre class="article__code">
+        <code>
+    // pobieranie aktualnej daty z urządzenia użytkownika
+
+    let now = new Date();
+    console.log(now);
+    // Tue Jul 31 2018 12:32:52 GMT+0200
+
+    // ustawianie wybranej daty
+
+    let myBirthday = new Date(1989, 4, 24);
+    console.log(myBirthday);
+    // Wed May 24 1989 00:00:00 GMT+0200
+
+    // ustawianie daty na podstawie liczby milisekund jakie upłyneły od początku 1970
+    let unixEpoch = new Date(6000);
+    console.log(unixEpoch);
+    // Thu Jan 01 1970 01:00:06 GMT+0100
+        </code>
+      </pre>
+
+        <p class="article__paragraph">Pamiętamy, że miesiące są numerowane od zera. Możemy ustawić datę z dokładnością do milisekundy, korzystając z poniższej składni:</p>
+
+        <span class="article__command">new Date(year, monthIndex, day, hours, minutes, seconds, milliseconds);</span>
+
+        <p class="article__paragraph">Obiekt Date zawiera całą listę metod służących do pobierania i ustawiania części składowych daty. Kompletną listę tych metod znajdziesz tutaj. Polecam Ci samodzielne pogłębianie wiedzy z materiałów MDN (mozilla developer network). Prowadzona przez nich dokumentacja jest bardzo solidna i stanowi doskonałe źródło wiedzy na temat JavaScript.</p>
+
+      </section>
+
+      <section class="article__section">
+        <h3 class="article__section__title">RegExp</h3>
+
+        <p class="article__paragraph">Wyrażenia regularne to wzorce stosowane do dopasowywania kombinacji znaków w łańcuchach. W JavaScript wyrażenia regularne są również obiektami. Zapisujemy je pomiędzy ukośnikami np: /^[a-zA-z]\w*\w$/</p>
+
+        <h4 class="article__section__subtitle">Metody obiektu RegExp</h4>
+
+        <p class="article__paragraph"><strong class="bold">exec</strong> – wyszukuje dopasowanie w łańcuchu. Zwraca dopasowany fragment lub <strong class="bold">null</strong> gdy nic nie znaleziono.</p>
+
+        <p class="article__paragraph"><strong class="bold">test</strong> – sprawdza dopasowanie w łańcuchu . Zwraca <strong class="bold">true</strong> gdy występuje lub <strong class="bold">false</strong> gdy nie występuje.</p>
+
+        <h4 class="article__section__subtitle">Metody obiektu String</h4>
+
+        <p class="article__paragraph"><strong class="bold">match</strong> – wyszukuje dopasowanie w łańcuchu. Zwraca tablicę dopasowanych fragmentów lub <strong class="bold">null</strong> gdy nic nie znaleziono.</p>
+
+        <p class="article__paragraph"><strong class="bold">search</strong> – sprawdza dopasowanie w łańcuchu. Zwraca <strong class="bold">index</strong> dopasowania lub <strong class="bold">-1</strong> gdy nic nie znajdzie.</p>
+
+        <p class="article__paragraph"><strong class="bold">replace</strong> – sprawdza dopasowanie w łańcuchu i zastępuje dopasowane fragmenty nowymi podanymi łańcuchami.</p>
+
+        <p class="article__paragraph"><strong class="bold">split</strong> – wykorzystuje wyrażenie regularne lub łańcuch znaków do podzielenia łańcucha na tablicę łańcuchów powstałych w wyniku podziału.</p>
+
+        <h4 class="article__section__subtitle">Oznaczenia</h4>
+
+        <p class="article__paragraph">
+          ^ – dopasowuje pierwszy znak w łańcuchu<br> $ – dopasowuje ostatni znak w łańcuchu<br> * – dopasowuje poprzedzający znak 0 powtórzeń lub więcej, ekwiwalent do {0,}<br> + – dopasowuje poprzedzające wyrażenie 1 lub więcej razy, ekwiwalent do {1,}<br> ? – dopasowuje poprzedzające wyrażenie 0 lub 1 raz, ekwiwalent do {0,1}<br> . – dopasowuje każdy (dowolny) znak za wyjątkiem znaku od nowej lini
+        </p>
+
+        <p class="article__paragraph">
+          (x) – dopasowuje x i zapamiętuje dopasowanie, później możemy je wykorzystać i np. zamieniać je miejscami za pomocą $1, $2<br> (?:x) – dopasowuje x i nie zapamiętuje dopasowania, pozwala grupować znaki wewnątrz wyrażenia regularnego<br> x(?=y) – dopasowuje x tylko gdy jest po nim y<br> x(?!y) – dopasowuje x gdy nie następuje po nim y<br> x|y – dopasowuje x lub y
+        </p>
+
+        <p class="article__paragraph">
+          {n} – dopasowuje dokładnie ilość poprzedzających wyrażeń<br> {n,} – dopasowuje przynajmniej n wystąpień poprzedzających wyrażeń<br> {n,m} – dopasowuje ilość wystąpień wyrażenia z przedziału od n do m<br> [xyz] – dopasowuje dowolny ze znaków z zestawu, zakres podajemy przy użyciu – np:/[a-z]/<br> [^xyz] – dopasowuje wszystko co nie należy do zestawu<br>
+        </p>
+
+        <p class="article__paragraph">
+          \d – dopasowuję cyfrę, ekwiwalent do [0-9]<br> \D – dopasowuje nie-cyfrę, ekwiwalent do [^0-9]<br> \s – dopasowuje biały znak np: spacje, tabulator<br> \S – dopasowuje pojedyńczy nie biały znak<br> \t – dopasowuje tabulator<br> \w – dopasowuje alfabetyczno-numeryczny znak z uwzględnieniem podkreślenia, ekwiwalent do [A-Za-z0-9_]<br> \W – dopasowuje nie alfabetyczno-numeryczny znak<br> \b – granica słowa, dopasowuje się do zmiany znaku z \w na \W lub na odwrót
+        </p>
+
+        <p class="article__paragraph">
+          \xhh – dopasowuje znak z kodem hh (dwie cyfry szesnastkowe)<br> \uhhhh – dopasowuje znak z kodem hhhh ( cztery cyfry szesnastkowe)<br> \u{hhhh} – tylko gdy flaga u jest włączona. Dopasowuje znak z kodem Unicode o wartości hhhh
+        </p>
+
+        <h4 class="article__section__subtitle">Flagi</h4>
+
+        <p class="article__paragraph">Flagi możemy dodać na końcu wyrażenia regularnego żeby zmodyfikować sposób w jaki działa np. <strong class="bold">/wyrażenieRegularne/flaga</strong>
+
+          <p class="article__paragraph">
+            g – nie zatrzymuje wyszukiwania po pierwszym dopasowaniu i szuka dalej<br> i – nie rozróżnia wielkości znaków np. a = A<br> m – wyszukiwanie wielowierszowe (^ i $) działają dla każdej nowej linii<br> u – traktuje wyrażenie jako znaki Unicode<br> y – sprawdza tylko wskazaną pozycję pod danym indexem (RegExp.lastIndex = index)
+          </p>
+
+          <h4 class="article__section__subtitle">Znaki specjalne</h4>
+
+          <p class="article__paragraph">Wszystkie znaki z tej listy należy poprzedzić ukośnikiem wstecznym \ żeby wykorzystać je jako zwykłe znaki w wyrażeniu regularnym:<strong class="bold"> \ ^ $ * + ? . ( ) | { } [ ]</strong></p>
+
+          <p class="article__paragraph">Do wyrażeń regularnych możemy też wstawiać zmienne z wykorzystaniem „Template strings” nie używamy wtedy ukośników // i całe wyrażenie zapisujemy w „ np. `(?:[0\\D]*(\\d+)\\D*){${n}}`, gdzie n jest zmienną.</p>
+
+          <p class="article__paragraph">Wewnątrz wyrażenia regularnego można korzystać z wcześniej zapamiętanych dopasowań w nawiasach () np. /([a-z]+)[^a-z]+\1\b/gi, gdzie \1 oznacza wcześniej dopasowane słowo z nawiasów ([a-z]+)</p>
+      </section>
+    </article>
+
+
+    <!-- Article 20 -->
+
 
 
     <footer class="documentation__footer">
