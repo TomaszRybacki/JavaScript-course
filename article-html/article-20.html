@@ -1,0 +1,262 @@
+<!DOCTYPE html>
+<html lang="pl">
+
+<head>
+  <title>html markup</title>
+</head>
+
+<body>
+
+<article class="article">
+
+      <header id="DOM" class="article__header">
+        <div class="decor">20</div>
+        <h2 class="article__title">DOM</h2>
+      </header>
+
+      <p class="article__paragraph">DOM to skrót od Document Object Model, czyli modelu obiektowego dokumentu. Nie jest częścią języka JavaScript, tylko API dla dokumentów HTML i XML. API to skrót od application programming interface, czyli interfejsu programowania aplikacji.</p>
+
+      <p class="article__paragraph">Wyjaśnijmy sobie, co kryje się pod tymi pojęciami. API jest ogólną koncepcją określającą w jaki sposób różne programy i urządzenia mają się komunikować między sobą. Natomiast DOM jest implementacją tego sposobu komunikacji dla naszych dokumentów HTML. Określa w jaki sposób wygląda struktura dokumentu, tak zwane drzewo DOM, oraz w jaki sposób nasze skrypty pisane w JavaScript mogą oddziaływać z tą strukturą.</p>
+
+      <p class="article__paragraph">Za każdym razem gdy wczytamy stronę internetową nasza przeglądarka, tworzy jej odwzorowanie w postaci drzewa DOM dodanego do obiektu globalnego <strong class="bold">window</strong>. W obiekcie <strong class="bold">window.document</strong> znajdziemy całą strukturę tagów naszego dokumentu HTML.</p>
+
+      <section class="article__section">
+        <h3 class="article__section__title">Drzewo DOM</h3>
+
+        <p class="article__paragraph">Składa się z węzłów. Węzły te mogą zawierać kolejne pod węzły. Głównym elementem jest element <strong class="bold">&lt;html&gt;</strong> zwany korzeniem dokumentu. To od niego rozchodzą się kolejne rozgałęzienia. Przyjmijmy, że mamy następujący dokument html:</p>
+
+        <pre class="article__code">
+        <code>
+    &lt;!DOCTYPE html&gt;
+    &lt;html lang="pl"&gt;
+    &lt;head&gt;
+      &lt;title&gt;DOM&lt;/title&gt;
+    &lt;/head&gt;
+    &lt;body&gt;
+      &lt;header&gt;
+        &lt;nav&gt;&lt;/nav&gt;
+      &lt;/header&gt;
+      &lt;main&gt;
+        &lt;h1&gt;Title&lt;/h1&gt;
+        &lt;p&gt;Lorem ipsum dolor sit amet, consectetur adipisicing elit.&lt;/p&gt;
+      &lt;/main&gt;
+      &lt;footer&gt;
+        &lt;a href="#"&gt;Link&lt;/a&gt;
+      &lt;/footer&gt;
+      &lt;script src="../scripts/code.js"&gt;&lt;/script&gt;
+    &lt;/body&gt;
+    &lt;/html&gt;
+        </code>
+      </pre>
+
+        <p class="article__paragraph">Graficznie możemy go rozpisać w postaci następującego drzewa DOM:</p>
+
+        <img class="article__img" src="img/DOM%20tree.jpg" alt="DOM tree">
+
+        <p class="article__paragraph">Gdy otworzymy narzędzia developerskie Chrome (F12) w zakładce Elements, zobaczymy uproszczony model naszego drzewa DOM, który nie zawiera pustych węzłów tekstowych oznaczających nową linię. Które widzimy w powyższym rozpisaniu.</p>
+
+        <p class="article__paragraph">Nasze tagi HTML stają się węzłami elementów i tworzą strukturę naszego drzewa. Możemy myśleć o nich jak o rodzinie. Każdy węzeł ma swojego rodzica (czyli węzeł, który go zawiera), ma też swoje dzieci (węzły o jeden poziom niżej), oraz rodzeństwo (węzły na tym samym poziomie co on).</p>
+
+        <p class="article__paragraph">Na przykładzie węzła <strong class="bold">&lt;main&gt;</strong>. Węzły <strong class="bold">&lt;header&gt;</strong> i <strong class="bold">&lt;footer&gt;</strong> są jego rodzeństwem. Węzeł <strong class="bold">&lt;body&gt;</strong> jest jego rodzicem. Natomiast węzły <strong class="bold">&lt;h1&gt;</strong> i <strong class="bold">&lt;p&gt;</strong> są jego dziećmi. W tym przykładzie rozpatrujemy tylko węzły elementów, pozostałe typy węzłów pomijam. W sumie mamy 12 typów węzłów:</p>
+
+        <ol class="article__ordered-list">
+          <li class="ordered-list__item">Element node</li>
+          <li class="ordered-list__item">Attribute node</li>
+          <li class="ordered-list__item">Text node</li>
+          <li class="ordered-list__item">CData section node</li>
+          <li class="ordered-list__item">Entity Reference node</li>
+          <li class="ordered-list__item">Entity node</li>
+          <li class="ordered-list__item">Processing Instruction node</li>
+          <li class="ordered-list__item">Comment node</li>
+          <li class="ordered-list__item">Document node</li>
+          <li class="ordered-list__item">Document Type node</li>
+          <li class="ordered-list__item">Document Fragment node</li>
+          <li class="ordered-list__item">Notation node</li>
+        </ol>
+
+        <p class="article__paragraph">Większość z nich, nas nie interesuje i podaję je jedynie jako ciekawostkę.</p>
+      </section>
+
+      <section class="article__section">
+        <h3 class="article__section__title">Odwoływanie się do elementów</h3>
+
+        <p class="article__paragraph">Oto lista dostępnych metod, służących do pobierania elementów z naszego drzewa DOM:</p>
+
+        <ol class="article__ordered-list">
+          <li class="ordered-list__item">document.getElementById(<strong class="bold">'id'</strong>)</li>
+          <li class="ordered-list__item">document.getElementsByClassName(<strong class="bold">'klasa'</strong>)</li>
+          <li class="ordered-list__item">document.getElementsByTagName(<strong class="bold">'tag'</strong>)</li>
+          <li class="ordered-list__item">document.querySelector(<strong class="bold">'selektor css'</strong>)</li>
+          <li class="ordered-list__item">document.querySelectorAll(<strong class="bold">'selektor css'</strong>)</li>
+        </ol>
+
+        <pre class="article__code">
+        <code>
+    // pobiera element o podanym id
+
+    const h1Element = document.getElementById('title');
+    console.log(h1Element); // &lt;h1 id="title"&gt;Title&lt;/h1&gt;
+
+    // pobiera kolekcję elementów o podanej klasie
+
+    const paragraphElements = document.getElementsByClassName('paragraph');
+    console.log(paragraphElements); // HTMLCollection(2)[p.paragraph, p.paragraph]
+
+    // pobiera kolekcję elementów o danej nazwie tagu HTML
+
+    const headerElement = document.getElementsByTagName('header');
+    console.log(headerElement); // HTMLCollection[header]
+
+    // pobiera pierwszy element wewnątrz dokumentu, który pasuje do podanego selektora
+
+    const linkElement = document.querySelector('a[href="#title"]');
+    console.log(linkElement); // &lt;a href="#title"&gt;Link&lt;/a&gt;
+
+    const h1Element2 = document.querySelector('#title');
+    console.log(h1Element2); // &lt;h1 id="title"&gt;Title&lt;/h1&gt;
+
+    // pobiera wszystkie elementy wewnątrz dokumentu, który pasuje do podanego selektora
+
+    const paragraphElements2 = document.querySelectorAll('.paragraph');
+    console.log(paragraphElements2); // NodeList(2)[p.paragraph, p.paragraph]
+        </code>
+      </pre>
+
+        <p class="article__paragraph">Widzimy powyżej, że metoda <strong class="bold">querySelectorAll</strong> zwraca listę węzłów, natomiast wcześniejsze metody jak <strong class="bold">getElementsByClassName</strong> i <strong class="bold">getElementsByTagName</strong> zwracały kolekcję elementów. Na czym polega różnica pomiędzy nimi ?</p>
+
+        <h4 class="article__section__subtitle">Kolekcja Elementów (HTMLCollection)</h4>
+
+        <p class="article__paragraph">Zawiera tylko listę elementów (element node). Jest „żywa” co oznacza, że jej zawartość jest aktualizowana na bieżąco gdy w dokumencie pojawiają się nowe elementy lub istniejące są usuwane.</p>
+
+        <h4 class="article__section__subtitle">Lista Węzłów (NodeList)</h4>
+
+        <p class="article__paragraph">Może zawierać dowolne węzły (element node, text node, comment node itp.) Ilość jej elementów jest zazwyczaj statyczna (wyjątkiem jest metoda <strong class="bold">childNodes</strong>, która zwraca „żywą” listę węzłów), i wynosi dokładnie tyle ile ich było na stronie w momencie wywołania naszej metody, która zwróciła nam listę węzłów.</p>
+
+        <pre class="article__code">
+        <code>
+    // tworzymy nowy paragraf
+
+    const newParagraph = document.createElement('p');
+
+    // dodajemy mu klasę paragraph
+
+    newParagraph.classList.add('paragraph');
+
+    // dodajemy tekst do naszego paragrafu
+
+    newParagraph.textContent = 'Jestem tekstem zawartym w nowym paragrafie.';
+
+    // podczepiamy stworzony element do body naszego dokumentu
+
+    document.body.appendChild(newParagraph);
+
+    console.log(paragraphElements.length); // 3
+    console.log(paragraphElements2.length); // 2
+        </code>
+      </pre>
+
+        <p class="article__paragraph">W powyższym przykładzie widzimy, że nasza kolekcja elementów przechowywana w zmiennej <strong class="bold">paragraphElements</strong> została powiększona o jeden. Podczas gdy wartość zmiennej <strong class="bold">paragraphElements2</strong> nie uległa zmianie.</p>
+      </section>
+
+      <section class="article__section">
+        <h3 class="article__section__title">Poruszanie się po DOM</h3>
+
+        Nie musimy za każdym razem pobierać nowego elementu za pomocą identyfikatora, klasy, nazwy tagu lub selektora CSS. Możemy pobrać tylko jeden element i za jego pomocą przechodzić do innych elementów.
+
+        <pre class="article__code">
+        <code>
+    const bodyElem = document.getElementsByTagName('body')[0];
+    console.log(bodyElem); // &lt;body&gt;...&lt;/body&gt;
+
+    // pobiera pierwszy węzeł zawarty w tym elemencie
+    console.log(bodyElem.firstChild); // #text
+
+    // pobiera pierwszy element zawarty w tym elemencie
+    console.log(bodyElem.firstElementChild); // &lt;header&gt;...&lt;/header&gt;
+
+    // pobiera ostatni węzeł zawarty w tym elemencie
+    console.log(bodyElem.lastChild); // &lt;script src="scripts/code.js"&gt;&lt;/script&gt;
+
+    // pobiera ostatni element zawarty w tym elemencie
+    console.log(bodyElem.lastElementChild); // &lt;script src="scripts/code.js"&gt;&lt;/script&gt;
+
+    // pobiera kolekcję elementów zawartych w tym elemencie
+    console.log(bodyElem.children);
+    // HTMLCollection(4)[header, main, footer, script]
+
+    // pobiera listę węzłów zawartych w tym elemencie
+    console.log(bodyElem.childNodes);
+    // NodeList(8)[text, header, text, main, text, footer, text, script]
+
+    const mainElem = document.getElementsByTagName('main')[0];
+    console.log(mainElem); // &lt;main&gt;...&lt;/main&gt;
+
+    // pobiera wcześniejszy węzeł na tym samym poziomie co dany element
+    console.log(mainElem.previousSibling); // #text
+
+    // pobiera wcześniejszy element na tym samym poziomie co dany element
+    console.log(mainElem.previousElementSibling); // &lt;header&gt;...&lt;/header&gt;
+
+    // pobiera następny węzeł na tym samym poziomie co dany element
+    console.log(mainElem.nextSibling); // #text
+
+    // pobiera następny element na tym samym poziomie co dany element
+    console.log(mainElem.nextElementSibling); // &lt;footer&gt;...&lt;/footer&gt;
+
+    // pobiera węzeł rodzica
+    console.log(mainElem.parentNode); // &lt;body&gt;...&lt;/body&gt;
+
+    // pobiera element rodzica
+    console.log(mainElem.parentElement); // &lt;body&gt;...&lt;/body&gt;
+        </code>
+      </pre>
+
+        <p class="article__paragraph">W powyższym przykładzie możesz zauważyć, że pobieramy element przy użyciu nazwy tagu <strong class="bold">document.getElementsByTagName('body')[0]</strong>. Ponieważ metoda ta zwróci nam kolekcie elementów HTML, zawierającą tylko jeden element. Pobieramy ten element przy pomocy nawiasów kwadratowych tak samo jak ze zwykłej tablicy (array). Należy jednak pamiętać, o tym, że pomimo wielu podobieństw kolekcje elementów i listy węzłów, nie są tablicami JavaScript! Brakuje im kilku metod i właściwości typowych dla tablic. Z tego też powodu możemy je przekształcić w standardowe tablice przy pomocy metody <strong class="bold">Array.from()</strong> lub w przypadku pętli po ich elementach ograniczyć się do stosowania zwyczajnej pętli <strong class="bold">for</strong>, która dla nich działa.</p>
+
+        <p class="article__paragraph">Kolejną rzeczą, którą zauważyłeś jest to, że mamy dostępne bliźniacze metody, z których jedna operuje na wszystkich węzłach DOM, a druga zawęża swoje działanie tylko do węzłów, które są węzłami elementów.</p>
+      </section>
+
+      <section class="article__section">
+        <h3 class="article__section__title">Usuwanie elementów</h3>
+
+        <p class="article__paragraph">Możemy usuwać „dzieci” elementów przy pomocy metody <strong class="bold">removeChild()</strong>, która zwraca usunięty węzeł. Węzeł ten nie jest całkowicie niszczony i możemy go ponownie podczepić do dowolnego elementu.</p>
+
+        <pre class="article__code">
+        <code>
+    const mainElem = document.getElementsByTagName('main')[0];
+    mainElem.removeChild(mainElem.lastElementChild);
+        </code>
+      </pre>
+      </section>
+
+      <section class="article__section">
+        <h3 class="article__section__title">Tworzenie i dodawanie nowych elementów</h3>
+
+        <p class="article__paragraph">Elementy tworzymy przy pomocy metody <strong class="bold">document.createElement()</strong>, utworzony w ten sposób element nie jest jeszcze widoczny na naszej stronie. Musimy go jeszcze podczepić do naszego drzewa DOM, przy pomocy jednej z dwóch metod: <strong class="bold">appendChild()</strong> lub <strong class="bold">insertBefore()</strong>.</p>
+
+        <pre class="article__code">
+        <code>
+    const mainElem = document.querySelector('main');
+    console.log(mainElem);
+
+    const newTitleElem = document.createElement('h2');
+    newTitleElem.textContent = 'Nowy podtytuł dodany za pomocą JavaScript';
+
+    const newParagraphElem = document.createElement('p');
+    const newTextNode = document.createTextNode('Nowy tekst paragrafu dodany za pomocą JavaScript.');
+
+    mainElem.appendChild(newParagraphElem);
+    newParagraphElem.appendChild(newTextNode);
+
+    mainElem.insertBefore(newTitleElem, mainElem.children[3]);
+        </code>
+      </pre>
+
+        <p class="article__paragraph">Metoda <strong class="bold">appendChild(nowyElement)</strong> wstawia element na koniec listy dzieci określonego elementu. Natomiast metoda <strong class="bold">elementRodzic.insertBefore(nowyElement, wybranyElement)</strong> wstawia <strong class="bold">nowyelement</strong> przed <strong class="bold">wybranyelement</strong>.</p>
+      </section>
+    </article>
+
+
+</body>
+
+</html>
