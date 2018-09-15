@@ -1,0 +1,201 @@
+<!DOCTYPE html>
+<html lang="pl">
+
+<head>
+  <title>html markup</title>
+</head>
+
+<body>
+
+    <article class="article">
+
+      <header id="JSON" class="article__header">
+        <div class="decor">22</div>
+        <h2 class="article__title">JSON</h2>
+      </header>
+
+      <p class="article__paragraph">Za każdym razem gdy chcemy przesłać informacje za pomocą sieci internet z pomocą przychodzi nam JSON, jest to powszechnie używany format danych do przesyłania informacji.</p>
+
+      <p class="article__paragraph">JSON to skrót od JavaScript Object Notation, czyli zapis w stylu obiektów JavaScript. Ponieważ znasz już obiekty JavaScript, można powiedzieć, że znasz też JSON-a. Jednak nim krzykniesz „hura” i zamkniesz ten wpis. Wiedz, że występuje pomiędzy nimi kilka różnic. Oto one:</p>
+
+      <ol class="article__ordered-list">
+        <li class="ordered-list__item">JSON zawiera tylko właściwości.</li>
+        <li class="ordered-list__item">Nazwy kluczy piszemy w cudzysłowach podwójnych.</li>
+        <li class="ordered-list__item">Wymagany jest brak przecinka po ostatniej właściwości.</li>
+        <li class="ordered-list__item">Brak komentarzy i pojedynczych cudzysłowów.</li>
+        <li class="ordered-list__item">Wartości <strong class="bold">Infinity, NaN</strong> oraz <strong class="bold">undefined</strong> są zwracane jako <strong class="bold">null</strong> </li>
+      </ol>
+
+      <p class="article__paragraph">Przykładowy JSON:</p>
+
+      <pre class="article__code">
+        <code>
+    {
+      "name": "Tomasz",
+      "age": 29,
+      "alive": true,
+      "login": null,
+      "favoriteFilms": ["Forrest Gump", "Najlepszy", "Matrix", "Zielona Mila", "Dwunastu gniewnych ludzi", "Siedem"],
+      "favoriteBook": {"title": "The Slight Edge","author": "Jeff Olson","publisher": "Greenleaf Book Group Press"}
+    }
+        </code>
+      </pre>
+
+      <p class="article__paragraph">Najczęściej dane zapisane w formacie <strong class="bold">.json</strong>, mogą być w postaci pojedynczego obiektu (powyższy przykład) lub tablicy zawierającej wiele obiektów (poniższy przykład).</p>
+
+      <pre class="article__code">
+        <code>
+    [
+      {
+        "name": "Tomasz"
+      },
+      {
+        "name": "Marcin"
+      },
+      {
+        "name": "Daniel"
+      }
+    ]
+        </code>
+      </pre>
+
+      <section class="article__section">
+        <h3 class="article__section__title">Obiekt JSON</h3>
+
+        <p class="article__paragraph">Aby móc z łatwością zamieniać obiekty JavaScript na format .json lub na odwrót. Mamy dostępny pojedynczy wbudowany obiekt o nazwie <strong class="bold">JSON</strong>. Zapewnia on nam dwie metody <strong class="bold">stringify(value, replacer,  space)</strong> oraz <strong class="bold">parse(text, reviver)</strong>.</p>
+
+        <h4 class="article__section__subtitle">stringify</h4>
+
+        <p class="article__paragraph">Służy do zamiany na format json. Jako pierwszy argument przyjmuje nasze dane. Kolejne argumenty są opcjonalne, drugi z nich pozwala nam na przefiltrowanie danych, które chcemy zamienić. Może być podany w postaci funkcji, która przyjmuje dwa parametry <strong class="bold">(key, value)</strong> lub w postaci tablicy. W takim przypadku zostaną nam zwrócone tylko te właściwości, które są w niej zawarte. Ostatnim, trzecim argumentem jest cyfra, oznaczająca o ile spacji będą wcięte nasze dane, lub ciąg znaków służący za wcięcia. Argument ten służy tylko do tego aby wynik był bardziej czytelny dla nas ludzi.</p>
+
+        <pre class="article__code">
+        <code>
+    const userData = {
+      // Właściwości
+
+      name: 'Tomasz',
+      age: 29,
+      alive: true,
+      login: null,
+      favoriteFilms: ['Forrest Gump', 'Najlepszy', 'Matrix', 'Zielona Mila', 'Dwunastu gniewnych ludzi', 'Siedem'],
+      favoriteBook: {
+        title: 'The Slight Edge',
+        author: 'Jeff Olson',
+        publisher: 'Greenleaf Book Group Press'
+      },
+
+      // Metody
+
+      getUserName: function() {
+        return this.name;
+      }
+    };
+
+    const jsonData = JSON.stringify(userData, null, 2);
+    console.log(jsonData);
+
+    /*
+    {
+      "name": "Tomasz",
+      "age": 29,
+      "alive": true,
+      "login": null,
+      "favoriteFilms": [
+        "Forrest Gump",
+        "Najlepszy",
+        "Matrix",
+        "Zielona Mila",
+        "Dwunastu gniewnych ludzi",
+        "Siedem"
+      ],
+      "favoriteBook": {
+        "title": "The Slight Edge",
+        "author": "Jeff Olson",
+        "publisher": "Greenleaf Book Group Press"
+      }
+    }
+    */
+
+    function replacer(key, value) {
+      if (typeof value === 'string') {
+        return undefined;
+      }
+      return value;
+    }
+
+    const filteredJsonData = JSON.stringify(userData, replacer, '--');
+    console.log(filteredJsonData);
+
+    /*
+    {
+    --"age": 29,
+    --"alive": true,
+    --"login": null,
+    --"favoriteFilms": [
+    ----null,
+    ----null,
+    ----null,
+    ----null,
+    ----null,
+    ----null
+    --],
+    --"favoriteBook": {}
+    }
+    */
+
+    const filteredJsonData2 = JSON.stringify(userData, ['favoriteFilms'], 2);
+    console.log(filteredJsonData2);
+
+    /*
+    {
+      "favoriteFilms": [
+        "Forrest Gump",
+        "Najlepszy",
+        "Matrix",
+        "Zielona Mila",
+        "Dwunastu gniewnych ludzi",
+        "Siedem"
+      ]
+    }
+    */
+        </code>
+      </pre>
+
+
+        <h4 class="article__section__subtitle">parse</h4>
+
+        <p class="article__paragraph">Zamienia ciąg znaków .json na obiekt lub wartość JavaScript. Tak samo jak wcześniej pierwszym argumentem są nasze dane. Natomiast drugim, opcjonalnym argumentem jest funkcja przekształcająca nasze dane zanim zostaną zwrócone.</p>
+
+        <pre class="article__code">
+        <code>
+    const receivedData = JSON.parse(jsonData);
+    console.log(receivedData);
+
+    // {name: "Tomasz", age: 29, alive: true, login: null, favoriteFilms: Array(6), …}
+
+    function reviver(key, value) {
+      if (value === null ||
+         (Array.isArray(value)) &amp;&amp; value.length === 0 ||
+         (typeof value === 'object' &amp;&amp; Object.keys(value).length === 0)) {
+        return undefined;
+      }
+      return value;
+    }
+
+    const receivedData2 = JSON.parse(filteredJsonData, reviver);
+    console.log(receivedData2);
+
+    // {age: 29, alive: true}
+
+    const receivedData3 = JSON.parse(filteredJsonData2);
+    console.log(receivedData3);
+
+    // {favoriteFilms: Array(6)}
+        </code>
+      </pre>
+      </section>
+    </article>
+
+</body>
+
+</html>
