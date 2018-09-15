@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html lang="pl">
+
+<head>
+  <title>html markup</title>
+</head>
+
+<body>
+
+    <article class="article">
+
+      <header id="REST_API" class="article__header">
+        <div class="decor">24</div>
+        <h2 class="article__title">REST API</h2>
+      </header>
+
+      <p class="article__paragraph">Kontynuujemy temat rozpoczęty w poprzednim wpisie. Czym jest API już wiemy z postu o DOM. Natomiast REST (Representational State Transfer) odnosi się do sposobu tworzenia takiego API. Jest ono zbudowane na protokole HTTP, w oparciu o 5 zasad:</p>
+
+      <ol class="article__ordered-list">
+        <li class="ordered-list__item">Jednolity interfejs (Uniform Interface) – oznacza, że istnieje jeden interfejs, który obsługuje wszystkie typy urządzeń, które się z nim łączą.</li>
+        <li class="ordered-list__item">Klient-serwer (Client-Server) – oznacza rozdzielenie aplikacji po stronie klienta i po stronie serwera.</li>
+        <li class="ordered-list__item">Pozbawiony stanu (Stateless) – każde żądanie jest nie zależne od innych żądań i posiada komplet informacji niezbędnych do jego przetworzenia.</li>
+        <li class="ordered-list__item">Używa pamięci podręcznej (Cachable) – żeby odciążyć serwer część danych powinna być zapisywana w pamięci podręcznej i stamtąd pobierana.</li>
+        <li class="ordered-list__item">Zbudowany warstwowo (Layered System) – wysyłając żądanie do serwera, nasz klient nie powinien wiedzieć dokąd odwołuje się serwer żeby wysłać nam gotową odpowiedź.</li>
+      </ol>
+
+      <section class="article__section">
+        <h3 class="article__section__title">Zasoby</h3>
+
+        <p class="article__paragraph">Celem istnienia naszego REST API jest dodawanie, pobieranie, modyfikowanie i kasowanie zasobów. Zasobami mogą być np. dane naszych użytkowników. Każdy zasób jest identyfikowany poprzez <strong class="bold">URI</strong> (Uniform Resource Identifier) czyli łańcuch znaków jak np. <strong class="bold">http://blog.tomasz-rybacki.pl</strong>. Dodatkowo zasoby znajdujące się w sieci posiadają swój <strong class="bold">URL</strong> (Uniform Resource Locator), który określa ich położenie.</p>
+      </section>
+
+      <section class="article__section">
+        <h3 class="article__section__title">Budowa adresu URL</h3>
+
+        <span class="article__command">scheme://[user:password]@host:port]/path?query#fragment</span>
+
+        <p class="article__paragraph"><strong class="bold">scheme</strong> – określa wykorzystywany protokół jak http lub https</p>
+
+        <p class="article__paragraph"><strong class="bold">user:password</strong> – służy do potwierdzania tożsamości użytkownika, ze względów bezpieczeństwa nie jest jednak wykorzystywany, ponieważ z łatwością można odczytać informacje przesyłane w ten sposób</p>
+
+        <p class="article__paragraph"><strong class="bold">host</strong> – określa nazwę domeny lub jej adres IP</p>
+
+        <p class="article__paragraph"><strong class="bold">port</strong> – określa numer portu, który „nasłuchuje” serwer. Protokoły mają przypisane domyślne porty dla http wartość ta wynosi 80 natomiast dla https równa się 443</p>
+
+        <p class="article__paragraph"><strong class="bold">path</strong> – ścieżka dostępu do zasobu np: /kurs-javascript/21-dom</p>
+
+        <p class="article__paragraph"><strong class="bold">query</strong> – zaczyna się od znaku zapytania. Zawiera pary klucz=wartość połączone znakiem &amp;. Służy do podawania dodatkowych danych identyfikujących zasób</p>
+
+        <p class="article__paragraph"><strong class="bold">fragment</strong> – oznacza fragment strony HTML, która powinna zostać wyświetlona użytkownikowi</p>
+
+        <p class="article__paragraph">Przykładowy URL:</p>
+
+        <span class="article__command">http://blog.tomasz-rybacki.pl/kurs-javascript/21-dom/#comments</span>
+      </section>
+
+      <section class="article__section">
+        <h3 class="article__section__title">Metody HTTP</h3>
+
+        <p class="article__paragraph">Wpisując powyższy URL do naszej przeglądarki zostaniemy przeniesieni do sekcji komentarzy wpisu o DOM na moim blogu. Stanie się tak ponieważ nasza przeglądarka użyje metody GET aby pobrać zasób jaki znajduje się pod wskazanym adresem. W odpowiedzi serwer zwróci jej wskazany plik HTML, na podstawie którego zostanie wyświetlona cała strona.</p>
+
+        <p class="article__paragraph">Istnieje 8 metod http do przeprowadzania różnych operacji. Należą do nich:</p>
+
+        <ol class="article__ordered-list">
+          <li class="ordered-list__item">GET</li>
+          <li class="ordered-list__item">POST</li>
+          <li class="ordered-list__item">PUT</li>
+          <li class="ordered-list__item">DELETE</li>
+          <li class="ordered-list__item">OPTIONS</li>
+          <li class="ordered-list__item">HEAD</li>
+          <li class="ordered-list__item">TRACE</li>
+          <li class="ordered-list__item">CONNECT</li>
+        </ol>
+
+        <p class="article__paragraph">Dzięki tym metodom możemy powiązać różne akcje jakie mają zostać wykonane dla naszego zasobu, zachowując ten sam adres URL np. GET /posts i POST /posts.</p>
+
+        <p class="article__paragraph"><strong class="bold">GET</strong> – odczytuje wskazany zasób, może zawierać dodatkowe parametry w postaci query string</p>
+
+        <p class="article__paragraph"><strong class="bold">POST</strong> – przesyła dane do wskazanego zasobu</p>
+
+        <p class="article__paragraph"><strong class="bold">PUT</strong> – służy do aktualizacji danego zasobu</p>
+
+        <p class="article__paragraph"><strong class="bold">DELETE</strong> – służy do usuwania zasobów</p>
+
+        <p class="article__paragraph"><strong class="bold">OPTIONS</strong> – używane jest do sprawdzania jakie metody są obsługiwane przez serwer dla danego zasobu</p>
+
+        <p class="article__paragraph"><strong class="bold">HEAD</strong> – służy do sprawdzania czy dany zasób się zmienił. Jest podobne do zapytania GET z tą różnicą, że nie zawiera ciała wiadomości.</p>
+
+        <p class="article__paragraph"><strong class="bold">TRACE</strong> – służy do testowania. W odpowiedzi na nie serwer powinien wysłać zapytanie, które otrzymał. Nie zawiera ciała wiadomości.</p>
+
+        <p class="article__paragraph"><strong class="bold">CONNECT</strong> – służy do utworzenia połączenia pomiędzy klientem a serwerem docelowym za pomocą węzłów pośrednich. W praktyce rzadko stosowane.</p>
+      </section>
+    </article>
+
+</body>
+
+</html>
