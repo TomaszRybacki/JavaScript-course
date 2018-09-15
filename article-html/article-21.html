@@ -1,0 +1,240 @@
+<!DOCTYPE html>
+<html lang="pl">
+
+<head>
+  <title>html markup</title>
+</head>
+
+<body>
+
+    <article class="article">
+
+    <header id="placeholder" class="article__header">
+      <div class="decor">21</div>
+      <h2 class="article__title">Zdarzenia</h2>
+    </header>
+
+    <p class="article__paragraph">Dzięki zdarzeniom możemy zapewnić interaktywność naszej strony i polepszyć wrażenia użytkowników z niej korzystających. Przykładami zdarzeń są: kliknięcie przycisku, skrolowanie treści strony, zmiana rozmiaru okna przeglądarki. Istnieje długa lista zdarzeń jakie mogą zajść w naszej przeglądarce internetowej. Wszystkie one pozwalają nam połączyć kawałek kodu, który chcemy wykonać w odpowiedzi na zajście konkretnego zdarzenia.</p>
+
+    <section class="article__section">
+      <h3 class="article__section__title">Atrybuty HTML umieszczane inline</h3>
+
+      <p class="article__paragraph">Polegają na umieszczaniu kodu JS wewnątrz pliku HTML poprzez zastosowanie specjalnych atrybutów HTML. Należy unikać ich używania, ale warto wiedzieć, że istnieje taki sposób, ponieważ możemy się z nim zetknąć.</p>
+
+      <pre class="article__code">
+        <code>
+    &lt;button onclick="logMessage()"&gt;Nie klikaj mnie&lt;/button&gt;
+    &lt;script&gt;
+    function logMessage() {
+      console.log('Wiedziałem, że się nie posłuchasz.')
+    }
+    &lt;/script&gt;
+        </code>
+      </pre>
+
+      <h4 class="article__section__subtitle">Dlaczego powyższy sposób obsługi zdarzeń jest zły ?</h4>
+
+      <p class="article__paragraph">Ponieważ miesza dwie warstwy ze sobą, HTML odpowiedzialny za treść i JS odpowiedzialny za zachowanie. Przez co jest mniej czytelny i trudniejszy w utrzymaniu. Gdybyś miał dziesiątki przycisków na swojej stronie i musiał ręcznie dodawać do nich atrybuty, szybko zauważył byś jak kiepskim rozwiązaniem jest powyższa praktyka.</p>
+    </section>
+
+    <section class="article__section">
+      <h3 class="article__section__title">Wydarzenia jako właściwości</h3>
+
+      <p class="article__paragraph">To kolejny ze sposobów obsługi zdarzeń w naszej przeglądarce. Każdy element HTML posiada listę właściwości, na której możemy zobaczyć długą listę możliwych zdarzeń dla tego elementu, zaczynających się od przedrostka <strong class="bold">on</strong>, po której mamy nazwę wydarzenia oraz wartość <strong class="bold">null</strong>, np: <strong class="bold">onclick: null</strong>.</p>
+
+      <pre class="article__code">
+        <code>
+    const firstButton = document.querySelector('.button');
+
+    function logMessage() {
+      console.log('Kliknełeś w przycisk!');
+    }
+
+    firstButton.onclick = logMessage;
+
+    console.dir(firstButton); // onclick: ƒ logMessage()
+        </code>
+      </pre>
+
+     <p class="article__paragraph">W powyższy sposób możemy przypisać naszą funkcję do wybranego elementu. Gdy tylko zajdzie zdarzenie wskazanego typu dla tego elementu, nasza funkcja zostanie wywołana. Minusem tego rozwiązania jest fakt, że możemy przypisać tylko pojedynczą funkcję do każdego ze zdarzeń.</p>
+
+    </section>
+
+    <section class="article__section">
+      <h3 class="article__section__title">Słuchacz zdarzeń</h3>
+
+    <p class="article__paragraph">To najnowsza i najlepsza z dostępnych możliwości. Pozwala nam na dodanie „słuchacza” do elementu, który będzie nasłuchiwał wybranego zdarzenia i gdy tylko zarejestruje wystąpienie danego zdarzenia odpali podaną funkcję.</p>
+
+      <pre class="article__code">
+        <code>
+    const firstButton = document.querySelector('.button');
+
+    function logMessage() {
+      console.log('Kliknełeś w przycisk!');
+    }
+
+    firstButton.addEventListener('click', logMessage);
+        </code>
+      </pre>
+
+      <p class="article__paragraph">Oto jakie korzyści zapewnia nam ten sposób:</p>
+
+      <p class="article__paragraph">1. Pozwala na dodanie wielu różnych funkcji do tego samego zdarzenia.</p>
+
+      <pre class="article__code">
+        <code>
+    const firstButton = document.querySelector('.button');
+
+    function logMessage() {
+      console.log('Kliknełeś w przycisk!');
+    }
+
+    function sayHello() {
+      console.log('Dobrze Cię widzieć.');
+    }
+
+    firstButton.addEventListener('click', logMessage);
+    firstButton.addEventListener('click', sayHello);
+        </code>
+      </pre>
+
+      <p class="article__paragraph">2. Pozwala na usuwanie nasłuchiwaczy zdarzeń przez zastosowanie metody <strong class="bold">removeEventListener()</strong></p>
+
+      <pre class="article__code">
+        <code>
+    const firstButton = document.querySelector('.button');
+
+    function logMessage() {
+      console.log('Kliknełeś w przycisk!');
+    }
+
+    function sayHello() {
+      console.log('Dobrze Cię widzieć.');
+    }
+
+    firstButton.addEventListener('click', logMessage);
+    firstButton.addEventListener('click', sayHello);
+
+    // wywołujemy zdarzenie z poziomu kodu, działa tak jakby użytkownik klikną w nasz przycisk
+
+    firstButton.click();
+    // Kliknełeś w przycisk!
+    // Dobrze Cię widzieć.
+
+    firstButton.removeEventListener('click', sayHello);
+
+    firstButton.click();
+    // Kliknełeś w przycisk!
+        </code>
+      </pre>
+
+    </section>
+
+    <section class="article__section">
+      <h3 class="article__section__title">Propagacja zdarzeń</h3>
+
+      <p class="article__paragraph">Wiemy, że struktura dokumentu HTML jest hierarchiczna i tworzy drzewo, w którym jedne elementy zawierają inne elementy. Gdy na naszej stronie wystąpi zdarzenie np. kliknięcia na dany element. To wystąpienie tego zdarzenia rozchodzi się niczym fala po wodzie również po pozostałych elementach w dokumencie.</p>
+
+      <p class="article__paragraph">Załóżmy, że mamy następujący układ elementów HTML:</p>
+
+      <pre class="article__code">
+        <code>
+    &lt;body&gt;
+      &lt;div class="container"&gt;
+        &lt;button class="button"&gt;Kliknji mnie!&lt;/button&gt;
+      &lt;/div&gt;
+    &lt;/body&gt;
+        </code>
+      </pre>
+
+      <p class="article__paragraph">Gdy klikniemy element następują dwie fazy rozchodzenia się tego wydarzenia. Najpierw występuje <strong class="bold">przechwytywanie</strong> zdarzenia a następnie <strong class="bold">bąbelkowanie zdarzenia</strong>.</p>
+
+      <p class="article__paragraph"><strong class="bold">przechwytywanie zdarzenia</strong> – przesuwamy się w dół naszego drzewa elementów i sprawdzamy czy dany element nasłuchuje danego zdarzenia w tej fazie. Jeśli tak, odpalamy daną funkcję, która obsługuje wystąpienie tego zdarzenia, a następnie przechodzimy do kolejnego elementu itd.</p>
+
+      <p class="article__paragraph">body -&gt; div -&gt; button</p>
+
+      <p class="article__paragraph"><strong class="bold">bąbelkowanie zdarzenia</strong> – przesuwamy się w górę naszego drzewa elementów  sprawdzamy czy dany element nasłuchuje danego zdarzenia w tej fazie. Jeśli tak, odpalamy daną funkcję, która obsługuje wystąpienie tego zdarzenia, a następnie przechodzimy do kolejnego elementu itd.</p>
+
+      <p class="article__paragraph">button -&gt; div -&gt; body</p>
+
+      <pre class="article__code">
+        <code>
+    const firstContainer = document.querySelector('.container');
+    const firstButton = document.querySelector('.button');
+
+    function buttonClick() {
+      console.log('Przycisk został kliknięty.');
+    }
+
+    function containerClick() {
+      console.log('Div został kliknięty.');
+    }
+
+    firstContainer.addEventListener('click', containerClick);
+    firstButton.addEventListener('click', buttonClick);
+
+    firstButton.click();
+    // Przycisk został kliknięty.
+    // Div został kliknięty
+        </code>
+      </pre>
+
+      <p class="article__paragraph">Widzimy w powyższym przykładzie, że obie nasze funkcje zostały wywołane. Pomimo, że kliknęliśmy tylko w przycisk, to zdarzenie to rozeszło się do elementu rodzica, który również nasłuchiwał zdarzenia typu <strong class="bold">click</strong>.</p>
+
+      <p class="article__paragraph">Metoda <strong class="bold">addEventListener()</strong>, może również przyjmować trzeci parametr w postaci wartości <strong class="bold">true</strong>. Domyślnie jest on ustawiony na wartość <strong class="bold">false</strong>. Parametr ten oznacza w której fazie rozchodzenia się zdarzenia ma nastąpić jego przechwycenie. Gdy jego wartość wynosi <strong class="bold">true</strong>, odpalenie zdarzenia następuje w fazie przechwytywania zdarzenia, a dla wartości <strong class="bold">false</strong> jest to faza bąbelkowania zdarzenia. Możemy w ten sposób odwrócić kolejność w jakiej zostaną wywołane nasze funkcje.</p>
+
+            <pre class="article__code">
+        <code>
+    firstContainer.addEventListener('click', containerClick, true);
+    firstButton.addEventListener('click', buttonClick, false);
+
+    firstButton.click();
+
+    // Div został kliknięty.
+    // Przycisk został kliknięty.
+        </code>
+      </pre>
+
+      <p class="article__paragraph">Możemy zatrzymać bąbelkowanie zdarzenia na wyższe elementy poprzez metodę <strong class="bold">stopPropagation()</strong>. Wystarczy lekka modyfikacja naszej funkcji <strong class="bold">buttonClick</strong>, aby zapobiec odpaleniu funkcji <strong class="bold">containerClick</strong> przez kliknięcie w przycisk.</p>
+
+      <pre class="article__code">
+        <code>
+    function buttonClick(event) {
+      event.stopPropagation();
+      console.log('Przycisk został kliknięty.');
+    }
+        </code>
+      </pre>
+    </section>
+
+    <section class="article__section">
+      <h3 class="article__section__title">Obiekt zdarzenia</h3>
+
+      <p class="article__paragraph">W powyższym przykładzie widzimy pojawienie się parametru <strong class="bold">event</strong>. Jest to obiekt zdarzenia, który jest automatycznie przekazywany do naszej funkcji obsługującej zaistniałe zdarzenie. Niesie on z sobą wiele informacji na temat zaistniałego zdarzenia jak np: typ zdarzenia – <strong class="bold">event.type</strong>, element który zapoczątkował zdarzenie – <strong class="bold">event.target</strong>.</p>
+    </section>
+
+        <section class="article__section">
+      <h3 class="article__section__title">Powstrzymywanie domyślnego zachowania dla zdarzeń</h3>
+
+          <p class="article__paragraph">Niektóre wydarzenia jak np. wysłanie formularza z automatu wysyłają pobrane z niego dane na serwer. Jeśli chcemy wykonać sprawdzenie poprawności tych danych po stronie przeglądarki użytkownika, musimy wyłączyć domyślne zachowanie dla tego zdarzenia, żeby móc przeprowadzić nasze sprawdzenia. Robimy to za pomocą metody <strong class="bold">preventDefault()</strong>.</p>
+
+         <pre class="article__code">
+        <code>
+    const form = document.querySelector('#Form');
+    console.log(form);
+
+    function validate(event) {
+      event.preventDefault();
+      console.log('Wykonuje sprawdzenie poprawności wprowadzonych danych');
+    }
+
+    form.addEventListener('submit', validate);
+        </code>
+      </pre>
+    </section>
+  </article>
+
+
+</body>
+
+</html>
