@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html lang="pl">
+
+<head>
+  <title>html markup</title>
+</head>
+
+<body>
+
+  <article class="article">
+
+    <header id="HTTP" class="article__header">
+      <div class="decor">23</div>
+      <h2 class="article__title">HTTP</h2>
+    </header>
+
+    <p class="article__paragraph">Dzisiaj robimy małą przerwę od JavaScript żeby zrozumieć jak działa przesyłanie informacji przez sieć. Wiedza ta przyda się nam, gdy będziemy omawiać AJAX-a czyli asynchroniczny JavaScript i XML.</p>
+
+    <section class="article__section">
+      <h3 class="article__section__title">Protokół HTTP</h3>
+
+      <p class="article__paragraph">Służy do przesyłania stron internetowych do naszych przeglądarek oraz do wysyłania informacji na serwer. Jest to protokół klient-serwer co oznacza, że żądania są inicjowane przez naszą przeglądarkę internetową. Za każdym razem gdy wchodzimy na stronę inicjujemy żądania do serwera jej poszczególnych elementów jak np: tekst, arkusze stylów CSS, skrypty JavaScript, obrazki, nagrania wideo itp. Im więcej żądań i im większe są pliki, które są przesyłane tym dłuższy jest czas oczekiwania na załadowanie naszej strony.</p>
+
+      <p class="article__paragraph">Komunikacja z serwerem odbywa się na podstawie pojedynczych wiadomości. Różne części naszej strony mogą znajdować się na różnych serwerach. Wiadomość wysyłaną przez naszą przeglądarkę nazywany <strong class="bold">żądaniem</strong>, natomiast wiadomość wysyłana przez serwer to <strong class="bold">odpowiedź</strong>. HTTP jest bezstanowy, oznacza to, że każde z naszych żądań jest nie zależne i nie wie nic o innych żądaniach jakie wykonaliśmy do tej pory, przy użyciu tego samego połączenia.</p>
+    </section>
+
+    <section class="article__section">
+      <h3 class="article__section__title">Co możemy kontrolować przy użyciu HTTP ?</h3>
+
+      <h4 class="article__section__subtitle">1 Pamięć podręczna</h4>
+
+      <p class="article__paragraph">Żeby zwiększyć szybkość wczytywania stron, które często odwiedzamy oraz zmniejszyć ruch, czyli tym samym zmniejszyć obciążenie serwera, korzystamy z pamięci podręcznej, która pozwala nam wykorzystać wcześniej pobrane zasoby. Dzięki HTTP serwer może poinformować serwery proxy (serwery pośredniczące w wymianie informacji) oraz naszą przeglądarkę jakie zasoby ma przechowywać, przez jaki okres czasu.</p>
+
+      <h4 class="article__section__subtitle">2 Uwierzytelnianie</h4>
+
+      <p class="article__paragraph">Aby ograniczyć dostępność do naszej strony, tak aby tylko wybrani użytkownicy mieli do niej dostęp, możemy wykorzystać podstawowe metody uwierzytelniania zapewniane przez HTTP, WWW-Authenticate lub poprzez ustawienie określonej sesji przy użyciu plików cookie HTTP.</p>
+
+      <h4 class="article__section__subtitle">3 Proxy</h4>
+
+      <p class="article__paragraph">Jeśli chcemy pozostać anonimowi w sieci i ukryć nasz prawdziwy adres IP. Możemy to zrobić przy pomocy sieci Tor.</p>
+
+      <h4 class="article__section__subtitle">4 Sesje</h4>
+
+      <p class="article__paragraph">Używanie ciasteczek HTTP pozwala połączyć ze sobą oddzielne zapytania pochodzące od tego samego klienta. Dzięki temu możemy stwierdzić czy dane żądanie pochodzi od tego samego użytkownika. Tworzy to sesje, mimo że podstawowy protokół HTTP jest protokołem bezstanowym.</p>
+
+      <h4 class="article__section__subtitle">5 CORS</h4>
+
+      <p class="article__paragraph">Dzięki nagłówkom HTTP możemy zmniejszyć obostrzenia związane z CORS (Cross-Origin Resource Sharing), które polega na blokowaniu danych pochodzących z innych źródeł niż domena naszej strony.</p>
+    </section>
+
+    <section class="article__section">
+      <h3 class="article__section__title">Żądania i odpowiedzi</h3>
+
+      <p class="article__paragraph">Dokładnej strukturze żądania i odpowiedzi przyjrzymy się w kolejnym wpisie. Dzisiaj natomiast powiemy sobie ogólnie z czego się składa żądanie i odpowiedź. Oraz omówimy statusy otrzymanych odpowiedzi.</p>
+
+      <p class="article__paragraph">Zarówno żądanie jak i odpowiedź zawierają wersję protokołu HTTP jaki jest wykorzystywany w komunikacji, nagłówki oraz ewentualne ciało wiadomości.</p>
+
+      <p class="article__paragraph">Żądanie natomiast zawiera dodatkowo adres URL zasobu, do którego chcemy się odwołać oraz nazwę metody, określającej rodzaj wysyłanego żądania.</p>
+
+      <p class="article__paragraph">Odpowiedź natomiast zawiera dodatkowo status, informujący czy dane żądanie zakończyło się sukcesem lub porażką oraz opis danego kodu statusu.</p>
+
+    </section>
+
+    <section class="article__section">
+      <h3 class="article__section__title">Statusy HTTP</h3>
+
+      <p class="article__paragraph">Zostały podzielone na 5 grup. Pierwsza cyfra określa grupę do jakiej należy dany status. Mamy więc:</p>
+
+      <ol class="article__ordered-list">
+        <li class="ordered-list__item">Statusy informacyjne – zaczynające się od 1 np. 101</li>
+        <li class="ordered-list__item">Statusy sukcesu – zaczynające się od 2 np. 200</li>
+        <li class="ordered-list__item">Statusy przekierowań – zaczynające się od 3 np. 301</li>
+        <li class="ordered-list__item">Statusy błędów po stronie klienta – zaczynające się od 4 np. 404</li>
+        <li class="ordered-list__item">Statusy błędów po stronie serwera – zaczynające się od 5 np. 500</li>
+      </ol>
+
+      <p class="article__paragraph">Najczęściej występujące kody statusu to:</p>
+
+      <ul class="article__unordered-list">
+        <li class="unordered-list__item"><strong class="bold">200 OK</strong> – wszystko przebiegło pomyślnie</li>
+        <li class="unordered-list__item"><strong class="bold">301 Moved Permanently</strong> – informuje klienta, że zasób został przeniesiony na stałe w inne miejsce. Taki status informuje wyszukiwarki o tym, że strona, która wcześniej była pod adresem X znajduje się w nowym miejscu</li>
+        <li class="unordered-list__item"><strong class="bold">400 Bad Request</strong> – serwer informuje klienta o błędnym zapytaniu, które nie będzie przetworzone</li>
+        <li class="unordered-list__item"><strong class="bold">403 Forbidden</strong> – zasób wymaga uwierzytelnienia, po potwierdzeniu tożsamości może być dostępny</li>
+        <li class="unordered-list__item"><strong class="bold">404 Not Found</strong> – żądany zasób nie istnieje</li>
+        <li class="unordered-list__item"><strong class="bold">500 Internal Server Error</strong> – serwer napotkał sytuacje, której nie umie poprawnie obsłużyć</li>
+        <li class="unordered-list__item"><strong class="bold">502 Bad Gateway</strong> – ten status informuje o tym, że jeden z pośrednich węzłów dostał błędną odpowiedź od poprzedniego węzła</li>
+        <li class="unordered-list__item"><strong class="bold">503 Service Unavailable</strong> – ten błąd informuje o tym, że serwer jest przeciążony, ponowna próba może zakończyć się poprawną odpowiedzią</li>
+      </ul>
+    </section>
+  </article>
+
+
+</body>
+
+</html>
