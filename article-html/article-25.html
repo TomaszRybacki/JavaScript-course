@@ -1,0 +1,263 @@
+<!DOCTYPE html>
+<html lang="pl">
+
+<head>
+  <title>html markup</title>
+</head>
+
+<body>
+
+<article class="article">
+
+      <header id="AJAX" class="article__header">
+        <div class="decor">25</div>
+        <h2 class="article__title">AJAX</h2>
+      </header>
+
+      <p class="article__paragraph">AJAX oznacza asynchroniczny JavaScript i XML. Nazwa ta powstała jako akronim od pierwszych liter tych wyrazów. Cała siła Ajax-a polega na możliwości tworzenia i wysyłania żądań oraz odbierania odpowiedzi bez konieczności przeładowania całej strony www. Dzięki czemu możemy wczytywać dane z serwera gdy ich potrzebujemy.</p>
+
+      <p class="article__paragraph">Żądania wysyłane przy pomocy ajax-a mogą być asynchroniczne co oznacza, że podczas oczekiwania na dane, które mają do nas dotrzeć z serwera, nie blokujemy wykonywania naszego skryptu JavaScript. Dzięki czemu użytkownik może nadal prowadzić interakcję z naszą stroną www.</p>
+
+      <p class="article__paragraph"><strong class="bold">XML</strong> (eXtensible Markup Language) oznacza rozszerzalny język znaczników. Działa na takiej samej zasadzie jak <strong class="bold">HTML</strong> i może być wykorzystywany do zapisu i przesyłania danych. Obecnie jest rzadko używany, zamiast niego wykorzystujemy <strong class="bold">JSON</strong>-a. Przykładowe dane użytkownika zapisane w postaci XML:</p>
+
+      <pre class="article__code">
+        <code>
+    &lt;user&gt;
+      &lt;id&gt;1&lt;/id&gt;
+      &lt;name&gt;Tomasz&lt;/name&gt;
+      &lt;age&gt;29&lt;/age&gt;
+    &lt;/user&gt;
+        </code>
+      </pre>
+
+      <section class="article__section">
+        <h3 class="article__section__title">XMLHttpRequest</h3>
+
+        <p class="article__paragraph">Do nawiązania połączenia tworzymy nową instancję obiektu <strong class="bold">XMLHttpRequest</strong>, udostępnia nam ona kilka przydatnych właściwości i metod. Najważniejsze z nich to:</p>
+
+        <table class="article__table">
+          <thead>
+            <tr class="table__row">
+              <th class="table__heading">Nazwa właściwości</th>
+              <th class="table__heading">Opis</th>
+            </tr>
+          </thead>
+
+          <tbody>
+            <tr class="table__row">
+              <td class="table__data bold">status</td>
+              <td class="table__data">status połączenia</td>
+            </tr>
+            <tr class="table__row">
+              <td class="table__data bold">statusText</td>
+              <td class="table__data">status w formie tekstowej</td>
+            </tr>
+            <tr class="table__row">
+              <td class="table__data bold">timeout</td>
+              <td class="table__data">czas oczekiwania na odpowiedź</td>
+            </tr>
+            <tr class="table__row">
+              <td class="table__data bold">responseURL</td>
+              <td class="table__data">adres url odpowiedzi</td>
+            </tr>
+            <tr class="table__row">
+              <td class="table__data bold">responseType</td>
+              <td class="table__data">typ odpowiedzi</td>
+            </tr>
+            <tr class="table__row">
+              <td class="table__data bold">responseText</td>
+              <td class="table__data">treść odpowiedzi</td>
+            </tr>
+            <tr class="table__row">
+              <td class="table__data bold">readyState</td>
+              <td class="table__data">stan połączenia</td>
+            </tr>
+          </tbody>
+        </table>
+
+        <p class="article__paragraph">Żeby sprawdzić czy dane zostały już pobrane i możemy je wykorzystać. Korzystamy z właściwości <strong class="bold">readyState</strong>. Będziemy nasłuchiwać zmian stanu połączenia. Za każdym razem gdy nastąpi jego zmiana będziemy wywoływać funkcję anonimową, która przetworzy otrzymane dane, gdy wartość <strong class="bold">readyState</strong> będzie równa <strong class="bold">4</strong>.</p>
+
+        <table class="article__table">
+          <thead>
+            <tr class="table__row">
+              <th class="table__heading">Wartość readyState</th>
+              <th class="table__heading">Opis</th>
+            </tr>
+          </thead>
+
+          <tbody>
+            <tr class="table__row">
+              <td class="table__data bold">0</td>
+              <td class="table__data">połączenie nie nawiązane</td>
+            </tr>
+            <tr class="table__row">
+              <td class="table__data bold">1</td>
+              <td class="table__data">połączenie nawiązane</td>
+            </tr>
+            <tr class="table__row">
+              <td class="table__data bold">2</td>
+              <td class="table__data">odebrano nagłówki odpowiedzi</td>
+            </tr>
+            <tr class="table__row">
+              <td class="table__data bold">3</td>
+              <td class="table__data">pobieranie ciała odpowiedzi (danych)</td>
+            </tr>
+            <tr class="table__row">
+              <td class="table__data bold">4</td>
+              <td class="table__data">przetwarzanie żądania zostało zakończone</td>
+            </tr>
+          </tbody>
+        </table>
+
+        <p class="article__paragraph">Poniżej znajduje się przykładowa funkcja <strong class="bold">ajax</strong>, przyjmująca kolejno jako parametry: <strong class="bold">metodę HTTP, url zasobu, dane do wysłania, wyrażenie zwrotne</strong>. Zawiera komentarze wyjaśniające w jaki sposób działa.</p>
+
+        <pre class="article__code">
+        <code>
+    function ajax(method, url, data, callback) {
+      // tworzymy nową instancję obiektu XMLHttpRequest
+      const request = new XMLHttpRequest();
+
+      // nawiązujemy połączenie
+      // parametr true oznacza, że połączenie ma być asynchroniczne
+      request.open(method, url, true);
+
+      // ustawiamy nagłówki dla naszego żądania
+
+      // mówimy serwerowi, jaki format danych wysyłamy w przypadku użycia metody POST
+      request.setRequestHeader('Content-type', 'application/json; charset=utf-8');
+
+      // mówimy serwerowi, że oczekujemy odpowiedzi w formacie JSON
+      request.setRequestHeader('Accept', 'application/json');
+
+      // gdy zajdzie zmiana stanu
+      request.onreadystatechange = function () {
+        // jeśli przetwarzanie zostało zakończone
+        if (request.readyState === 4) {
+          // jeśli przetwarzanie zakończyło się sukcesem
+          if (request.status === 200) {
+            // wywołujemy naszą funkcję callback z otrzymanymi danymi jako jej argument
+            callback(JSON.parse(request.responseText));
+          } else {
+            // coś poszło nie tak, tworzymy błąd z informacją co się stało
+            throw new Error(`XMLHttpRequest failed: ${request.status} ${request.statusText}`);
+          }
+        }
+      };
+
+      if (data) {
+        // jeśli wysyłamy dane na serwer podajemy je jako argument metody send
+        request.send(JSON.stringify(data));
+      } else {
+        request.send();
+      }
+    }
+        </code>
+      </pre>
+
+        <p class="article__paragraph">Żeby przetestować działanie naszej funkcji wykorzystamy <strong class="bold">JSONPlaceholder</strong> czyli darmowe <strong class="bold">REST API</strong>, które dostarczy nam dane z serwera. W moim przykładzie odwołam się do fałszywej bazy danych użytkowników.</p>
+
+        <pre class="article__code">
+        <code>
+    function logResults(data) {
+      console.log(data);
+    }
+
+    ajax('GET', 'https://jsonplaceholder.typicode.com/users', null, logResults);
+
+    /*
+    (10) [{…}, {…}, {…}, {…}, {…}, {…}, {…}, {…}, {…}, {…}]
+
+    0:{id: 1, name: "Leanne Graham", username: "Bret", email: "Sincere@april.biz", address: {…}, …}
+    1:{id: 2, name: "Ervin Howell", username: "Antonette", email: "Shanna@melissa.tv", address: {…}, …}
+    2:{id: 3, name: "Clementine Bauch", username: "Samantha", email: "Nathan@yesenia.net", address: {…}, …}
+    3:{id: 4, name: "Patricia Lebsack", username: "Karianne", email: "Julianne.OConner@kory.org", address: {…}, …}
+    4:{id: 5, name: "Chelsey Dietrich", username: "Kamren", email: "Lucio_Hettinger@annie.ca", address: {…}, …}
+    5:{id: 6, name: "Mrs. Dennis Schulist", username: "Leopoldo_Corkery", email: "Karley_Dach@jasper.info", address: {…}, …}
+    6:{id: 7, name: "Kurtis Weissnat", username: "Elwyn.Skiles", email: "Telly.Hoeger@billy.biz", address: {…}, …}
+    7:{id: 8, name: "Nicholas Runolfsdottir V", username: "Maxime_Nienow", email: "Sherwood@rosamond.me", address: {…}, …}
+    8:{id: 9, name: "Glenna Reichert", username: "Delphine", email: "Chaim_McDermott@dana.io", address: {…}, …}
+    9:{id: 10, name: "Clementina DuBuque", username: "Moriah.Stanton", email: "Rey.Padberg@karina.biz", address: {…}, …}
+    */
+        </code>
+      </pre>
+
+        <p class="article__paragraph">Jak widzimy, wszystko zadziałało jak należy. Możemy też przetestować co się stanie w przypadku błędu . W tym celu możemy podać błędną ścieżkę url, poprzez skasowanie kilku liter np: <strong class="bold">https://jsonplaceholder.typicode.com/use</strong>. Sprawdź samodzielnie co się wtedy stanie i czy wszystko zadziała tak jak się tego spodziewamy.</p>
+
+      </section>
+
+      <section class="article__section">
+        <h3 class="article__section__title">Fetch API</h3>
+
+        <p class="article__paragraph">Zapewnia nam możliwość pobierania danych z wykorzystaniem obietnic (promise) wprowadzonych w ES6. Obietnice omówię dokładnie w następnym wpisie. Jest to nowe rozwiązanie wspierane przez nowoczesne przeglądarki. W przypadku pobierania zasobów składnia jest bardzo prosta dzięki wykorzystaniu łańcuchów obietnic.</p>
+
+        <pre class="article__code">
+        <code>
+    function checkStatus(response) {
+      if (response.status &gt;= 200 &amp;&amp; response.status &lt; 300) {
+        return Promise.resolve(response);
+      } else {
+        return Promise.reject(new Error(`statusCode: ${response.status} ${response.statusText}`));
+      }
+    }
+
+    function toJSON(response) {
+      return response.json();
+    }
+
+    function logResults(data) {
+      console.log(data);
+    }
+
+    fetch('https://jsonplaceholder.typicode.com/users')
+      .then(checkStatus)
+      .then(toJSON)
+      .then(logResults)
+      .catch(error =&gt; console.error(error));
+        </code>
+      </pre>
+
+        <p class="article__paragraph">Wysyłanie danych na serwer jest nieco bardziej skomplikowane.</p>
+
+        <pre class="article__code">
+        <code>
+    const newUser = {
+      id: 2,
+      name: 'Tomasz',
+      age: 29
+    };
+
+    function checkStatus(response) {
+      if (response.status &gt;= 200 &amp;&amp; response.status &lt; 300) {
+        return Promise.resolve(response);
+      } else {
+        return Promise.reject(new Error(`statusCode: ${response.status} ${response.statusText}`));
+      }
+    }
+
+    const options = {
+      method: 'post',
+      headers: {
+        'Content-type': 'application/x-www-form-urlencoded; charset=UTF-8'
+      },
+      body: JSON.stringify(newUser)
+    };
+
+    fetch('https://jsonplaceholder.typicode.com/users', options)
+      .then((checkStatus))
+      .then((response) =&gt; {
+        console.log('Użytkownik został dodany.');
+        console.log(response);
+      })
+      .catch((err) =&gt; {
+        console.error('Żądanie zakończone niepowodzeniem', err);
+      });
+        </code>
+      </pre>
+
+      </section>
+
+    </article>
+
+</body>
+
+</html>

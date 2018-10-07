@@ -80,6 +80,32 @@
       padding: 5px;
     }
   }
+
+  &__table {
+    width: 100%;
+    font-size: $medium;
+    border: solid 1px $black;
+    text-align: left;
+
+    .table__row {
+      padding: 10px;
+      border-bottom: solid 1px $black;
+    }
+
+    .table__heading {
+      padding: 10px;
+      font-weight: 700;
+      border-bottom: solid 2px $black;
+      background-color: $black;
+      color: $orange;
+      text-transform: uppercase;
+    }
+
+    .table__data {
+      padding: 10px;
+    }
+
+  }
 }
 
 .article__section {
